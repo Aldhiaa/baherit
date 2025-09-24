@@ -2,14 +2,16 @@
 
 namespace App\Filament\Resources\Blogs;
 
+use App\Filament\Resources\Blogs\CommentResource\Pages;
 use Filament\Resources\Resource;
-use Filament\Tables\Table;
 use Filament\Tables;
+use Filament\Tables\Table;
 use Modules\Blogs\App\Models\Comment;
 
 class CommentResource extends Resource
 {
     protected static ?string $model = Comment::class;
+
     protected static ?string $navigationIcon = 'heroicon-o-chat-alt-2';
 
     public static function table(Table $table): Table
@@ -26,11 +28,19 @@ class CommentResource extends Resource
                 Tables\Actions\Action::make('approve')
                     ->action(function (Comment $record) {
                         $record->update(['approved' => true]);
-                    })->visible(fn($record) => !$record->approved),
+                    })
+                    ->visible(fn ($record) => ! $record->approved),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => Pages\ListComments::route('/'),
+        ];
     }
 }
