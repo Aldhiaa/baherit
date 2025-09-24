@@ -3,7 +3,7 @@
 use Doctrine\DBAL\Schema\Index;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\homecontroller;
-use Modules\Blogs\App\Http\Controllers\FrontendBlogController;
+use Modules\Blogs\Http\Controllers\FrontendBlogController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
