@@ -1,0 +1,10 @@
+{
+    "Blogs": true,
+    "About": true,
+    "Contact": true,
+    "Faq": true,
+    "Services": true,
+    "Projects": true,
+    "Settings": true,
+    "Language": true
+}

@@ -1,0 +1,117 @@
+html {
+    direction: rtl;
+}
+header {
+    flex-direction: row;
+}
+header .navbar-nav .nav-item::before{
+    left: initial;
+    right: -7px;
+}
+
+
+header .navbar.navbar-expand-xl .navbar-nav .nav-item + .nav-item {
+    margin-right: initial;
+  }
+
+
+header .navbar.navbar-expand-xl .navbar-nav .nav-item + .nav-item {
+    margin-right: calc(30px + 10 * (100vw - 1200px) / 720);
+  }
+
+  .title::after {
+    content: "";
+    position: absolute;
+    left: initial;
+    right: 0;
+    bottom: 0;
+    width: 78px;
+    height: 1px;
+    background-color: #054b7f;
+  }
+
+  .title::before {
+    content: "";
+    position: absolute;
+    left: initial;
+    bottom: -2px;
+    width: 6px;
+    height: 6px;
+    background-color: #054b7f;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  footer .footer-copyright {
+    direction: ltr;
+  }
+
+
+.about-section .about-box::before {
+    right: initial;
+    left: -34px;
+}
+
+
+.feature-section .feature-box .feature-top h3 {
+    padding-left: initial;
+    padding-right: 30px;
+}
+
+
+.blog-box .blog-content ul {
+    direction: ltr;
+}
+
+.arrow i{
+    transform: rotate(180deg);
+}
+
+footer .footer-title::before {
+    left: initial;
+    right: 0;
+}
+footer .footer-title::after {
+
+    left: initial;
+    right: 45px;
+}
+
+footer .footer-content {
+    padding-left: initial;
+    padding-right: 33px;
+
+}
+
+footer .footer-content ul li a::after {
+    left: initial;
+    right: -30px;
+    top: 22%;
+    transform: rotate(180deg);
+}
+
+.feature-section .feature-box a {
+    transform: translateX(110px);
+
+}
+
+.feature-section .feature-box a i {
+margin-left: 0;
+    margin-right: 34px;
+    transform: rotate(180deg);
+}
+
+footer .footer-content ul li:hover a::after {
+    left: initial;
+  }
+
+@media (max-width: 576px) {
+  header .navbar-toggler-icon {
+    position: absolute;
+    right: initial;
+    left: -2px;
+    top: 16px;
+    margin-right: initial;
+    margin-left: calc(15px + 85 * (100vw - 320px) / 1600);
+  }
+}
