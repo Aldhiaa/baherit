@@ -6,7 +6,7 @@ use App\Filament\Resources\Blogs\CommentResource\Pages;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Modules\Blogs\App\Models\Comment;
+use Modules\Blogs\app\Models\Comment;
 
 class CommentResource extends Resource
 {

@@ -11,7 +11,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Table;
 use Filament\Tables;
-use Modules\Blogs\App\Models\Post;
+use Modules\Blogs\app\Models\Post;
 
 class PostResource extends Resource
 {
