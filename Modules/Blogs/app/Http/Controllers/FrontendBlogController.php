@@ -20,7 +20,7 @@ class FrontendBlogController extends Controller
             ->orderByDesc('published_at')
             ->paginate(10);
 
-        return view('blogs.index', compact('posts'));
+        return view('blogs::index', compact('posts'));
     }
 
     public function show($slug)
