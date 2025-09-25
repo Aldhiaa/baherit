@@ -11,6 +11,8 @@
                 <li><a href="#work"   class="nav-link"></a></li>
                 <li><a href="#faq"    class="nav-link"></a></li>
                 <li><a href="#contact"class="nav-link"></a></li>
+                <!-- Added Blogs link so it's visible on large screens without opening the offcanvas menu -->
+                <li><a href="{{ route('blogs.index') }}" class="nav-link">{{ __('messages.Blogs') }}</a></li>
             </ul>
         </ul>
     </div>
