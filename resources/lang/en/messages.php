@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 return [
     'nav' => [
@@ -14,7 +14,7 @@ return [
         'title'     => 'HERE WHERE YOUR',
         'title2'    => 'DREAM',
         'subtitle'  => 'COMES TRUE',
-        'subtitle2' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit…',
+        'subtitle2' => 'Lorem ipsum dolor sit amet consectetur adipisicing elitâ€¦',
     ],
 
     'about' => [
@@ -27,7 +27,7 @@ return [
     ],
 
     'projects' => [
-        'heading' => 'BROWSE OUR AMAZING WORK AS …',
+        'heading' => 'BROWSE OUR AMAZING WORK AS â€¦',
         'visit'   => 'Visit Projects',
     ],
 
@@ -50,7 +50,7 @@ return [
         'subscribe_heading'   => 'Subscribe to our newsletter',
         'email_placeholder'   => 'Enter your email',
         'subscribe_button'    => 'Subscribe',
-        'copyright'           => '© :year All Rights Reserved.',
+        'copyright'           => 'آ© :year All Rights Reserved.',
         'privacy'             => 'Privacy Policy',
         'terms'               => 'Terms & Conditions',
     ],
@@ -61,7 +61,11 @@ return [
     'Services' => 'Services',
     'Projects' => 'Projects',
     'Blogs' => 'Blogs',
+    'Latest insights, articles and news from our team.' => 'Latest insights, articles and news from our team.',
+    'Recent posts & stories' => 'Recent posts & stories',
+    'No blogs available at the moment.' => 'No blogs available at the moment.',
     'home' => 'Home',
-    'Our service line‑up powered by AI.' =>'Our service line‑up powered by AI.',
-    'A Wide Range of Functionality to Support Any Use‑Case' =>'A Wide Range of Functionality to Support Any Use‑Case',
+    'Our service lineâ€‘up powered by AI.' =>'Our service lineâ€‘up powered by AI.',
+    'A Wide Range of Functionality to Support Any Useâ€‘Case' =>'A Wide Range of Functionality to Support Any Useâ€‘Case',
 ];
+
