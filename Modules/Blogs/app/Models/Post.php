@@ -2,19 +2,30 @@
 
 namespace Modules\Blogs\app\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
+use Spatie\Translatable\HasTranslations;
 
 class Post extends Model
 {
     use HasFactory;
+    use HasTranslations;
 
     protected $fillable = [
-    'user_id', 'title', 'slug', 'excerpt', 'content', 'published', 'published_at', 'featured_image'
+        'user_id',
+        'title',
+        'slug',
+        'excerpt',
+        'content',
+        'published',
+        'published_at',
+        'featured_image',
     ];
+
+    public $translatable = ['title', 'excerpt', 'content'];
 
     protected $casts = [
         'published' => 'boolean',
@@ -41,6 +52,7 @@ class Post extends Model
         if (! $this->featured_image) {
             return null;
         }
+
         return Storage::url($this->featured_image);
     }
 }

@@ -21,17 +21,52 @@ class PostResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('Post Details')
+                Forms\Components\Tabs::make('Translations')
+                    ->columnSpan('full')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('English')
+                            ->schema([
+                                Forms\Components\TextInput::make('title.en')
+                                    ->label('Title (English)')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
+                                Forms\Components\Textarea::make('excerpt.en')
+                                    ->label('Excerpt (English)')
+                                    ->rows(4)
+                                    ->maxLength(500)
+                                    ->columnSpanFull(),
+                                Forms\Components\RichEditor::make('content.en')
+                                    ->label('Content (English)')
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Arabic')
+                            ->schema([
+                                Forms\Components\TextInput::make('title.ar')
+                                    ->label('Title (Arabic)')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(function ($state, callable $set, callable $get) {
+                                        if (! $get('slug')) {
+                                            $set('slug', Str::slug($state));
+                                        }
+                                    }),
+                                Forms\Components\Textarea::make('excerpt.ar')
+                                    ->label('Excerpt (Arabic)')
+                                    ->rows(4)
+                                    ->maxLength(500)
+                                    ->columnSpanFull(),
+                                Forms\Components\RichEditor::make('content.ar')
+                                    ->label('Content (Arabic)')
+                                    ->required()
+                                    ->columnSpanFull(),
+                            ]),
+                    ]),
+                Forms\Components\Section::make('Details')
                     ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->required()
-                            ->maxLength(255)
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn ($state, callable $set) => $set('slug', Str::slug($state))),
-                        Forms\Components\TextInput::make('slug')
-                            ->required()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true),
                         Forms\Components\Select::make('user_id')
                             ->label('Author')
                             ->relationship('author', 'name')
@@ -39,30 +74,14 @@ class PostResource extends Resource
                             ->preload()
                             ->default(fn () => auth()->id())
                             ->nullable(),
-                        Forms\Components\Textarea::make('excerpt')
-                            ->rows(4)
-                            ->maxLength(500)
-                            ->columnSpanFull(),
-                    ])
-                    ->columns(2),
-                Forms\Components\Section::make('Content')
-                    ->schema([
-                        Forms\Components\RichEditor::make('content')
-                            ->required()
-                            ->columnSpanFull(),
                         Forms\Components\FileUpload::make('featured_image')
                             ->image()
                             ->directory('posts')
                             ->imagePreviewHeight('250')
-                            ->downloadable()
-                            ->columnSpanFull(),
-                    ]),
-                Forms\Components\Section::make('Publishing')
-                    ->schema([
+                            ->downloadable(),
                         Forms\Components\Toggle::make('published')
                             ->label('Published')
-                            ->default(false)
-                            ->inline(false),
+                            ->default(false),
                         Forms\Components\DateTimePicker::make('published_at')
                             ->label('Published at')
                             ->seconds(false)
@@ -70,6 +89,7 @@ class PostResource extends Resource
                             ->nullable(),
                     ])
                     ->columns(2),
+                Forms\Components\Hidden::make('slug'),
             ]);
     }
 
@@ -79,6 +99,8 @@ class PostResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id'),
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Title')
+                    ->formatStateUsing(fn ($state, Post $record) => $record->getTranslation('title', app()->getLocale()))
                     ->searchable()
                     ->limit(50),
                 Tables\Columns\TextColumn::make('author.name')
