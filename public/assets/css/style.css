@@ -1,4 +1,4 @@
-/*=====================
+﻿/*=====================
    1.0 Variables start
 ==========================*/
 :root {
@@ -423,6 +423,12 @@ i {
     position: relative;
 }
 
+.breadcrumb-section .blog-illustration {
+    max-width: 320px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
 @media (max-width: 1400px) {
     .breadcrumb-section {
         padding-top: 150px;
@@ -6946,3 +6952,5 @@ main.service .feature-section::after {}
 }
 
 /*# sourceMappingURL=style.css.map */
+
+

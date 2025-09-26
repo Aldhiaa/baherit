@@ -64,7 +64,11 @@ return [
     'Project' => 'المشروع',
     'Blogs' => 'المدونة',
     'home' => 'الرئيسية',
+    'Our Skills' => '',
+    'A Wide Range of Functionality to Support Any Use‑Case' => 'مجموعة واسعة من الوظائف لدعم أي حالة استخدام',
+    'Our service line‑up powered by AI' => 'خط خدماتنا المدعوم بالذكاء الاصطناعي',
     'Latest insights, articles and news from our team.' => 'أحدث الرؤى والمقالات والأخبار من فريقنا.',
     'Recent posts & stories' => 'أحدث المنشورات والقصص',
     'No blogs available at the moment.' => 'لا توجد مدونات متاحة في الوقت الحالي.',
 ];
+

@@ -1,4 +1,4 @@
-@extends('layouts')
+﻿@extends('layouts')
 
 @section('content')
 <main class="service">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-lg-6 d-lg-inline-block d-none">
                     <div class="breadcrumb-img">
-                        <img src="{{ asset('assets/svg/Blog post-amico.svg') }}" class="img-fluid"  alt="blog" />
+                        <img src="{{ asset('assets/svg/Blog post-amico.svg') }}" class="img-fluid blog-illustration" alt="blog" />
                     </div>
                 </div>
             </div>
@@ -85,3 +85,4 @@
     </section>
 </main>
 @endsection
+
