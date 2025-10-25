@@ -30,11 +30,6 @@ return [
 
     'disks' => [
 
-        'livewire-tmp' => [
-            'driver' => 'local',
-            'root'   => storage_path('framework/livewire-tmp'),
-        ],
-
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
