@@ -9,11 +9,60 @@
     @if(app()->getLocale() === 'ar')
         <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
     @endif
+     @if (app()->getLocale() === 'ar')
+      <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- وسوم تحسين محركات البحث -->
+    <title>بحر التكنولوجيا – للحلول التقنيةو الرقمية المتقدمة | تطوير مواقع، تطبيقات، تسويق رقمي، وأمن سيبراني</title>
+    <meta name="description" content="بحر التكنولوجيا شركة رائدة تقدم حلول رقمية متكاملة تشمل تطوير المواقع والتطبيقات، الأمن السيبراني، التسويق الرقمي، ودعم تقني متخصص." />
+    <meta name="keywords" content="بحر التكنولوجيا, شركة تقنية, تطوير مواقع, تصميم تطبيقات, الأمن السيبراني, التسويق الرقمي, خدمات تقنية المعلومات, شركات تقنية , شركة برمجة " />
+    <meta name="author" content="بحر التكنولوجيا" />
+
+    <!-- أيقونة الموقع -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <!-- وسوم المشاركة على وسائل التواصل -->
+    <meta property="og:title" content="بحر التكنولوجيا – حلول رقمية متكاملة" />
+    <meta property="og:description" content="خدمات تطوير مواقع وتطبيقات، أمن سيبراني، وتسويق رقمي ." />
+    <meta property="og:image" content="/assets/images/og-image.jpg" />
+    <meta property="og:url" content="https://www.baherit.com" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="بحر التكنولوجيا – للحلول الرقمية المتكاملة" />
+    <meta name="twitter:description" content="شركة تقنية  تقدم خدمات شاملة تشمل البرمجة، الأمن السيبراني، والتسويق الرقمي." />
+    <meta name="twitter:image" content="/assets/images/twitter-card.jpg" />
+    <link rel="stylesheet" href="{{ asset('assets/css/vendors/bootstrap.rtl.min.css') }}?v={{time()}}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/rtl_style.css') }}?v={{time()}}" />
+    @else
+    <title>Baher Technology – for Advanced Digital and Technical Solutions | Website Development, Apps, Digital Marketing, and Cybersecurity</title>
+    <meta name="description" content="Baher Technology – for Advanced Digital and Technical Solutions including website and app development, cybersecurity, digital marketing, and  technical support." />
+    <meta name="keywords" content="Baher Technology, Tech Company, Website Development, App Design, Cybersecurity, Digital Marketing, IT Services, Tech Companies, Programming Company" />
+    <meta name="author" content="Baher Technology" />
+
+    <!-- Website Icon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <!-- Social Media Sharing Tags -->
+    <meta property="og:title" content="Baher Technology – Integrated Digital Solutions" />
+    <meta property="og:description" content="Website and app development services, cybersecurity, and digital marketing." />
+    <meta property="og:image" content="/assets/images/og-image.jpg" />
+    <meta property="og:url" content="https://www.baherit.com" />
+    <meta property="og:type" content="website" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Baher Technology – Integrated Digital Solutions" />
+    <meta name="twitter:description" content="A Saudi tech company providing comprehensive services including programming, cybersecurity, and digital marketing." />
+    <meta name="twitter:image" content="/assets/images/twitter-card.jpg" />
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     @yield('head')
 </head>
 <body class="bg-background text-text-primary">
+    
     <!-- Navigation Header -->
     <nav class="bg-white shadow-soft sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
