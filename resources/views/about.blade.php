@@ -142,7 +142,7 @@
     @endif
 
     <!-- Leadership Team -->
-    @php
+    {{-- @php
         $leadershipSection = $aboutSections->where('section_name', 'leadership')->first();
     @endphp
     @if($leadershipSection)
@@ -182,7 +182,7 @@
             </div>
         </div>
     </section>
-    @endif
+    @endif --}}
 
     <!-- Company Culture -->
     @if($cultureSection)

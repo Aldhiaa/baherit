@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\ServicePage;
+use App\Models\TechnologyCategory;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -13,7 +15,10 @@ class ServiceController extends Controller
     public function index()
     {
         $services = Service::all();
-        return view('services', compact('services'));
+        $servicePage = ServicePage::where('page_name', 'services')->where('is_active', true)->first();
+        $technologyCategories = TechnologyCategory::active()->ordered()->get();
+        
+        return view('services', compact('services', 'servicePage', 'technologyCategories'));
     }
 
     /**

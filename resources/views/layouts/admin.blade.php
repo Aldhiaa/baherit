@@ -252,7 +252,7 @@
                     </i>
                     <span class="sidebar-menu-text">{{ __('Technologies') }}</span>
                 </a>
-                
+
                 <a href="{{ route('admin.about-sections.index') }}"
                    class="sidebar-menu-item {{ request()->routeIs('admin.about-sections.*') ? 'active' : '' }}">
                     <i>
@@ -351,5 +351,7 @@
             }
         });
     </script>
+
+    @yield('scripts')
 </body>
 </html>

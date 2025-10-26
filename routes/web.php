@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CaseStudyController as AdminCaseStudyController;
 use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Admin\TechnologyController as AdminTechnologyController;
 use App\Http\Controllers\Admin\AboutSectionController as AdminAboutSectionController;
+use App\Http\Controllers\Admin\ServicePageController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use App\Http\Controllers\ServiceController;
@@ -50,6 +51,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('team-members', AdminTeamMemberController::class);
     Route::resource('technologies', AdminTechnologyController::class);
     Route::resource('about-sections', AdminAboutSectionController::class);
+    Route::resource('service-pages', ServicePageController::class);
 });
 
 Route::middleware('auth')->group(function () {

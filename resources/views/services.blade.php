@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', __('services.meta_title'))
-@section('description', __('services.description'))
+@section('title', $servicePage ? $servicePage->getTranslation('hero_title', app()->getLocale()) : __('services.meta_title'))
+@section('description', $servicePage ? $servicePage->getTranslation('hero_description', app()->getLocale()) : __('services.description'))
 
 @section('content')
     <!-- Hero Section -->
@@ -10,15 +10,15 @@
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
             <div class="text-center">
                 <h1 class="text-4xl lg:text-6xl font-bold text-secondary-900 mb-6 leading-tight">
-                    {{ __('services.hero_title') }}
-                    <span class="text-gradient">{{ __('services.hero_highlight') }}</span>
+                    {{ $servicePage ? $servicePage->getTranslation('hero_title', app()->getLocale()) : __('services.hero_title') }}
+                    <span class="text-gradient">{{ $servicePage ? $servicePage->getTranslation('hero_highlight', app()->getLocale()) : __('services.hero_highlight') }}</span>
                 </h1>
                 <p class="text-xl text-secondary-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-                    {{ __('services.hero_description') }}
+                    {{ $servicePage ? $servicePage->getTranslation('hero_description', app()->getLocale()) : __('services.hero_description') }}
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('contact.index') }}" class="btn-primary text-lg px-8 py-4">{{ __('services.hero_button_primary') }}</a>
-                    <a href="{{ route('case-studies.index') }}" class="btn-secondary text-lg px-8 py-4">{{ __('services.hero_button_secondary') }}</a>
+                    <a href="{{ route('contact.index') }}" class="btn-primary text-lg px-8 py-4">{{ $servicePage ? $servicePage->getTranslation('hero_button_primary', app()->getLocale()) : __('services.hero_button_primary') }}</a>
+                    <a href="{{ route('case-studies.index') }}" class="btn-secondary text-lg px-8 py-4">{{ $servicePage ? $servicePage->getTranslation('hero_button_secondary', app()->getLocale()) : __('services.hero_button_secondary') }}</a>
                 </div>
             </div>
         </div>
@@ -29,10 +29,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ __('services.find_title') }}
+                    {{ $servicePage ? $servicePage->getTranslation('find_title', app()->getLocale()) : __('services.find_title') }}
                 </h2>
                 <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
-                    {{ __('services.find_description') }}
+                    {{ $servicePage ? $servicePage->getTranslation('find_description', app()->getLocale()) : __('services.find_description') }}
                 </p>
             </div>
 
@@ -42,31 +42,31 @@
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
                     </svg>
-                    {{ __('services.filter_all') }}
+                    {{ $servicePage ? $servicePage->getTranslation('filter_all', app()->getLocale()) : __('services.filter_all') }}
                 </button>
                 <button class="filter-btn" data-filter="development">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                     </svg>
-                    {{ __('services.filter_development') }}
+                    {{ $servicePage ? $servicePage->getTranslation('filter_development', app()->getLocale()) : __('services.filter_development') }}
                 </button>
                 <button class="filter-btn" data-filter="cloud">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"></path>
                     </svg>
-                    {{ __('services.filter_cloud') }}
+                    {{ $servicePage ? $servicePage->getTranslation('filter_cloud', app()->getLocale()) : __('services.filter_cloud') }}
                 </button>
                 <button class="filter-btn" data-filter="consulting">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                     </svg>
-                    {{ __('services.filter_consulting') }}
+                    {{ $servicePage ? $servicePage->getTranslation('filter_consulting', app()->getLocale()) : __('services.filter_consulting') }}
                 </button>
                 <button class="reset-btn" onclick="resetFilters()">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
                     </svg>
-                    {{ __('services.reset') }}
+                    {{ $servicePage ? $servicePage->getTranslation('reset', app()->getLocale()) : __('services.reset') }}
                 </button>
             </div>
         </div>
@@ -150,62 +150,33 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ __('services.technology_title') }}
+                    {{ $servicePage ? $servicePage->getTranslation('technology_title', app()->getLocale()) : __('services.technology_title') }}
                 </h2>
                 <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
-                    {{ __('services.technology_description') }}
+                    {{ $servicePage ? $servicePage->getTranslation('technology_description', app()->getLocale()) : __('services.technology_description') }}
                 </p>
             </div>
 
             <div class="grid md:grid-cols-4 gap-8">
-                <!-- Frontend -->
+                @foreach($technologyCategories as $category)
                 <div class="text-center">
-                    <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path>
-                            <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v-1z"></path>
-                        </svg>
+                    <div class="w-16 h-16 {{ $category->color_class ?? 'bg-primary-100' }} rounded-full flex items-center justify-center mx-auto mb-4">
+                        @if($category->icon_svg_path)
+                            {!! $category->icon_svg_path !!}
+                        @else
+                            <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path>
+                                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v-1z"></path>
+                            </svg>
+                        @endif
                     </div>
-                    <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('services.frontend') }}</h3>
-                    <p class="text-secondary-600 text-sm mb-3">React, Vue.js, Angular, TypeScript</p>
-                    <a href="{{ route('technology-stack.index') }}" class="text-primary text-sm font-semibold hover:text-primary-700">{{ __('services.learn_more') }}</a>
+                    <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $category->name }}</h3>
+                    <p class="text-secondary-600 text-sm mb-3">{{ $category->description }}</p>
+                    <a href="{{ route('technology-stack.index') }}" class="text-primary text-sm font-semibold hover:text-primary-700">
+                        {{ $servicePage ? $servicePage->getTranslation('learn_more', app()->getLocale()) : __('services.learn_more') }}
+                    </a>
                 </div>
-
-                <!-- Backend -->
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-accent" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M2 9.5A3.5 3.5 0 005.5 13H9v2.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 15.586V13h3.5a3.5 3.5 0 100-7H11V3.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 3.414V6H5.5A3.5 3.5 0 002 9.5z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('services.backend') }}</h3>
-                    <p class="text-secondary-600 text-sm mb-3">Node.js, Python, .NET, Java</p>
-                    <a href="{{ route('technology-stack.index') }}" class="text-accent text-sm font-semibold hover:text-accent-700">{{ __('services.learn_more') }}</a>
-                </div>
-
-                <!-- Database -->
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-success" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M3 4a1 1 0 000 2v9a2 2 0 002 2h1a2 2 0 002-2V6a1 1 0 100-2H3zm3 11V6h1v9a1 1 0 01-1 1H5a1 1 0 01-1-1zm5-10a1 1 0 011-1h3a1 1 0 110 2v8a2 2 0 01-2 2h-1a2 2 0 01-2-2V5z" clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('services.database') }}</h3>
-                    <p class="text-secondary-600 text-sm mb-3">PostgreSQL, MongoDB, Redis</p>
-                    <a href="{{ route('technology-stack.index') }}" class="text-success text-sm font-semibold hover:text-success-700">{{ __('services.learn_more') }}</a>
-                </div>
-
-                <!-- Cloud -->
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-warning" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('services.cloud') }}</h3>
-                    <p class="text-secondary-600 text-sm mb-3">AWS, Azure, Google Cloud, Docker</p>
-                    <a href="{{ route('technology-stack.index') }}" class="text-warning text-sm font-semibold hover:text-warning-700">{{ __('services.learn_more') }}</a>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -215,10 +186,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ __('services.process_title') }}
+                    {{ $servicePage ? $servicePage->getTranslation('process_title', app()->getLocale()) : __('services.process_title') }}
                 </h2>
                 <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
-                    {{ __('services.process_description') }}
+                    {{ $servicePage ? $servicePage->getTranslation('process_description', app()->getLocale()) : __('services.process_description') }}
                 </p>
             </div>
 
@@ -230,8 +201,8 @@
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ __('services.process_discovery') }}</h3>
-                    <p class="text-secondary-600 text-sm">{{ __('services.process_discovery_desc') }}</p>
+                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ $servicePage ? $servicePage->getTranslation('process_discovery', app()->getLocale()) : __('services.process_discovery') }}</h3>
+                    <p class="text-secondary-600 text-sm">{{ $servicePage ? $servicePage->getTranslation('process_discovery_desc', app()->getLocale()) : __('services.process_discovery_desc') }}</p>
                 </div>
 
                 <!-- Design & Prototyping -->
@@ -241,8 +212,8 @@
                             <path fill-rule="evenodd" d="M4 2a2 2 0 00-2 2v11a3 3 0 106 0V4a2 2 0 00-2-2H4zm1 14a1 1 0 100-2 1 1 0 000 2zm5-1.757l4.9-4.9a2 2 0 000-2.828L13.485 5.1a2 2 0 00-2.828 0L10 5.757v8.486zM16 18H9.071l6-6H16a2 2 0 012 2v2a2 2 0 01-2 2z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ __('services.process_design') }}</h3>
-                    <p class="text-secondary-600 text-sm">{{ __('services.process_design_desc') }}</p>
+                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ $servicePage ? $servicePage->getTranslation('process_design', app()->getLocale()) : __('services.process_design') }}</h3>
+                    <p class="text-secondary-600 text-sm">{{ $servicePage ? $servicePage->getTranslation('process_design_desc', app()->getLocale()) : __('services.process_design_desc') }}</p>
                 </div>
 
                 <!-- Development & Testing -->
@@ -252,8 +223,8 @@
                             <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ __('services.process_development') }}</h3>
-                    <p class="text-secondary-600 text-sm">{{ __('services.process_development_desc') }}</p>
+                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ $servicePage ? $servicePage->getTranslation('process_development', app()->getLocale()) : __('services.process_development') }}</h3>
+                    <p class="text-secondary-600 text-sm">{{ $servicePage ? $servicePage->getTranslation('process_development_desc', app()->getLocale()) : __('services.process_development_desc') }}</p>
                 </div>
 
                 <!-- Deployment & Support -->
@@ -263,8 +234,8 @@
                             <path fill-rule="evenodd" d="M3 4a1 1 0 000 2h.01a1 1 0 100-2H3zm2.01 0a1 1 0 000 2h.01a1 1 0 100-2h-.01zM7 4a1 1 0 000 2h.01a1 1 0 100-2H7zM3 8a1 1 0 000 2h.01a1 1 0 100-2H3zm2.01 0a1 1 0 000 2h.01a1 1 0 100-2h-.01zM7 8a1 1 0 000 2h.01a1 1 0 100-2H7zm2 0a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1zm1 4a1 1 0 100 2h6a1 1 0 100-2h-6z" clip-rule="evenodd"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ __('services.process_deployment') }}</h3>
-                    <p class="text-secondary-600 text-sm">{{ __('services.process_deployment_desc') }}</p>
+                    <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ $servicePage ? $servicePage->getTranslation('process_deployment', app()->getLocale()) : __('services.process_deployment') }}</h3>
+                    <p class="text-secondary-600 text-sm">{{ $servicePage ? $servicePage->getTranslation('process_deployment_desc', app()->getLocale()) : __('services.process_deployment_desc') }}</p>
                 </div>
             </div>
         </div>
@@ -274,17 +245,17 @@
     <section class="py-20 bg-gradient-to-r from-primary to-primary-700">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
-                {{ __('services.cta_title') }}
+                {{ $servicePage ? $servicePage->getTranslation('cta_title', app()->getLocale()) : __('services.cta_title') }}
             </h2>
             <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-                {{ __('services.cta_description') }}
+                {{ $servicePage ? $servicePage->getTranslation('cta_description', app()->getLocale()) : __('services.cta_description') }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('contact.index') }}" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-xl">
-                    {{ __('services.cta_button_primary') }}
+                    {{ $servicePage ? $servicePage->getTranslation('cta_button_primary', app()->getLocale()) : __('services.cta_button_primary') }}
                 </a>
                 <a href="{{ route('case-studies.index') }}" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-all duration-300">
-                    {{ __('services.cta_button_secondary') }}
+                    {{ $servicePage ? $servicePage->getTranslation('cta_button_secondary', app()->getLocale()) : __('services.cta_button_secondary') }}
                 </a>
             </div>
         </div>
