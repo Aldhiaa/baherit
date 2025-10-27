@@ -37,24 +37,39 @@ class SettingSeeder extends Seeder
             ]
         );
 
+        // Company description
         DB::table('settings')->updateOrInsert(
-            ['key' => 'site_phone'],
+            ['key' => 'ouT_baher_technology'],
             [
                 'value' => json_encode([
-                    'en' => '+967 777 777 777',
-                    'ar' => '+967 777 777 777'
+                    'en' => 'Tech baher is a Yemeni company specialized in providing comprehensive technological and digital solutions. It aims to empower businesses and organizations to achieve digital transformation and excel in an ever-changing business environment. We rely on a professional team passionate about technology to deliver innovative, high-quality services at competitive prices that meet customer expectations.',
+                    'ar' => 'بحر التكنولوجيا هي شركة يمنية متخصصة في تقديم حلول تقنية ورقمية متكاملة، تهدف إلى تمكين الشركات والمؤسسات من تحقيق التحول الرقمي والتميز في بيئة الأعمال المتغيرة. نعتمد على فريق عمل محترف وشغوف بالتقنية، لتقديم خدمات مبتكرة بجودة عالية وأسعار تنافسية تلبي تطلعات العملاء.'
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
         );
 
+        // Banner title
         DB::table('settings')->updateOrInsert(
-            ['key' => 'site_address'],
+            ['key' => 'banner_title'],
             [
                 'value' => json_encode([
-                    'en' => 'Sanaa, Yemen',
-                    'ar' => 'صنعاء, اليمن'
+                    'en' => 'Baher Technology',
+                    'ar' => 'بحر التكنولوجيا'
+                ]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+
+        // Browse project button text
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'browse_project'],
+            [
+                'value' => json_encode([
+                    'en' => 'projects',
+                    'ar' => 'تصفح مشاريعنا '
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),

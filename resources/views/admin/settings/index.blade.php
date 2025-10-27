@@ -39,95 +39,95 @@
                             </svg>
                             {{ __('Site Information') }}
                         </h3>
-                        
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Site Name -->
                             <div>
                                 <label for="site_name_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Site Name (English)') }}
                                 </label>
-                                <input type="text" 
-                                       name="site_name_en" 
+                                <input type="text"
+                                       name="site_name_en"
                                        id="site_name_en"
                                        value="{{ old('site_name_en', $settings['site_name']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="site_name_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Site Name (Arabic)') }}
                                 </label>
-                                <input type="text" 
-                                       name="site_name_ar" 
+                                <input type="text"
+                                       name="site_name_ar"
                                        id="site_name_ar"
                                        value="{{ old('site_name_ar', $settings['site_name']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <!-- Email -->
                             <div>
                                 <label for="site_email_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Email (English)') }}
                                 </label>
-                                <input type="email" 
-                                       name="site_email_en" 
+                                <input type="email"
+                                       name="site_email_en"
                                        id="site_email_en"
                                        value="{{ old('site_email_en', $settings['site_email']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="site_email_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Email (Arabic)') }}
                                 </label>
-                                <input type="email" 
-                                       name="site_email_ar" 
+                                <input type="email"
+                                       name="site_email_ar"
                                        id="site_email_ar"
                                        value="{{ old('site_email_ar', $settings['site_email']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <!-- Phone -->
                             <div>
                                 <label for="site_phone_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Phone (English)') }}
                                 </label>
-                                <input type="text" 
-                                       name="site_phone_en" 
+                                <input type="text"
+                                       name="site_phone_en"
                                        id="site_phone_en"
                                        value="{{ old('site_phone_en', $settings['site_phone']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="site_phone_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Phone (Arabic)') }}
                                 </label>
-                                <input type="text" 
-                                       name="site_phone_ar" 
+                                <input type="text"
+                                       name="site_phone_ar"
                                        id="site_phone_ar"
                                        value="{{ old('site_phone_ar', $settings['site_phone']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <!-- Address -->
                             <div>
                                 <label for="site_address_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Address (English)') }}
                                 </label>
-                                <input type="text" 
-                                       name="site_address_en" 
+                                <input type="text"
+                                       name="site_address_en"
                                        id="site_address_en"
                                        value="{{ old('site_address_en', $settings['site_address']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="site_address_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Address (Arabic)') }}
                                 </label>
-                                <input type="text" 
-                                       name="site_address_ar" 
+                                <input type="text"
+                                       name="site_address_ar"
                                        id="site_address_ar"
                                        value="{{ old('site_address_ar', $settings['site_address']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
@@ -143,20 +143,20 @@
                             </svg>
                             {{ __('Logo') }}
                         </h3>
-                        
+
                         <div class="flex items-center">
                             @if(isset($settings['site_logo']) && $settings['site_logo']->logo)
                                 <div class="mr-6">
                                     <img src="{{ asset('storage/' . $settings['site_logo']->logo) }}" alt="Current Logo" class="h-20 w-20 object-contain">
                                 </div>
                             @endif
-                            
+
                             <div class="flex-1">
                                 <label for="logo" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Upload New Logo') }}
                                 </label>
-                                <input type="file" 
-                                       name="logo" 
+                                <input type="file"
+                                       name="logo"
                                        id="logo"
                                        accept="image/*"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
@@ -173,118 +173,118 @@
                             </svg>
                             {{ __('Social Media Links') }}
                         </h3>
-                        
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Facebook -->
                             <div>
                                 <label for="facebook_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Facebook URL (English)') }}
                                 </label>
-                                <input type="url" 
-                                       name="facebook_en" 
+                                <input type="url"
+                                       name="facebook_en"
                                        id="facebook_en"
                                        value="{{ old('facebook_en', $settings['facebook']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="facebook_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Facebook URL (Arabic)') }}
                                 </label>
-                                <input type="url" 
-                                       name="facebook_ar" 
+                                <input type="url"
+                                       name="facebook_ar"
                                        id="facebook_ar"
                                        value="{{ old('facebook_ar', $settings['facebook']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <!-- Twitter -->
                             <div>
                                 <label for="twitter_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Twitter URL (English)') }}
                                 </label>
-                                <input type="url" 
-                                       name="twitter_en" 
+                                <input type="url"
+                                       name="twitter_en"
                                        id="twitter_en"
                                        value="{{ old('twitter_en', $settings['twitter']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="twitter_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Twitter URL (Arabic)') }}
                                 </label>
-                                <input type="url" 
-                                       name="twitter_ar" 
+                                <input type="url"
+                                       name="twitter_ar"
                                        id="twitter_ar"
                                        value="{{ old('twitter_ar', $settings['twitter']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <!-- Instagram -->
                             <div>
                                 <label for="instagram_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Instagram URL (English)') }}
                                 </label>
-                                <input type="url" 
-                                       name="instagram_en" 
+                                <input type="url"
+                                       name="instagram_en"
                                        id="instagram_en"
                                        value="{{ old('instagram_en', $settings['instagram']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="instagram_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('Instagram URL (Arabic)') }}
                                 </label>
-                                <input type="url" 
-                                       name="instagram_ar" 
+                                <input type="url"
+                                       name="instagram_ar"
                                        id="instagram_ar"
                                        value="{{ old('instagram_ar', $settings['instagram']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <!-- LinkedIn -->
                             <div>
                                 <label for="linkedin_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('LinkedIn URL (English)') }}
                                 </label>
-                                <input type="url" 
-                                       name="linkedin_en" 
+                                <input type="url"
+                                       name="linkedin_en"
                                        id="linkedin_en"
                                        value="{{ old('linkedin_en', $settings['linkedin']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="linkedin_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('LinkedIn URL (Arabic)') }}
                                 </label>
-                                <input type="url" 
-                                       name="linkedin_ar" 
+                                <input type="url"
+                                       name="linkedin_ar"
                                        id="linkedin_ar"
                                        value="{{ old('linkedin_ar', $settings['linkedin']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <!-- YouTube -->
                             <div>
                                 <label for="youtube_en" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('YouTube URL (English)') }}
                                 </label>
-                                <input type="url" 
-                                       name="youtube_en" 
+                                <input type="url"
+                                       name="youtube_en"
                                        id="youtube_en"
                                        value="{{ old('youtube_en', $settings['youtube']->value['en'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
                             </div>
-                            
+
                             <div>
                                 <label for="youtube_ar" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                                     {{ __('YouTube URL (Arabic)') }}
                                 </label>
-                                <input type="url" 
-                                       name="youtube_ar" 
+                                <input type="url"
+                                       name="youtube_ar"
                                        id="youtube_ar"
                                        value="{{ old('youtube_ar', $settings['youtube']->value['ar'] ?? '') }}"
                                        class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
@@ -294,7 +294,7 @@
 
                     <!-- Submit Button -->
                     <div class="flex justify-end">
-                        <button type="submit" 
+                        <button type="submit"
                                 class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-700 focus:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
                             {{ __('Update Settings') }}
                         </button>

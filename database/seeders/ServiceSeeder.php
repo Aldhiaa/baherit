@@ -15,76 +15,86 @@ class ServiceSeeder extends Seeder
     {
         $services = [
             [
-                'title' => 'Custom Software Development',
-                'description' => 'Tailored applications built to your exact specifications and business requirements',
-                'category' => 'development',
-                'icon' => 'code',
-                'features' => [
-                    'Enterprise-grade architecture & scalability',
-                    'Modern tech stack & best practices',
-                    'Comprehensive testing & quality assurance'
-                ],
-                'timeline' => '3-12 months'
-            ],
-            [
-                'title' => 'Web Applications',
-                'description' => 'Scalable web platforms with modern architecture and responsive design',
-                'category' => 'development',
-                'icon' => 'web',
-                'features' => [
-                    'Progressive Web App (PWA) capabilities',
-                    'Cross-browser compatibility & optimization',
-                    'API integration & third-party services'
-                ],
-                'timeline' => '2-8 months'
-            ],
-            [
-                'title' => 'Cloud Migration & Infrastructure',
-                'description' => 'Seamless transition to cloud platforms with optimized performance and security',
-                'category' => 'cloud',
-                'icon' => 'cloud',
-                'features' => [
-                    'AWS, Azure, Google Cloud expertise',
-                    'DevOps automation & CI/CD pipelines',
-                    'Security compliance & monitoring'
-                ],
-                'timeline' => '1-6 months'
-            ],
-            [
-                'title' => 'Digital Transformation Consulting',
-                'description' => 'Strategic technology guidance and implementation roadmaps for business growth',
-                'category' => 'consulting',
-                'icon' => 'consulting',
-                'features' => [
-                    'Technology assessment & strategy',
-                    'Process optimization & automation',
-                    'Change management & training'
-                ],
-                'timeline' => '2-18 months'
-            ],
-            [
-                'title' => 'Mobile Solutions',
-                'description' => 'Native and cross-platform mobile applications for iOS and Android',
+                'title' => 'Mobile App Development',
+                'description' => 'Design and development of mobile applications for iOS and Android using cutting-edge technologies like Flutter and React Native for high performance.',
                 'category' => 'development',
                 'icon' => 'mobile',
                 'features' => [
-                    'React Native & Flutter development',
-                    'App Store optimization & deployment',
-                    'Push notifications & analytics'
+                    'Design and development of mobile applications for iOS and Android',
+                    'Utilization of cutting-edge technologies like Flutter and React Native for high performance',
+                    'Integration with websites for a seamless cross-platform experience',
+                    'App maintenance and updates to ensure continuity and improved performance'
                 ],
                 'timeline' => '3-9 months'
             ],
             [
-                'title' => 'API Development & Integration',
-                'description' => 'Robust APIs and seamless third-party integrations for connected systems',
+                'title' => 'Website Design & Development',
+                'description' => 'Professional UI/UX Design to ensure a seamless user experience with website development using the latest technologies.',
                 'category' => 'development',
-                'icon' => 'api',
+                'icon' => 'web',
                 'features' => [
-                    'RESTful & GraphQL API design',
-                    'Microservices architecture',
-                    'Documentation & testing suites'
+                    'Professional UI/UX Design to ensure a seamless user experience',
+                    'Website development using the latest technologies (HTML, CSS, JS, Laravel, WordPress)',
+                    'Responsive design for compatibility across all devices to ensure optimal performance',
+                    'E-commerce development with enhanced user experience and speed'
                 ],
-                'timeline' => '1-4 months'
+                'timeline' => '2-8 months'
+            ],
+            [
+                'title' => 'Domain Registration & Email Hosting',
+                'description' => 'Domain registration with premium names tailored to your brand and hosting plans that cater to diverse needs.',
+                'category' => 'cloud',
+                'icon' => 'domain',
+                'features' => [
+                    'Domain registration with premium names tailored to your brand',
+                    'Hosting plans that cater to diverse needs',
+                    'Professional email setup using the domain name',
+                    'SSL certificate management for secure data protection',
+                    '24/7 technical support to ensure uninterrupted service'
+                ],
+                'timeline' => '1-2 weeks'
+            ],
+            [
+                'title' => 'Network Management & Cybersecurity',
+                'description' => 'Design and implementation of network infrastructure for efficient connectivity with system protection against cyberattacks to secure sensitive data.',
+                'category' => 'security',
+                'icon' => 'security',
+                'features' => [
+                    'Design and implementation of network infrastructure for efficient connectivity',
+                    'Network performance monitoring and quick, professional troubleshooting',
+                    'System protection against cyberattacks to secure sensitive data',
+                    'Firewall and protection system updates against emerging threats',
+                    'Comprehensive security audits and vulnerability assessments for system protection'
+                ],
+                'timeline' => '1-6 months'
+            ],
+            [
+                'title' => 'IT Support & Technology Solutions',
+                'description' => 'Troubleshooting and immediate support to maintain operations with software and app maintenance for enhanced performance.',
+                'category' => 'support',
+                'icon' => 'support',
+                'features' => [
+                    'Troubleshooting and immediate support to maintain operations',
+                    'Software and app maintenance for enhanced performance',
+                    'Device and network setup using the latest technologies',
+                    'Data protection and system security against breaches',
+                    'Staff training on modern tools and technologies to boost productivity'
+                ],
+                'timeline' => 'Ongoing'
+            ],
+            [
+                'title' => 'Security & Smart Home Systems',
+                'description' => 'Installation of smart doors, intercom systems, surveillance cameras, alarm systems with instant notifications via smart applications.',
+                'category' => 'security',
+                'icon' => 'smart-home',
+                'features' => [
+                    'Smart doors: Installation of fingerprint, passcode, or app-controlled doors integrated with smart home systems',
+                    'Intercom systems: Advanced intercoms with display screens connected to cameras and smart apps',
+                    'Surveillance cameras: High-definition (HD, 4K) cameras with night vision and online monitoring',
+                    'Alarm systems: Theft and fire alarm systems with instant notifications via smart applications',
+                    'Smart home integration: Control security, lighting, heating, and cooling via mobile for full smart home management'
+                ],
+                'timeline' => '2-6 months'
             ]
         ];
 

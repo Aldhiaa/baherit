@@ -39,6 +39,8 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
     Route::get('/contact', function () {
         return view('contact');
     })->name('contact.index');
+
+   
 });
 
 // Admin routes
@@ -52,10 +54,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
     Route::resource('technologies', AdminTechnologyController::class);
     Route::resource('about-sections', AdminAboutSectionController::class);
     Route::resource('service-pages', ServicePageController::class);
-    
+
     // Settings routes
-    Route::get('/settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
-    Route::post('/settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+    Route::get('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::post('/settings', [\App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
 });
 
 Route::middleware('auth')->group(function () {
