@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             TechnologyCategorySeeder::class,
             AboutSectionSeeder::class,
             AdminUserSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }

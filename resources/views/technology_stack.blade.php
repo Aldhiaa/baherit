@@ -152,9 +152,21 @@
                 @foreach($technologyCategories as $category)
                 <div class="card-elevated text-center">
                     <div class="w-16 h-16 bg-{{ $category->color_class }}-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <svg class="w-8 h-8 text-{{ $category->color_class }}" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="{{ $category->icon_svg_path }}" clip-rule="evenodd"></path>
-                        </svg>
+                        @if($category->name == 'Frontend' || $category->getNameInLocale('en') == 'Frontend')
+                            <i class="fas fa-code text-{{ $category->color_class }} text-2xl"></i>
+                        @elseif($category->name == 'Backend' || $category->getNameInLocale('en') == 'Backend')
+                            <i class="fas fa-server text-{{ $category->color_class }} text-2xl"></i>
+                        @elseif($category->name == 'Database' || $category->getNameInLocale('en') == 'Database')
+                            <i class="fas fa-database text-{{ $category->color_class }} text-2xl"></i>
+                        @elseif($category->name == 'Cloud' || $category->getNameInLocale('en') == 'Cloud')
+                            <i class="fas fa-cloud text-{{ $category->color_class }} text-2xl"></i>
+                        @elseif($category->name == 'Mobile' || $category->getNameInLocale('en') == 'Mobile')
+                            <i class="fas fa-mobile-alt text-{{ $category->color_class }} text-2xl"></i>
+                        @elseif($category->name == 'Emerging' || $category->getNameInLocale('en') == 'Emerging')
+                            <i class="fas fa-lightbulb text-{{ $category->color_class }} text-2xl"></i>
+                        @else
+                            <i class="fas fa-cube text-{{ $category->color_class }} text-2xl"></i>
+                        @endif
                     </div>
                     <h3 class="text-xl font-semibold text-secondary-900 mb-3">{{ $category->name }}</h3>
                     <p class="text-secondary-600 mb-4">

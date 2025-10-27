@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Baherit Software Solutions')</title>
     <meta name="description" content="@yield('description', 'Enterprise software development company specializing in custom solutions, digital transformation, and technology consulting. Your trusted partner for scalable software solutions.')">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     @if(app()->getLocale() === 'ar')
         <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
@@ -62,7 +63,7 @@
     @yield('head')
 </head>
 <body class="bg-background text-text-primary">
-    
+
     <!-- Navigation Header -->
     <nav class="bg-white shadow-soft sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

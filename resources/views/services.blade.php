@@ -64,7 +64,7 @@
                 </button>
                 <button class="reset-btn" onclick="resetFilters()">
                     <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                        <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 110-2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
                     </svg>
                     {{ $servicePage ? $servicePage->getTranslation('reset', app()->getLocale()) : __('services.reset') }}
                 </button>
@@ -161,13 +161,20 @@
                 @foreach($technologyCategories as $category)
                 <div class="text-center">
                     <div class="w-16 h-16 {{ $category->color_class ?? 'bg-primary-100' }} rounded-full flex items-center justify-center mx-auto mb-4">
-                        @if($category->icon_svg_path)
-                            {!! $category->icon_svg_path !!}
+                        @if($category->name == 'Frontend' || $category->getNameInLocale('en') == 'Frontend')
+                            <i class="fas fa-code text-primary text-2xl"></i>
+                        @elseif($category->name == 'Backend' || $category->getNameInLocale('en') == 'Backend')
+                            <i class="fas fa-server text-accent text-2xl"></i>
+                        @elseif($category->name == 'Database' || $category->getNameInLocale('en') == 'Database')
+                            <i class="fas fa-database text-success text-2xl"></i>
+                        @elseif($category->name == 'Cloud' || $category->getNameInLocale('en') == 'Cloud')
+                            <i class="fas fa-cloud text-warning text-2xl"></i>
+                        @elseif($category->name == 'Mobile' || $category->getNameInLocale('en') == 'Mobile')
+                            <i class="fas fa-mobile-alt text-accent text-2xl"></i>
+                        @elseif($category->name == 'Emerging' || $category->getNameInLocale('en') == 'Emerging')
+                            <i class="fas fa-lightbulb text-primary text-2xl"></i>
                         @else
-                            <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd"></path>
-                                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V9a1 1 0 00-1-1h-1v-1z"></path>
-                            </svg>
+                            <i class="fas fa-cube text-primary text-2xl"></i>
                         @endif
                     </div>
                     <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $category->name }}</h3>
