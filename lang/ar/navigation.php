@@ -3,9 +3,12 @@
 return [
     'home' => 'الرئيسية',
     'services' => 'الخدمات',
-    'case_studies' => 'المشاريع',
+    'projects' => 'المشاريع',
     'technology' => 'التكنولوجيا',
-    'about' => 'عن الشركة',
+    'about' => 'عنا',
     'contact' => 'اتصل بنا',
     'get_started' => 'ابدأ الآن',
+    'dashboard' => 'لوحة التحكم',
+    'profile' => 'الملف الشخصي',
+    'logout' => 'تسجيل الخروج',
 ];

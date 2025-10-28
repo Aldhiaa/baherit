@@ -9,7 +9,7 @@
         <div class="absolute inset-0 bg-white/50"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="text-center lg:text-left">
+                <div class="text-center lg:text-left {{ app()->getLocale() === 'ar' ? 'lg:text-right' : '' }}">
                     <h1 class="text-4xl lg:text-6xl font-bold text-secondary-900 mb-6 leading-tight">
                         {{ __('homepage.hero_title') }}
                         <span class="text-gradient">{{ __('homepage.hero_highlight') }}</span>
@@ -17,19 +17,19 @@
                     <p class="text-xl text-secondary-600 mb-8 leading-relaxed">
                         {{ __('homepage.hero_description') }}
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start {{ app()->getLocale() === 'ar' ? 'lg:justify-end' : '' }}">
                         <a href="{{ route('contact.index') }}" class="btn-primary text-lg px-8 py-4">{{ __('navigation.get_started') }}</a>
                         <a href="{{ route('case-studies.index') }}" class="btn-secondary text-lg px-8 py-4">{{ __('homepage.hero_button_secondary') }}</a>
                     </div>
-                    <div class="mt-8 flex items-center justify-center lg:justify-start space-x-6 text-sm text-secondary-500">
+                    <div class="mt-8 flex items-center justify-center lg:justify-start {{ app()->getLocale() === 'ar' ? 'lg:justify-end' : '' }} space-x-6 {{ app()->getLocale() === 'ar' ? 'space-x-reverse' : '' }} text-sm text-secondary-500">
                         <div class="flex items-center">
-                            <svg class="h-5 w-5 text-success mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="h-5 w-5 text-success mr-2 {{ app()->getLocale() === 'ar' ? 'ml-2 mr-0' : '' }}" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
                             {{ __('homepage.services_title') }}
                         </div>
                         <div class="flex items-center">
-                            <svg class="h-5 w-5 text-success mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="h-5 w-5 text-success mr-2 {{ app()->getLocale() === 'ar' ? 'ml-2 mr-0' : '' }}" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                             </svg>
                             {{ __('homepage.technology_title') }}
@@ -38,9 +38,9 @@
                 </div>
                 <div class="relative">
                     <div class="relative z-10">
-                        <img src="https://images.unsplash.com/photo-1690192078982-d3d2f89059ee"
+                        <img src="{{ asset('assets/svg/home.svg') }}"
                              alt="{{ __('homepage.hero_title') }} {{ __('homepage.hero_highlight') }}"
-                             class="rounded-lg shadow-deep w-full h-96 object-cover"
+                             class="rounded-lg shadow-deep w-full h-auto object-contain max-h-96 md:max-h-screen"
                              loading="lazy"
                              onerror="this.src='https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
                     </div>

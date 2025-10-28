@@ -40,7 +40,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['lo
         return view('contact');
     })->name('contact.index');
 
-   
+
 });
 
 // Admin routes

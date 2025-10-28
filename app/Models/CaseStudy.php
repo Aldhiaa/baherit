@@ -86,7 +86,17 @@ class CaseStudy extends Model
      */
     public function getMetricsAttribute($value)
     {
-        return $value ? json_decode($value, true) : [];
+        $metrics = $value ? json_decode($value, true) : [];
+        $locale = app()->getLocale();
+
+        // Handle multilingual labels in metrics
+        foreach ($metrics as &$metric) {
+            if (isset($metric['label']) && is_array($metric['label'])) {
+                $metric['label'] = $metric['label'][$locale] ?? $metric['label']['en'] ?? '';
+            }
+        }
+
+        return $metrics;
     }
 
     /**
@@ -95,7 +105,15 @@ class CaseStudy extends Model
     public function setTitleAttribute($value)
     {
         if (is_array($value)) {
-            $this->attributes['title'] = json_encode($value);
+            // If we're seeding with multilingual data, store it directly
+            if (isset($value['en']) || isset($value['ar'])) {
+                $this->attributes['title'] = json_encode($value);
+            } else {
+                // If it's an array but not multilingual, handle as before
+                $titles = isset($this->attributes['title']) ? json_decode($this->attributes['title'], true) : [];
+                $titles[app()->getLocale()] = $value;
+                $this->attributes['title'] = json_encode($titles);
+            }
         } else {
             $titles = isset($this->attributes['title']) ? json_decode($this->attributes['title'], true) : [];
             $titles[app()->getLocale()] = $value;
@@ -109,7 +127,15 @@ class CaseStudy extends Model
     public function setDescriptionAttribute($value)
     {
         if (is_array($value)) {
-            $this->attributes['description'] = json_encode($value);
+            // If we're seeding with multilingual data, store it directly
+            if (isset($value['en']) || isset($value['ar'])) {
+                $this->attributes['description'] = json_encode($value);
+            } else {
+                // If it's an array but not multilingual, handle as before
+                $descriptions = isset($this->attributes['description']) ? json_decode($this->attributes['description'], true) : [];
+                $descriptions[app()->getLocale()] = $value;
+                $this->attributes['description'] = json_encode($descriptions);
+            }
         } else {
             $descriptions = isset($this->attributes['description']) ? json_decode($this->attributes['description'], true) : [];
             $descriptions[app()->getLocale()] = $value;
@@ -123,7 +149,15 @@ class CaseStudy extends Model
     public function setChallengeAttribute($value)
     {
         if (is_array($value)) {
-            $this->attributes['challenge'] = json_encode($value);
+            // If we're seeding with multilingual data, store it directly
+            if (isset($value['en']) || isset($value['ar'])) {
+                $this->attributes['challenge'] = json_encode($value);
+            } else {
+                // If it's an array but not multilingual, handle as before
+                $challenges = isset($this->attributes['challenge']) ? json_decode($this->attributes['challenge'], true) : [];
+                $challenges[app()->getLocale()] = $value;
+                $this->attributes['challenge'] = json_encode($challenges);
+            }
         } else {
             $challenges = isset($this->attributes['challenge']) ? json_decode($this->attributes['challenge'], true) : [];
             $challenges[app()->getLocale()] = $value;
@@ -137,7 +171,15 @@ class CaseStudy extends Model
     public function setSolutionAttribute($value)
     {
         if (is_array($value)) {
-            $this->attributes['solution'] = json_encode($value);
+            // If we're seeding with multilingual data, store it directly
+            if (isset($value['en']) || isset($value['ar'])) {
+                $this->attributes['solution'] = json_encode($value);
+            } else {
+                // If it's an array but not multilingual, handle as before
+                $solutions = isset($this->attributes['solution']) ? json_decode($this->attributes['solution'], true) : [];
+                $solutions[app()->getLocale()] = $value;
+                $this->attributes['solution'] = json_encode($solutions);
+            }
         } else {
             $solutions = isset($this->attributes['solution']) ? json_decode($this->attributes['solution'], true) : [];
             $solutions[app()->getLocale()] = $value;
@@ -151,7 +193,15 @@ class CaseStudy extends Model
     public function setResultsAttribute($value)
     {
         if (is_array($value)) {
-            $this->attributes['results'] = json_encode($value);
+            // If we're seeding with multilingual data, store it directly
+            if (isset($value['en']) || isset($value['ar'])) {
+                $this->attributes['results'] = json_encode($value);
+            } else {
+                // If it's an array but not multilingual, handle as before
+                $results = isset($this->attributes['results']) ? json_decode($this->attributes['results'], true) : [];
+                $results[app()->getLocale()] = $value;
+                $this->attributes['results'] = json_encode($results);
+            }
         } else {
             $results = isset($this->attributes['results']) ? json_decode($this->attributes['results'], true) : [];
             $results[app()->getLocale()] = $value;

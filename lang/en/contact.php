@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'meta_title' => 'Contact Us - Baherit Software Solutions | Strategic Technology Consultation',
-    'description' => 'Connect with Baherit\'s technology experts for strategic consultation. Schedule discovery calls, access technical support, and explore custom software solutions tailored to your business needs.',
+    'meta_title' => 'Contact Us - Baher Technology | Digital Transformation Solutions',
+    'description' => 'Connect with Baher Technology\'s experts for comprehensive digital solutions. Schedule consultations, access technical support, and explore technology services tailored to your business needs.',
 
     // Hero
-    'hero_title' => 'Let\'s Build Something',
-    'hero_highlight' => 'Extraordinary',
-    'hero_description' => 'Ready to transform your business with custom software solutions? Our strategic consultation process ensures we understand your unique challenges and deliver technology that drives real results.',
+    'hero_title' => 'Let\'s Transform Your Business',
+    'hero_highlight' => 'Together',
+    'hero_description' => 'Baher Technology is a Yemeni company specialized in providing comprehensive digital and technological solutions. Our mission is to empower businesses and organizations to achieve digital transformation and excel in today\'s dynamic business landscape.',
     'hero_button_primary' => 'Schedule Consultation',
     'hero_button_secondary' => 'Explore Contact Options',
 
     // Contact Method Selector
     'methods_title' => 'Choose Your Preferred Way to Connect',
-    'methods_subtitle' => 'Whether you need immediate technical support or want to explore strategic partnership opportunities, we\'re here to help',
+    'methods_subtitle' => 'Whether you need immediate technical support or want to explore partnership opportunities, we\'re here to help',
 
     // Strategic Consultation
     'strategic_title' => 'Strategic Consultation',
-    'strategic_description' => 'Schedule a discovery call with our technology strategists to explore custom software solutions tailored to your business goals.',
+    'strategic_description' => 'Schedule a discovery call with our technology experts to explore custom solutions tailored to your business goals.',
     'strategic_benefit_1' => '45-minute discovery session',
     'strategic_benefit_2' => 'Custom solution roadmap',
     'strategic_benefit_3' => 'No-obligation proposal',
@@ -26,7 +26,7 @@ return [
     // Technical Support
     'technical_title' => 'Technical Support',
     'technical_description' => 'Get immediate assistance with technical questions, project updates, or access our comprehensive knowledge base.',
-    'technical_benefit_1' => 'Live chat available 9-5 EST',
+    'technical_benefit_1' => 'Live chat available during business hours',
     'technical_benefit_2' => '24/7 knowledge base access',
     'technical_benefit_3' => 'Priority client support',
     'technical_button' => 'Start Live Chat',
@@ -40,7 +40,7 @@ return [
     'general_button' => 'Send Message',
 
     // Consultation Form
-    'form_title' => 'Strategic Consultation Request',
+    'form_title' => 'Consultation Request',
     'form_subtitle' => 'Help us understand your needs so we can provide the most valuable consultation experience',
     'form_step1_title' => 'Tell Us About Your Project',
     'form_company' => 'Company Name *',
@@ -140,7 +140,7 @@ return [
 
     // CTA
     'cta_title' => 'Ready to Transform Your Business?',
-    'cta_description' => 'Let\'s discuss how Baherit can accelerate your digital transformation journey with custom software solutions that drive real results.',
+    'cta_description' => 'Let\'s discuss how Baher Technology can accelerate your digital transformation journey with comprehensive technology solutions that drive real results.',
     'cta_button_primary' => 'Schedule Consultation',
-    'cta_button_secondary' => 'View Success Stories',
+    'cta_button_secondary' => 'View Our Projects',
 ];

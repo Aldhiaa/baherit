@@ -85,41 +85,72 @@
 
                 <!-- Desktop Navigation -->
                 <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.home') }}</a>
-                        <a href="{{ route('services.index') }}" class="{{ request()->routeIs('services.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.services') }}</a>
-                        <a href="{{ route('case-studies.index') }}" class="{{ request()->routeIs('case-studies.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.case_studies') }}</a>
-                        <a href="{{ route('technology-stack.index') }}" class="{{ request()->routeIs('technology-stack.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.technology') }}</a>
-                        <a href="{{ route('about.index') }}" class="{{ request()->routeIs('about.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.about') }}</a>
-                        <x-language-switcher />
-                        <a href="{{ route('contact.index') }}" class="btn-primary">{{ __('navigation.get_started') }}</a>
-                    </div>
+                    <div class="md:flex space-x-1">
+                            <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.home') }}</a>
+                            <a href="{{ route('services.index') }}" class="{{ request()->routeIs('services.*') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.services') }}</a>
+                            <a href="{{ route('case-studies.index') }}" class="{{ request()->routeIs('case-studies.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.projects') }}</a>
+                            <a href="{{ route('technology-stack.index') }}" class="{{ request()->routeIs('technology-stack.*') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.technology') }}</a>
+                            <a href="{{ route('about.index') }}" class="{{ request()->routeIs('about.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.about') }}</a>
+                            <a href="{{ route('contact.index') }}" class="{{ request()->routeIs('contact.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} px-3 py-2 rounded-md text-sm transition-smooth">{{ __('navigation.contact') }}</a>
+                        </div>
                 </div>
 
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button type="button" class="text-secondary-600 hover:text-primary focus:outline-none focus:text-primary" id="mobile-menu-button">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
+                <!-- Language Switcher and Mobile menu button -->
+                <div class="flex items-center">
+                    <!-- Language Switcher Dropdown -->
+                    <div class="relative ml-3">
+                        <button type="button" class="text-secondary-600 hover:text-primary focus:outline-none focus:text-primary flex items-center text-sm" id="language-menu-button">
+                            <span class="mr-1">{{ strtoupper(app()->getLocale()) }}</span>
+                            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <div class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden" id="language-dropdown">
+                            <div class="py-1" role="none">
+                                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                    @if($localeCode !== app()->getLocale())
+                                        <a href="{{ LaravelLocalization::getLocalizedUrl($localeCode, null, [], true) }}" class="block px-4 py-2 text-sm text-secondary-700 hover:bg-secondary-100" role="menuitem">
+                                            {{ $properties['native'] }}
+                                        </a>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden ml-2">
+                        <button type="button" class="text-secondary-600 hover:text-primary focus:outline-none focus:text-primary" id="mobile-menu-button">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <div class="md:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-secondary-200">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.home') }}</a>
-                <a href="{{ route('services.index') }}" class="{{ request()->routeIs('services.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.services') }}</a>
-                <a href="{{ route('case-studies.index') }}" class="{{ request()->routeIs('case-studies.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.case_studies') }}</a>
-                <a href="{{ route('technology-stack.index') }}" class="{{ request()->routeIs('technology-stack.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.technology') }}</a>
-                <a href="{{ route('about.index') }}" class="{{ request()->routeIs('about.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.about') }}</a>
-                <div class="px-3 py-2">
-                    <x-language-switcher />
-                </div>
-                <a href="{{ route('contact.index') }}" class="btn-primary w-full text-center mt-4">{{ __('navigation.get_started') }}</a>
-            </div>
+        <div class="md:hidden" id="mobile-menu">
+                    <div class="px-2 pt-2 pb-3 space-y-1">
+                        <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.home') }}</a>
+                        <a href="{{ route('services.index') }}" class="{{ request()->routeIs('services.*') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.services') }}</a>
+                        <a href="{{ route('case-studies.index') }}" class="{{ request()->routeIs('case-studies.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.projects') }}</a>
+                        <a href="{{ route('technology-stack.index') }}" class="{{ request()->routeIs('technology-stack.*') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.technology') }}</a>
+                        <a href="{{ route('about.index') }}" class="{{ request()->routeIs('about.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.about') }}</a>
+                        <a href="{{ route('contact.index') }}" class="{{ request()->routeIs('contact.index') ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} block px-3 py-2 rounded-md text-base transition-smooth">{{ __('navigation.contact') }}</a>
+
+                        <!-- Mobile Language Switcher -->
+                        <div class="border-t border-secondary-200 pt-2 mt-2">
+                            <div class="px-3 py-2 text-secondary-500 text-sm">{{ __('common.language') }}</div>
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a href="{{ LaravelLocalization::getLocalizedUrl($localeCode, null, [], true) }}" class="block px-3 py-2 rounded-md text-base {{ app()->getLocale() === $localeCode ? 'text-primary font-semibold' : 'text-secondary-600 hover:text-primary' }} transition-smooth">
+                                    {{ $properties['native'] }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
         </div>
     </nav>
 
@@ -194,7 +225,7 @@
                     <h3 class="text-lg font-semibold mb-4">{{ __('navigation.about') }}</h3>
                     <ul class="space-y-2">
                         <li><a href="{{ route('about.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.about') }}</a></li>
-                        <li><a href="{{ route('case-studies.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.case_studies') }}</a></li>
+                        <li><a href="{{ route('case-studies.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.projects') }}</a></li>
                         <li><a href="{{ route('technology-stack.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.technology') }}</a></li>
                         <li><a href="{{ route('contact.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.contact') }}</a></li>
                     </ul>
@@ -219,6 +250,24 @@
         document.getElementById('mobile-menu-button').addEventListener('click', function() {
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenu.classList.toggle('hidden');
+        });
+
+        // Language dropdown toggle
+        document.getElementById('language-menu-button').addEventListener('click', function() {
+            const languageDropdown = document.getElementById('language-dropdown');
+            languageDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const languageButton = document.getElementById('language-menu-button');
+            const languageDropdown = document.getElementById('language-dropdown');
+
+            if (languageButton && languageDropdown &&
+                !languageButton.contains(event.target) &&
+                !languageDropdown.contains(event.target)) {
+                languageDropdown.classList.add('hidden');
+            }
         });
 
         // Smooth scrolling for anchor links

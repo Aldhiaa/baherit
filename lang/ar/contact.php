@@ -1,23 +1,23 @@
 <?php
 
 return [
-    'meta_title' => 'اتصل بنا - حلول برمجيات باهيريتس | استشارة تقنية استراتيجية',
-    'description' => 'تواصل مع خبراء تكنولوجيا باهيريتس للاستشارة الاستراتيجية. جدولة مكالمات الاكتشاف، والوصول إلى الدعم الفني، واستكشاف حلول برمجية مخصصة تناسب احتياجات عملك.',
+    'meta_title' => 'اتصل بنا - بحر التكنولوجيا | حلول التحول الرقمي',
+    'description' => 'تواصل مع خبراء بحر التكنولوجيا للحصول على حلول رقمية شاملة. جدولة الاستشارات، والوصول إلى الدعم الفني، واستكشاف خدمات التكنولوجيا المصممة خصيصاً لاحتياجات عملك.',
 
     // Hero
-    'hero_title' => 'لنقم ببناء شيء',
-    'hero_highlight' => 'استثنائي',
-    'hero_description' => 'هل أنت مستعد لتحويل عملك من خلال حلول برمجية مخصصة؟ تضمن عملية الاستشارة الاستراتيجية لدينا أن نفهم التحديات الفريدة الخاصة بك ونقدم تكنولوجيا تدفع نتائج حقيقية.',
+    'hero_title' => 'لنحول عملك معاً',
+    'hero_highlight' => '',
+    'hero_description' => 'بحر التكنولوجيا هي شركة يمنية متخصصة في تقديم حلول تقنية ورقمية متكاملة، تهدف إلى تمكين الشركات والمؤسسات من تحقيق التحول الرقمي والتميز في عالم الأعمال المتغير.',
     'hero_button_primary' => 'جدولة استشارة',
     'hero_button_secondary' => 'استكشف خيارات الاتصال',
 
     // Contact Method Selector
     'methods_title' => 'اختر طريقتك المفضلة للتواصل',
-    'methods_subtitle' => 'سواء كنت بحاجة إلى دعم تقني فوري أو تريد استكشاف فرص الشراكة الاستراتيجية، نحن هنا للمساعدة',
+    'methods_subtitle' => 'سواء كنت بحاجة إلى دعم تقني فوري أو تريد استكشاف فرص الشراكة، نحن هنا للمساعدة',
 
     // Strategic Consultation
     'strategic_title' => 'استشارة استراتيجية',
-    'strategic_description' => 'جدولة مكالمة اكتشاف مع استراتيجيين التكنولوجيا لدينا لاستكشاف حلول برمجية مخصصة تناسب أهداف عملك.',
+    'strategic_description' => 'جدولة مكالمة اكتشاف مع خبراء التكنولوجيا لدينا لاستكشاف حلول مخصصة تناسب أهداف عملك.',
     'strategic_benefit_1' => 'جلسة اكتشاف مدتها 45 دقيقة',
     'strategic_benefit_2' => 'خارطة طريق الحل المخصص',
     'strategic_benefit_3' => 'عرض أسعار بدون التزام',
@@ -26,7 +26,7 @@ return [
     // Technical Support
     'technical_title' => 'الدعم الفني',
     'technical_description' => 'احصل على مساعدة فورية مع الأسئلة التقنية، أو تحديثات المشروع، أو الوصول إلى قاعدة المعرفة الشاملة لدينا.',
-    'technical_benefit_1' => 'الدردشة المباشرة متاحة من 9-5 بتوقيت شرق الولايات المتحدة',
+    'technical_benefit_1' => 'الدردشة المباشرة متاحة خلال ساعات العمل',
     'technical_benefit_2' => 'الوصول إلى قاعدة المعرفة 24/7',
     'technical_benefit_3' => 'دعم العملاء ذو الأولوية',
     'technical_button' => 'بدء الدردشة المباشرة',
@@ -40,7 +40,7 @@ return [
     'general_button' => 'إرسال رسالة',
 
     // Consultation Form
-    'form_title' => 'طلب استشارة استراتيجية',
+    'form_title' => 'طلب استشارة',
     'form_subtitle' => 'ساعدنا على فهم احتياجاتك حتى نتمكن من تقديم تجربة استشارة ذات قيمة قصوى',
     'form_step1_title' => 'أخبرنا عن مشروعك',
     'form_company' => 'اسم الشركة *',
@@ -140,7 +140,28 @@ return [
 
     // CTA
     'cta_title' => 'هل أنت مستعد لتحويل عملك؟',
-    'cta_description' => 'دعنا نناقش كيف يمكن لباهيريتس تسريع رحلة التحول الرقمي الخاصة بك مع حلول برمجية مخصصة تدفع نتائج حقيقية.',
+    'cta_description' => 'دعنا نناقش كيف يمكن لبحر التكنولوجيا تسريع رحلة التحول الرقمي الخاصة بك مع حلول تكنولوجيا شاملة تدفع نتائج حقيقية.',
     'cta_button_primary' => 'جدولة استشارة',
-    'cta_button_secondary' => 'عرض قصص النجاح',
+    'cta_button_secondary' => 'عرض مشاريعنا',
+
+    // Additional contact page translations
+    'Get in Touch' => 'ابق على تواصل',
+    'Multiple ways to connect with our team' => 'طرق متعددة للتواصل مع فريقنا',
+    'Office Location' => 'موقع المكتب',
+    'Yemen' => 'اليمن',
+    'info@baherit.com' => 'info@baherit.com',
+    'Direct Contact' => 'التواصل المباشر',
+    'Response within 24 hours' => 'رد خلال 24 ساعة',
+    'Follow Us' => 'تابعنا',
+    'Interactive map showing Baher Technology office location' => 'خريطة تفاعلية تُظهر موقع مكتب بحر التكنولوجيا',
+    'Visit Our Office' => 'زر مكتبنا',
+    'Live Support' => 'الدعم المباشر',
+    'Online now' => 'متصل الآن',
+    'Hi! I\'m here to help with any questions about our services or to connect you with the right team member.' => 'مرحباً! أنا هنا للمساعدة في أي أسئلة حول خدماتنا أو لتوصيلك مع عضو الفريق المناسب.',
+    'General Questions' => 'أسئلة عامة',
+    'Technical Support' => 'الدعم الفني',
+    'Schedule Consultation' => 'جدولة استشارة',
+    'Starting' => 'بدء',
+    'chat session. In a real implementation, this would connect to your live chat system.' => 'جلسة دردشة. في التطبيق الحقيقي، سيتم الاتصال بنظام الدردشة المباشرة الخاص بك.',
+    'I\'d like to receive updates about Baher Technology\'s services and industry insights' => 'أود تلقي تحديثات حول خدمات بحر التكنولوجيا ورؤى الصناعة',
 ];

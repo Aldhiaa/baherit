@@ -39,7 +39,7 @@
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-6">
-                        {{ $storySection->title }}
+                        {{ $storySection->title ?? __('about.story_title') }}
                     </h2>
                     <div class="space-y-6 text-lg text-secondary-600">
                         <p>
@@ -70,7 +70,7 @@
                 <div class="relative">
                     <div class="relative z-10">
                         <img src="https://images.unsplash.com/photo-1690192078982-d3d2f89059ee"
-                             alt="{{ $storySection->title }}"
+                             alt="{{ $storySection->title ?? __('about.story_title') }}"
                              class="rounded-lg shadow-deep w-full h-96 object-cover"
                              loading="lazy"
                              onerror="this.src='https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
@@ -89,10 +89,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ $foundationSection->title }}
+                    {{ $foundationSection->title ?? __('about.foundation_title') }}
                 </h2>
                 <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
-                    {{ $foundationSection->description }}
+                    {{ $foundationSection->description ?? __('about.foundation_description') }}
                 </p>
             </div>
 
@@ -137,63 +137,52 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Detailed Values -->
+            <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-semibold text-secondary-900 mb-2">{{ __('about.innovation') }}</h4>
+                    <p class="text-secondary-600 text-sm">{{ __('about.innovation_desc') }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-semibold text-secondary-900 mb-2">{{ __('about.quality') }}</h4>
+                    <p class="text-secondary-600 text-sm">{{ __('about.quality_desc') }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-semibold text-secondary-900 mb-2">{{ __('about.transparency') }}</h4>
+                    <p class="text-secondary-600 text-sm">{{ __('about.transparency_desc') }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-semibold text-secondary-900 mb-2">{{ __('about.flexibility') }}</h4>
+                    <p class="text-secondary-600 text-sm">{{ __('about.flexibility_desc') }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-semibold text-secondary-900 mb-2">{{ __('about.security') }}</h4>
+                    <p class="text-secondary-600 text-sm">{{ __('about.security_desc') }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-semibold text-secondary-900 mb-2">{{ __('about.professionalism') }}</h4>
+                    <p class="text-secondary-600 text-sm">{{ __('about.professionalism_desc') }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <h4 class="font-semibold text-secondary-900 mb-2">{{ __('about.customer_service') }}</h4>
+                    <p class="text-secondary-600 text-sm">{{ __('about.customer_service_desc') }}</p>
+                </div>
+            </div>
         </div>
     </section>
     @endif
 
-    <!-- Leadership Team -->
-    {{-- @php
-        $leadershipSection = $aboutSections->where('section_name', 'leadership')->first();
-    @endphp
-    @if($leadershipSection)
-    <section class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ $leadershipSection->title }}
-                </h2>
-                <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
-                    {{ $leadershipSection->description }}
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($teamMembers as $member)
-                <div class="card-elevated text-center group hover:scale-105 transition-all duration-300">
-                    <div class="relative mb-6">
-                        <img src="{{ $member->image_url }}"
-                             alt="{{ $member->name }}, {{ $member->position }} {{ __('common.company_name') }}"
-                             class="w-32 h-32 rounded-full object-cover mx-auto shadow-lg"
-                             loading="lazy"
-                             onerror="this.src='https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
-                        <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-semibold text-secondary-900 mb-2">{{ $member->name }}</h3>
-                    <p class="text-primary font-medium mb-3">{{ $member->position }}</p>
-                    <p class="text-secondary-600 text-sm mb-4">
-                        {{ Str::limit($member->bio, 120) }}
-                    </p>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endif --}}
-
-    <!-- Company Culture -->
+    <!-- Company Services -->
     @if($cultureSection)
     <section class="py-20 bg-surface">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ $cultureSection->content['culture_title'] ?? $cultureSection->title }}
+                    {{ $cultureSection->content['culture_title'] ?? __('about.culture_title') }}
                 </h2>
                 <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
-                    {{ $cultureSection->content['culture_description'] ?? $cultureSection->description }}
+                    {{ $cultureSection->content['culture_description'] ?? __('about.culture_description') }}
                 </p>
             </div>
 
@@ -250,7 +239,7 @@
                 <div class="relative">
                     <div class="relative z-10">
                         <img src="https://images.unsplash.com/photo-1690192078982-d3d2f89059ee"
-                             alt="{{ $cultureSection->content['culture_title'] ?? $cultureSection->title }}"
+                             alt="{{ $cultureSection->content['culture_title'] ?? __('about.culture_title') }}"
                              class="rounded-lg shadow-deep w-full h-96 object-cover"
                              loading="lazy"
                              onerror="this.src='https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
@@ -260,39 +249,39 @@
                 </div>
             </div>
 
-            <!-- Recognition & Certifications -->
+            <!-- Services Grid -->
             <div class="text-center">
                 <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ $cultureSection->content['recognition_title'] ?? __('about.recognition_title') }}
+                    {{ __('about.recognition_title') }}
                 </h2>
                 <p class="text-xl text-secondary-600 mb-12 max-w-3xl mx-auto">
-                    {{ $cultureSection->content['recognition_description'] ?? __('about.recognition_description') }}
+                    {{ __('about.recognition_description') }}
                 </p>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="card-elevated text-center p-6">
-                        <div class="text-4xl text-primary mb-4">🏆</div>
-                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $teamExpertiseSection->content['certification_1'] ?? __('about.certification_1') }}</h3>
+                        <div class="text-4xl text-primary mb-4">📱</div>
+                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('about.certification_1') }}</h3>
                     </div>
                     <div class="card-elevated text-center p-6">
-                        <div class="text-4xl text-accent mb-4">☁️</div>
-                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $teamExpertiseSection->content['certification_2'] ?? __('about.certification_2') }}</h3>
+                        <div class="text-4xl text-accent mb-4">🔒</div>
+                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('about.certification_2') }}</h3>
                     </div>
                     <div class="card-elevated text-center p-6">
-                        <div class="text-4xl text-success mb-4">🔷</div>
-                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $teamExpertiseSection->content['certification_3'] ?? __('about.certification_3') }}</h3>
+                        <div class="text-4xl text-success mb-4">🌐</div>
+                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('about.certification_3') }}</h3>
                     </div>
                     <div class="card-elevated text-center p-6">
-                        <div class="text-4xl text-warning mb-4">🥇</div>
-                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $teamExpertiseSection->content['award_1'] ?? __('about.award_1') }}</h3>
+                        <div class="text-4xl text-warning mb-4">💻</div>
+                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('about.award_1') }}</h3>
                     </div>
                     <div class="card-elevated text-center p-6">
-                        <div class="text-4xl text-primary mb-4">💡</div>
-                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $teamExpertiseSection->content['award_2'] ?? __('about.award_2') }}</h3>
+                        <div class="text-4xl text-primary mb-4">☁️</div>
+                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('about.award_2') }}</h3>
                     </div>
                     <div class="card-elevated text-center p-6">
-                        <div class="text-4xl text-accent mb-4">⭐</div>
-                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ $teamExpertiseSection->content['award_3'] ?? __('about.award_3') }}</h3>
+                        <div class="text-4xl text-accent mb-4">🤝</div>
+                        <h3 class="text-lg font-semibold text-secondary-900 mb-2">{{ __('about.award_3') }}</h3>
                     </div>
                 </div>
             </div>
@@ -388,10 +377,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl lg:text-4xl font-bold text-secondary-900 mb-4">
-                    {{ $teamExpertiseSection->title }}
+                    {{ $teamExpertiseSection->title ?? __('about.team_expertise_title') }}
                 </h2>
                 <p class="text-xl text-secondary-600 max-w-3xl mx-auto">
-                    {{ $teamExpertiseSection->description }}
+                    {{ $teamExpertiseSection->description ?? __('about.team_expertise_description') }}
                 </p>
             </div>
 
@@ -454,22 +443,22 @@
                 <h3 class="text-xl font-semibold text-secondary-900 mb-8">{{ $teamExpertiseSection->content['certifications_title'] ?? __('about.certifications_title') }}</h3>
                 <div class="flex flex-wrap justify-center items-center gap-8 opacity-70">
                     <img src="https://images.unsplash.com/photo-1669865015890-4dbd855de0f7"
-                         alt="AWS Partner certification badge"
+                         alt="Technology certifications"
                          class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
                          loading="lazy"
                          onerror="this.src='https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
                     <img src="https://images.unsplash.com/photo-1629640341147-e597cad2840e"
-                         alt="Google Cloud Partner certification badge"
+                         alt="Cloud technology badges"
                          class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
                          loading="lazy"
                          onerror="this.src='https://images.pixabay.com/photo/2016/12/27/13/10/logo-2150297_1280.png'; this.onerror=null;">
                     <img src="https://images.unsplash.com/photo-1566304660263-c15041ac11c0"
-                         alt="Microsoft Azure Partner certification badge"
+                         alt="Development frameworks"
                          class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
                          loading="lazy"
                          onerror="this.src='https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
                     <img src="https://images.unsplash.com/photo-1653299269669-a3386d39888a"
-                         alt="Agile Scrum certification badge"
+                         alt="Security certifications"
                          class="h-16 w-auto grayscale hover:grayscale-0 transition-all duration-300"
                          loading="lazy"
                          onerror="this.src='https://images.pixabay.com/photo/2017/03/16/21/18/logo-2150297_1280.png'; this.onerror=null;">
@@ -484,16 +473,16 @@
     <section class="py-20 bg-gradient-to-r from-primary to-primary-700">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
-                {{ $ctaSection->title }}
+                {{ $ctaSection->title ?? __('about.cta_title') }}
             </h2>
             <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
-                {{ $ctaSection->description }}
+                {{ $ctaSection->description ?? __('about.cta_description') }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('contact.index') }}" class="bg-white text-primary px-8 py-4 rounded-lg font-semibold text-lg hover:bg-primary-50 transition-all duration-300 shadow-lg hover:shadow-xl">
                     {{ $ctaSection->content['cta_button_primary'] ?? __('about.cta_button_primary') }}
                 </a>
-                <a href="{{ route('contact.index') }}" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-all duration-300">
+                <a href="{{ route('services.index') }}" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white hover:text-primary transition-all duration-300">
                     {{ $ctaSection->content['cta_button_secondary'] ?? __('about.cta_button_secondary') }}
                 </a>
             </div>

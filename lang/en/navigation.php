@@ -3,9 +3,12 @@
 return [
     'home' => 'Home',
     'services' => 'Services',
-    'case_studies' => 'Projects',
+    'projects' => 'Projects',
     'technology' => 'Technology',
-    'about' => 'About Us',
+    'about' => 'About',
     'contact' => 'Contact',
     'get_started' => 'Get Started',
+    'dashboard' => 'Dashboard',
+    'profile' => 'Profile',
+    'logout' => 'Logout',
 ];
