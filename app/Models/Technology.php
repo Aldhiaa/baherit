@@ -54,15 +54,15 @@ class Technology extends Model
     public function getTranslation($attribute, $locale, $fallback = true)
     {
         $values = json_decode($this->attributes[$attribute] ?? '{}', true);
-        
+
         if (isset($values[$locale])) {
             return $values[$locale];
         }
-        
+
         if ($fallback) {
             return $values['en'] ?? '';
         }
-        
+
         return '';
     }
 
