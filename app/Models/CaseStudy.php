@@ -234,4 +234,23 @@ class CaseStudy extends Model
         $descriptions = json_decode($this->attributes['description'], true);
         return $descriptions[$locale] ?? $descriptions['en'] ?? '';
     }
+
+    /**
+     * Get the full image URL with asset helper
+     */
+    public function getImageUrlAttribute($value)
+    {
+        // If the value is already a full URL (http/https), return as is
+        if (filter_var($value, FILTER_VALIDATE_URL)) {
+            return $value;
+        }
+        
+        // If it's a relative path, pass it through the asset helper
+        if ($value) {
+            return asset($value);
+        }
+        
+        // Return default image if no value
+        return asset('images/projects/default.png');
+    }
 }

@@ -136,5 +136,15 @@ class SettingSeeder extends Seeder
                 'updated_at' => now(),
             ]
         );
+
+        // Site logo
+        DB::table('settings')->updateOrInsert(
+            ['key' => 'site_logo'],
+            [
+                'logo' => 'images/settings/01JTCABP28NHFCZ1E2TXM68PG5.png',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
     }
 }

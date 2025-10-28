@@ -117,7 +117,7 @@
                     <div class="relative">
                         <img src="{{ $featuredCaseStudy->image_url }}"
                              alt="{{ $featuredCaseStudy->title }}"
-                             class="rounded-lg shadow-deep w-full h-96 object-cover"
+                             class="rounded-lg shadow-deep w-full h-auto max-h-96 object-cover"
                              loading="lazy"
                              onerror="this.src='https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
                         <div class="absolute -top-4 -right-4 w-72 h-72 bg-primary/10 rounded-full blur-3xl"></div>
@@ -147,7 +147,7 @@
                     <div class="relative mb-6">
                         <img src="{{ $caseStudy->image_url }}"
                              alt="{{ $caseStudy->title }}"
-                             class="w-full h-48 object-cover rounded-lg"
+                             class="w-full h-auto max-h-48 object-cover rounded-lg"
                              loading="lazy"
                              onerror="this.src='https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'; this.onerror=null;">
                         <div class="absolute top-4 left-4">

@@ -41,7 +41,7 @@ class CaseStudySeeder extends Seeder
                     ['label' => ['en' => 'Order Management', 'ar' => 'إدارة الطلبات'], 'value' => 'Intelligent'],
                     ['label' => ['en' => 'Analytics', 'ar' => 'التحليلات'], 'value' => 'Advanced']
                 ],
-                'image_url' => 'https://images.unsplash.com/photo-1666886573531-48d2e3c2b684',
+                'image_url' => 'images/projects/01JRDTDNHQTDJKJEEFT4ZK2578.png',
                 'is_featured' => true,
                 'completed_at' => '2024-10-01'
             ],

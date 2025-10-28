@@ -24,7 +24,7 @@ return [
     'start_similar_project' => 'ابدأ مشروعاً مشابهاً',
     'grid_title' => 'معرض المشاريع',
     'grid_subtitle' => 'مجموعة متنوعة من الحلول عبر الصناعات',
-    'view_case_study' => 'عرض دراسة الحالة',
+    'view_case_study' => 'زيارة المشروع',
     'load_more' => 'تحميل المزيد',
     'metrics_title' => 'إنجازاتنا',
     'metrics_subtitle' => 'الأرقام التي تُ speak لأنفسها',

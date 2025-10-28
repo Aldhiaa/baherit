@@ -29,7 +29,7 @@ return [
     // Case Studies Grid
     'grid_title' => 'Client Success Stories',
     'grid_subtitle' => 'Explore our portfolio of transformative software solutions across industries',
-    'view_case_study' => 'View Case Study',
+    'view_case_study' => 'Visit the Project',
     'load_more' => 'Load More Case Studies',
 
     // Success Metrics
