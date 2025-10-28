@@ -91,11 +91,17 @@
                     @foreach($technologies as $tech)
                     <div class="card group hover:shadow-lg transition-all duration-300 technology-item" data-category="{{ $tech->category }}">
                         <div class="flex items-center mb-4">
-                            <img src="{{ $tech->logo_url }}"
-                                 alt="{{ $tech->name }} {{ __('technology_stack.technology_logo') }}"
-                                 class="w-12 h-12 rounded-lg object-cover mr-4"
-                                 loading="lazy"
-                                 onerror="this.src='https://images.unsplash.com/photo-1633356122544-f1575ac72d75'; this.onerror=null;">
+                            @if($tech->icon_class)
+                                <div class="w-12 h-12 rounded-lg bg-primary-100 flex items-center justify-center mr-4">
+                                    <i class="{{ $tech->icon_class }} text-primary text-2xl"></i>
+                                </div>
+                            @else
+                                <img src="{{ $tech->logo_url }}"
+                                     alt="{{ $tech->name }}"
+                                     class="w-12 h-12 rounded-lg object-cover mr-4"
+                                     loading="lazy"
+                                     onerror="this.src='https://images.unsplash.com/photo-1633356122544-f1575ac72d75'; this.onerror=null;">
+                            @endif
                             <div>
                                 <h3 class="text-lg font-semibold text-secondary-900">{{ $tech->name }}</h3>
                                 <div class="flex items-center">
@@ -107,10 +113,10 @@
                                             @endif" style="width: {{ $tech->proficiency_level }}%"></div>
                                     </div>
                                     <span class="text-sm text-secondary-600">
-                                        @if($tech->proficiency_level >= 90) {{ __('technology_stack.level_expert') }}
-                                        @elseif($tech->proficiency_level >= 80) {{ __('technology_stack.level_advanced') }}
-                                        @elseif($tech->proficiency_level >= 70) {{ __('technology_stack.level_intermediate') }}
-                                        @else {{ __('technology_stack.level_learning') }}
+                                        @if($tech->proficiency_level >= 90) {{ __('technology_stack.proficiency_expert') }}
+                                        @elseif($tech->proficiency_level >= 80) {{ __('technology_stack.proficiency_advanced') }}
+                                        @elseif($tech->proficiency_level >= 70) {{ __('technology_stack.proficiency_intermediate') }}
+                                        @else {{ __('technology_stack.proficiency_learning') }}
                                         @endif
                                     </span>
                                 </div>

@@ -12,6 +12,7 @@ class Technology extends Model
         'category',
         'description',
         'logo_url',
+        'icon_class',
         'proficiency_level',
         'tags',
         'is_featured',

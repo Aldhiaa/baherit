@@ -10,8 +10,8 @@ return [
     'hero_description' => 'Cutting-edge frameworks, proven methodologies, and enterprise-grade infrastructure that power scalable, secure, and maintainable software solutions.',
     'hero_button_primary' => 'Discuss Your Project',
     'hero_button_secondary' => 'View Implementation Examples',
-    'feature_security' => 'Enterprise-Grade Security',
-    'feature_cloud_native' => 'Cloud-Native Architecture',
+    'enterprise_security' => 'Enterprise-Grade Security',
+    'cloud_native' => 'Cloud-Native Architecture',
 
     // Expertise matrix
     'matrix_title' => 'Technology Expertise Matrix',
