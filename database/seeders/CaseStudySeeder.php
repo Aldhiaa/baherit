@@ -42,6 +42,7 @@ class CaseStudySeeder extends Seeder
                     ['label' => ['en' => 'Analytics', 'ar' => 'التحليلات'], 'value' => 'Advanced']
                 ],
                 'image_url' => 'images/projects/01JRDTDNHQTDJKJEEFT4ZK2578.png',
+                'project_url' => 'https://riomarket.com',
                 'is_featured' => true,
                 'completed_at' => '2024-10-01'
             ],
@@ -73,6 +74,7 @@ class CaseStudySeeder extends Seeder
                     ['label' => ['en' => 'Customization', 'ar' => 'التخصيص'], 'value' => 'Full']
                 ],
                 'image_url' => 'https://images.unsplash.com/photo-1551836022-d5d88e9218df',
+                'project_url' => 'https://intelligents-erp.com',
                 'is_featured' => true,
                 'completed_at' => '2024-08-15'
             ],
@@ -104,6 +106,7 @@ class CaseStudySeeder extends Seeder
                     ['label' => ['en' => 'Cost Reduction', 'ar' => 'تقليل التكاليف'], 'value' => '-20%']
                 ],
                 'image_url' => 'https://images.unsplash.com/photo-1563014959-2a0c0c7c0a4a',
+                'project_url' => 'https://manufacturing-digital-transformation.com',
                 'is_featured' => false,
                 'completed_at' => '2024-07-20'
             ]

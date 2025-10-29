@@ -106,9 +106,15 @@
                         </div>
 
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="javascript:void(0)" onclick="openCaseStudyModal('{{ $featuredCaseStudy->id }}')" class="btn-primary">
-                                {{ __('case_studies.view_full_case_study') }}
-                            </a>
+                            @if($featuredCaseStudy->project_url)
+                                <a href="{{ $featuredCaseStudy->project_url }}" target="_blank" class="btn-primary">
+                                    {{ __('case_studies.view_full_case_study') }}
+                                </a>
+                            @else
+                                <a href="javascript:void(0)" onclick="openCaseStudyModal('{{ $featuredCaseStudy->id }}')" class="btn-primary">
+                                    {{ __('case_studies.view_full_case_study') }}
+                                </a>
+                            @endif
                             <a href="{{ route('contact.index') }}" class="btn-secondary">
                                 {{ __('case_studies.start_similar_project') }}
                             </a>
@@ -163,9 +169,15 @@
                     <div class="flex justify-between items-center mb-4">
                         <div class="text-sm text-secondary-500">{{ __('case_studies.completed') }} {{ $caseStudy->completed_at->format('M Y') }}</div>
                     </div>
-                    <button onclick="openCaseStudyModal('{{ $caseStudy->id }}')" class="w-full btn-secondary group-hover:btn-primary transition-all duration-300">
-                        {{ __('case_studies.view_case_study') }}
-                    </button>
+                    @if($caseStudy->project_url)
+                        <a href="{{ $caseStudy->project_url }}" target="_blank" class="w-full btn-secondary group-hover:btn-primary transition-all duration-300 text-center block">
+                            {{ __('case_studies.view_case_study') }}
+                        </a>
+                    @else
+                        <button onclick="openCaseStudyModal('{{ $caseStudy->id }}')" class="w-full btn-secondary group-hover:btn-primary transition-all duration-300">
+                            {{ __('case_studies.view_case_study') }}
+                        </button>
+                    @endif
                 </div>
                 @endforeach
             </div>

@@ -25,6 +25,12 @@ return [
     'view_case_studies' => 'عرض دراسات الحالة →',
     'get_quote' => 'احصل على عرض سعر',
 
+    // Service names for footer
+    'web_development' => 'تطوير المواقع',
+    'mobile_apps' => 'تطبيقات الجوال',
+    'cloud_solutions' => 'حلول السحابة',
+    'digital_transformation' => 'التحول الرقمي',
+
     // Technology showcase
     'technology_title' => 'مدعوم بتكنولوجيا حديثة',
     'technology_description' => 'نستفيد من التقنيات المتطورة والأطر المثبتة لتقديم حلول قابلة للتوسع وآمنة وقابلة للصيانة',

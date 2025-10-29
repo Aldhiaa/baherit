@@ -25,6 +25,12 @@ return [
     'view_case_studies' => 'View Case Studies →',
     'get_quote' => 'Get Quote',
 
+    // Service names for footer
+    'web_development' => 'Web Development',
+    'mobile_apps' => 'Mobile Applications',
+    'cloud_solutions' => 'Cloud Solutions',
+    'digital_transformation' => 'Digital Transformation',
+
     // Technology showcase
     'technology_title' => 'Powered by Modern Technology',
     'technology_description' => 'We leverage cutting-edge technologies and proven frameworks to deliver scalable, secure, and maintainable solutions',

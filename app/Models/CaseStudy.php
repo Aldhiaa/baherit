@@ -16,6 +16,7 @@ class CaseStudy extends Model
         'results',
         'metrics',
         'image_url',
+        'project_url',
         'is_featured',
         'completed_at',
     ];

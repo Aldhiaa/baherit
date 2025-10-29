@@ -163,7 +163,7 @@
                 <div class="md:col-span-2">
                     <div class="flex items-center mb-6">
                         @if(App\Facades\Setting::setting('site_logo'))
-                            <img src="{{ asset('storage/' . App\Facades\Setting::setting('site_logo')) }}" alt="{{ App\Facades\Setting::settingTranslated('site_name') }}" class="h-12 w-auto">
+                            <img src="{{ asset(App\Facades\Setting::setting('site_logo')) }}" alt="{{ App\Facades\Setting::settingTranslated('site_name') }}" class="h-12 w-auto">
                         @else
                             <svg class="h-12 w-12 text-primary" viewBox="0 0 32 32" fill="currentColor">
                                 <path d="M16 2L4 8v16l12 6 12-6V8L16 2zm0 4l8 4v12l-8 4-8-4V10l8-4z"/>
@@ -209,12 +209,12 @@
 
                 <!-- Quick Links -->
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Services</h3>
+                    <h3 class="text-lg font-semibold mb-4">{{ __('navigation.services') }}</h3>
                     <ul class="space-y-2">
-                        <li><a href="{{ route('services.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.services') }}</a></li>
-                        <li><a href="{{ route('services.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.services') }}</a></li>
-                        <li><a href="{{ route('services.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.services') }}</a></li>
-                        <li><a href="{{ route('services.index') }}" class="text-secondary-300 hover:text-white transition-colors">{{ __('navigation.services') }}</a></li>
+                        <li><a href="{{ route('services.index') }}#web-development" class="text-secondary-300 hover:text-white transition-colors">{{ __('services.web_development') }}</a></li>
+                        <li><a href="{{ route('services.index') }}#mobile-apps" class="text-secondary-300 hover:text-white transition-colors">{{ __('services.mobile_apps') }}</a></li>
+                        <li><a href="{{ route('services.index') }}#cloud-solutions" class="text-secondary-300 hover:text-white transition-colors">{{ __('services.cloud_solutions') }}</a></li>
+                        <li><a href="{{ route('services.index') }}#digital-transformation" class="text-secondary-300 hover:text-white transition-colors">{{ __('services.digital_transformation') }}</a></li>
                     </ul>
                 </div>
 
