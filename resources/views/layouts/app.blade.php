@@ -71,14 +71,7 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0">
                     <a href="{{ route('home') }}" class="flex items-center">
-                        @if(App\Facades\Setting::setting('site_logo'))
-                            <img src="{{ asset( App\Facades\Setting::setting('site_logo')) }}" alt="{{ App\Facades\Setting::settingTranslated('site_name') }}" class="h-16 w-auto">
-                        @else
-                            <svg class="h-12 w-12 text-primary" viewBox="0 0 32 32" fill="currentColor">
-                                <path d="M16 2L4 8v16l12 6 12-6V8L16 2zm0 4l8 4v12l-8 4-8-4V10l8-4z"/>
-                                <circle cx="16" cy="16" r="4"/>
-                            </svg>
-                        @endif
+                        <img src="{{ asset('images/settings/logo.png') }}" alt="{{ App\Facades\Setting::settingTranslated('site_name') }}" class="h-16 w-auto">
                     </a>
                 </div>
 
@@ -162,14 +155,7 @@
                 <!-- Company Info -->
                 <div class="md:col-span-2">
                     <div class="flex items-center mb-6">
-                        @if(App\Facades\Setting::setting('site_logo'))
-                            <img src="{{ asset(App\Facades\Setting::setting('site_logo')) }}" alt="{{ App\Facades\Setting::settingTranslated('site_name') }}" class="h-12 w-auto">
-                        @else
-                            <svg class="h-12 w-12 text-primary" viewBox="0 0 32 32" fill="currentColor">
-                                <path d="M16 2L4 8v16l12 6 12-6V8L16 2zm0 4l8 4v12l-8 4-8-4V10l8-4z"/>
-                                <circle cx="16" cy="16" r="4"/>
-                            </svg>
-                        @endif
+                        <img src="{{ asset('images/settings/logo.png') }}" alt="{{ App\Facades\Setting::settingTranslated('site_name') }}" class="h-12 w-auto">
                     </div>
                     <p class="text-secondary-300 mb-6 max-w-md">
                         {{ __('common.tagline') }}
