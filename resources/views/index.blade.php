@@ -490,7 +490,7 @@
     </div>
     <!-- end cta -->
 
-    <div class="techin-section-padding2">
+    {{-- <div class="techin-section-padding2">
         <div class="container">
             <div class="techin-section-title center mb-50">
                 <div class="techin-title-tag center2">
@@ -759,10 +759,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- end team -->
 
-    <section class="techin-section-padding4 section" style="background-image: url(assets/images/v1/pricing-bg.png);">
+    {{-- <section class="techin-section-padding4 section" style="background-image: url(assets/images/v1/pricing-bg.png);">
         <div class="container">
             <div class="techin-section-title techin-pricing">
                 <div class="row">
@@ -786,7 +786,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
 
 
@@ -1001,9 +1001,15 @@
                         $category = $deliverables['industry'] ?? __('index.projects.fallback.category');
                         $projectUrl = $deliverables['project_url'] ?? '#';
                         $imagePath = $project->featured_image;
-                        $imageUrl = $imagePath && (str_starts_with($imagePath, 'http://') || str_starts_with($imagePath, 'https://'))
-                            ? $imagePath
-                            : ($imagePath ? asset('storage/' . ltrim($imagePath, '/')) : asset('assets/images/v1/img5.png'));
+                        if ($imagePath && (str_starts_with($imagePath, 'http://') || str_starts_with($imagePath, 'https://'))) {
+                            $imageUrl = $imagePath;
+                        } elseif ($imagePath) {
+                            $relativePath = ltrim($imagePath, '/');
+                            $publicPath = public_path($relativePath);
+                            $imageUrl = file_exists($publicPath) ? asset($relativePath) : asset('assets/images/v1/img5.png');
+                        } else {
+                            $imageUrl = asset('assets/images/v1/img5.png');
+                        }
                     @endphp
                     <div class="techin-p-item">
                         <div class="techin-p-thumb">
@@ -1148,96 +1154,79 @@
                     <div class="techin-t-wrap">
                         <div class="techin-title-tag">
                             <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-                            <h6>Testimonials</h6>
+                            <h6>{{ __('index.testimonials.label') }}</h6>
                             <span><img src="assets/images/v1/shape1.svg" alt=""></span>
                         </div>
-                        <h2>what’s our client’s words</h2>
-                        <p>At Techin, we are dedicated to delivering innovative IT solutions and services that empower
-                            businesses to thrive in the digital age.</p>
+                        <h2>{{ __('index.testimonials.title') }}</h2>
+                        <p>{{ __('index.testimonials.description') }}</p>
                     </div>
                 </div>
                 <div class="col-xl-8">
                     <div class="techin-t-slider-init">
-                        <div class="techin-t-slider-wrap">
-                            <div class="techin-t-slider-title">
-                                <h6>Laura McAlister</h6>
-                                <p>Tech Startup Founder</p>
+                        @forelse(($testimonials ?? collect()) as $testimonial)
+                            @php
+                                $translation = optional($testimonial->translation);
+                                $fallbackTranslation = $testimonial->translations->firstWhere('locale', config('app.fallback_locale'));
+                                $authorName = $translation->author_name ?? optional($fallbackTranslation)->author_name ?? __('index.testimonials.fallback.author_name');
+                                $authorTitle = $translation->author_title ?? optional($fallbackTranslation)->author_title ?? __('index.testimonials.fallback.author_title');
+                                $quote = $translation->quote ?? optional($fallbackTranslation)->quote ?? __('index.testimonials.fallback.quote');
+                                $avatarPath = $testimonial->avatar_path;
+                                if ($avatarPath && (str_starts_with($avatarPath, 'http://') || str_starts_with($avatarPath, 'https://'))) {
+                                    $avatarUrl = $avatarPath;
+                                } elseif ($avatarPath) {
+                                    $relativeAvatarPath = ltrim($avatarPath, '/');
+                                    $publicAvatarPath = public_path($relativeAvatarPath);
+                                    if (file_exists($publicAvatarPath)) {
+                                        $avatarUrl = asset($relativeAvatarPath);
+                                    } else {
+                                        $avatarUrl = asset('storage/' . $relativeAvatarPath);
+                                    }
+                                } else {
+                                    $avatarUrl = asset('assets/images/v1/img8.png');
+                                }
+                                $rating = (int) ($testimonial->rating ?? 5);
+                                $rating = $rating < 1 ? 1 : ($rating > 5 ? 5 : $rating);
+                            @endphp
+                            <div class="techin-t-slider-wrap">
+                                <div class="techin-t-slider-title">
+                                    <h6>{{ $authorName }}</h6>
+                                    @if ($authorTitle)
+                                        <p>{{ $authorTitle }}</p>
+                                    @endif
+                                </div>
+                                <div class="techin-t-slider-thumb">
+                                    <img src="{{ $avatarUrl }}" alt="{{ $authorName }}">
+                                </div>
+                                <div class="techin-t-slider-rating" aria-label="Rating {{ $rating }} / 5">
+                                    <span>{{ str_repeat('★', $rating) . str_repeat('☆', 5 - $rating) }}</span>
+                                </div>
+                                <div class="techin-t-slider-text">
+                                    <p>“{{ $quote }}”</p>
+                                </div>
+                                <div class="techin-t-slider-icon">
+                                    <img src="assets/images/v1/8.svg" alt="">
+                                </div>
                             </div>
-                            <div class="techin-t-slider-thumb">
-                                <img src="assets/images/v1/img8.png" alt="">
+                        @empty
+                            <div class="techin-t-slider-wrap">
+                                <div class="techin-t-slider-title">
+                                    <h6>{{ __('index.testimonials.fallback.author_name') }}</h6>
+                                    <p>{{ __('index.testimonials.fallback.author_title') }}</p>
+                                </div>
+                                <div class="techin-t-slider-thumb">
+                                    <img src="assets/images/v1/img8.png" alt="{{ __('index.testimonials.fallback.author_name') }}">
+                                </div>
+                                <div class="techin-t-slider-rating" aria-label="Rating 5 / 5">
+                                    <span>{{ str_repeat('★', 5) }}</span>
+                                </div>
+                                <div class="techin-t-slider-text">
+                                    <p>“{{ __('index.testimonials.fallback.quote') }}”</p>
+                                </div>
+                                <div class="techin-t-slider-icon">
+                                    <img src="assets/images/v1/8.svg" alt="">
+                                </div>
                             </div>
-                            <div class="techin-t-slider-rating">
-                                <img src="assets/images/v1/rating.svg" alt="">
-                            </div>
-                            <div class="techin-t-slider-text">
-                                <p>“TechIN completely transformed our IT infrastructure. Their team was knowledgeable,
-                                    responsive, and provided solutions that significantly improved our efficiency.
-                                    Highly recommended!”</p>
-                            </div>
-                            <div class="techin-t-slider-icon">
-                                <img src="assets/images/v1/8.svg" alt="">
-                            </div>
-                        </div>
-                        <div class="techin-t-slider-wrap">
-                            <div class="techin-t-slider-title">
-                                <h6>Laura McAlister</h6>
-                                <p>Tech Startup Founder</p>
-                            </div>
-                            <div class="techin-t-slider-thumb">
-                                <img src="assets/images/v1/img9.png" alt="">
-                            </div>
-                            <div class="techin-t-slider-rating">
-                                <img src="assets/images/v1/rating.svg" alt="">
-                            </div>
-                            <div class="techin-t-slider-text">
-                                <p>“TechIN completely transformed our IT infrastructure. Their team was knowledgeable,
-                                    responsive, and provided solutions that significantly improved our efficiency.
-                                    Highly recommended!”</p>
-                            </div>
-                            <div class="techin-t-slider-icon">
-                                <img src="assets/images/v1/8.svg" alt="">
-                            </div>
-                        </div>
-                        <div class="techin-t-slider-wrap">
-                            <div class="techin-t-slider-title">
-                                <h6>Laura McAlister</h6>
-                                <p>Tech Startup Founder</p>
-                            </div>
-                            <div class="techin-t-slider-thumb">
-                                <img src="assets/images/v1/img8.png" alt="">
-                            </div>
-                            <div class="techin-t-slider-rating">
-                                <img src="assets/images/v1/rating.svg" alt="">
-                            </div>
-                            <div class="techin-t-slider-text">
-                                <p>“TechIN completely transformed our IT infrastructure. Their team was knowledgeable,
-                                    responsive, and provided solutions that significantly improved our efficiency.
-                                    Highly recommended!”</p>
-                            </div>
-                            <div class="techin-t-slider-icon">
-                                <img src="assets/images/v1/8.svg" alt="">
-                            </div>
-                        </div>
-                        <div class="techin-t-slider-wrap">
-                            <div class="techin-t-slider-title">
-                                <h6>Laura McAlister</h6>
-                                <p>Tech Startup Founder</p>
-                            </div>
-                            <div class="techin-t-slider-thumb">
-                                <img src="assets/images/v1/img9.png" alt="">
-                            </div>
-                            <div class="techin-t-slider-rating">
-                                <img src="assets/images/v1/rating.svg" alt="">
-                            </div>
-                            <div class="techin-t-slider-text">
-                                <p>“TechIN completely transformed our IT infrastructure. Their team was knowledgeable,
-                                    responsive, and provided solutions that significantly improved our efficiency.
-                                    Highly recommended!”</p>
-                            </div>
-                            <div class="techin-t-slider-icon">
-                                <img src="assets/images/v1/8.svg" alt="">
-                            </div>
-                        </div>
+                        @endforelse
                     </div>
                 </div>
             </div>
