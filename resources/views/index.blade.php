@@ -982,94 +982,55 @@
                     <div class="col-xl-6 col-lg-8">
                         <div class="techin-title-tag">
                             <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-                            <h6>Latest Projects</h6>
+                            <h6>{{ __('index.projects.label') }}</h6>
                             <span><img src="assets/images/v1/shape1.svg" alt=""></span>
                         </div>
-                        <h2>Our Successful Project and Case Study</h2>
-                    </div>
-                    <div class="col-xl-6 col-lg-4 d-flex justify-content-end align-items-center">
+                        <h2>{{ __('index.projects.title') }}</h2>
                     </div>
                 </div>
             </div>
             <div class="techin-three-column">
-                <div class="techin-p-item">
-                    <div class="techin-p-thumb">
-                        <img src="assets/images/v1/img77.png" alt="">
-                    </div>
-                    <div class="techin-p-content">
-                        <p>CloudStream Integration</p>
-                        <h6>Advanced Cybersecurity for a Financial Services Firm.</h6>
-                        <div class="btn-icon">
-                            <a href='single-portfolio.html'><img src="assets/images/v1/r-arrow.svg"
-                                    alt=""></a>
+                @forelse(($projects ?? collect()) as $project)
+                    @php
+                        $translation = optional($project->translation);
+                        $fallbackTranslation = $project->translations->firstWhere('locale', config('app.fallback_locale'));
+                        $title = $translation->title ?? optional($fallbackTranslation)->title ?? __('index.projects.fallback.title');
+                        $excerpt = $translation->excerpt ?? optional($fallbackTranslation)->excerpt ?? __('index.projects.fallback.description');
+                        $deliverables = $translation->deliverables ?? optional($fallbackTranslation)->deliverables;
+                        $deliverables = $deliverables ? json_decode($deliverables, true) : [];
+                        $category = $deliverables['industry'] ?? __('index.projects.fallback.category');
+                        $projectUrl = $deliverables['project_url'] ?? '#';
+                        $imagePath = $project->featured_image;
+                        $imageUrl = $imagePath && (str_starts_with($imagePath, 'http://') || str_starts_with($imagePath, 'https://'))
+                            ? $imagePath
+                            : ($imagePath ? asset('storage/' . ltrim($imagePath, '/')) : asset('assets/images/v1/img5.png'));
+                    @endphp
+                    <div class="techin-p-item">
+                        <div class="techin-p-thumb">
+                            <img src="{{ $imageUrl }}" alt="{{ $title }}">
+                        </div>
+                        <div class="techin-p-content">
+                            <p>{{ $category }}</p>
+                            <h6>{{ $title }}</h6>
+                            <div class="btn-icon">
+                                <a href="{{ $projectUrl }}" target="_blank" rel="noopener">
+                                    <img src="assets/images/v1/r-arrow.svg" alt="{{ __('index.projects.button') }}">
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="techin-p-item">
-                    <div class="techin-p-thumb">
-                        <img src="assets/images/v1/img6.png" alt="">
-                    </div>
-                    <div class="techin-p-content">
-                        <p>Cybersecurity</p>
-                        <h6>Advanced Cybersecurity for TechNova.</h6>
-                        <div class="btn-icon">
-                            <a href='single-portfolio.html'><img src="assets/images/v1/r-arrow.svg"
-                                    alt=""></a>
+                @empty
+                    <div class="techin-p-item">
+                        <div class="techin-p-thumb">
+                            <img src="assets/images/v1/img5.png" alt="{{ __('index.projects.fallback.title') }}">
+                        </div>
+                        <div class="techin-p-content">
+                            <p>{{ __('index.projects.fallback.category') }}</p>
+                            <h6>{{ __('index.projects.fallback.title') }}</h6>
+                            <p>{{ __('index.projects.fallback.description') }}</p>
                         </div>
                     </div>
-                </div>
-                <div class="techin-p-item">
-                    <div class="techin-p-thumb">
-                        <img src="assets/images/v1/img5.png" alt="">
-                    </div>
-                    <div class="techin-p-content">
-                        <p>Cybersecurity</p>
-                        <h6>Network Security Overhaul for Financial Institution</h6>
-                        <div class="btn-icon">
-                            <a href='single-portfolio.html'><img src="assets/images/v1/r-arrow.svg"
-                                    alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="techin-p-item">
-                    <div class="techin-p-thumb">
-                        <img src="assets/images/v1/img77.png" alt="">
-                    </div>
-                    <div class="techin-p-content">
-                        <p>Cybersecurity</p>
-                        <h6>Smart Network Infrastructure Overhaul</h6>
-                        <div class="btn-icon">
-                            <a href='single-portfolio.html'><img src="assets/images/v1/r-arrow.svg"
-                                    alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="techin-p-item">
-                    <div class="techin-p-thumb">
-                        <img src="assets/images/v1/img6.png" alt="">
-                    </div>
-                    <div class="techin-p-content">
-                        <p>Development</p>
-                        <h6>Custom ERP System Development & Integration</h6>
-                        <div class="btn-icon">
-                            <a href='single-portfolio.html'><img src="assets/images/v1/r-arrow.svg"
-                                    alt=""></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="techin-p-item">
-                    <div class="techin-p-thumb">
-                        <img src="assets/images/v1/img5.png" alt="">
-                    </div>
-                    <div class="techin-p-content">
-                        <p>Data Recovery</p>
-                        <h6>Robust Data Backup & Disaster Recovery Solution</h6>
-                        <div class="btn-icon">
-                            <a href='single-portfolio.html'><img src="assets/images/v1/r-arrow.svg"
-                                    alt=""></a>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </div>

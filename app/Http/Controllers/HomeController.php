@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Counter;
 use App\Models\Page;
+use App\Models\Project;
 use App\Models\Service;
 use App\Models\Testimonial;
 use Illuminate\View\View;
@@ -34,6 +35,14 @@ class HomeController extends Controller
             ->limit(8)
             ->get();
 
+        $projects = Project::query()
+            ->published()
+            ->withTranslations($locale)
+            ->orderByDesc('is_featured')
+            ->orderByDesc('completion_date')
+            ->limit(6)
+            ->get();
+
         $counters = Counter::query()
             ->active()
             ->ordered()
@@ -46,7 +55,7 @@ class HomeController extends Controller
             ->withTranslations($locale)
             ->get();
 
-        return view('index', compact('hero', 'about', 'services', 'counters', 'testimonials'));
+        return view('index', compact('hero', 'about', 'services', 'projects', 'counters', 'testimonials'));
     }
     
 }

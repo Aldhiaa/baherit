@@ -68,6 +68,13 @@ return [
     'projects' => [
         'label' => 'Latest Projects',
         'title' => 'Our Successful Project and Case Study',
+        'button' => 'View Project',
+        'empty' => 'Our latest projects will appear here soon.',
+        'fallback' => [
+            'title' => 'Coming Soon',
+            'description' => 'Explore how our technology solutions drive tangible results for our clients.',
+            'category' => 'Technology',
+        ],
     ],
     'contact' => [
         'label' => 'Contact Us',
