@@ -2,19 +2,39 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\ServiceTranslation;
 use Illuminate\Http\Request;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
-class ServiceController extends AdminController
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::orderBy('id', 'desc')->get();
+        $query = Service::with(['translations']);
+
+        // Search functionality
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->whereHas('translations', function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                  ->orWhere('short_description', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter by status
+        if ($request->filled('status')) {
+            $query->where('is_active', $request->status);
+        }
+
+        $services = $query->ordered()->paginate(15);
+
         return view('admin.services.index', compact('services'));
     }
 
@@ -23,15 +43,7 @@ class ServiceController extends AdminController
      */
     public function create()
     {
-        $categories = [
-            'development' => 'Development',
-            'cloud' => 'Cloud Services',
-            'consulting' => 'Consulting',
-            'design' => 'Design',
-            'support' => 'Support & Maintenance',
-        ];
-        
-        return view('admin.services.create', compact('categories'));
+        return view('admin.services.create');
     }
 
     /**
@@ -39,42 +51,74 @@ class ServiceController extends AdminController
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title_en' => 'required|string|max:255',
-            'title_ar' => 'required|string|max:255',
-            'description_en' => 'required|string',
-            'description_ar' => 'required|string',
-            'category' => 'required|string|max:255',
-            'icon' => 'nullable|string|max:255',
-            'features' => 'nullable|string',
-            'timeline' => 'nullable|string|max:255',
+        $validated = $request->validate([
+            'slug' => 'required|string|unique:services,slug|max:255',
+            'icon_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'display_order' => 'nullable|integer|min:0',
+            'is_featured' => 'boolean',
+            'is_active' => 'boolean',
+            
+            // English translations
+            'name_en' => 'required|string|max:255',
+            'short_description_en' => 'required|string|max:500',
+            'long_description_en' => 'nullable|string',
+            
+            // Arabic translations
+            'name_ar' => 'required|string|max:255',
+            'short_description_ar' => 'required|string|max:500',
+            'long_description_ar' => 'nullable|string',
         ]);
 
-        // Process features if provided
-        $features = null;
-        if ($request->filled('features')) {
-            $featuresArray = array_filter(array_map('trim', explode("\n", $request->features)));
-            $features = !empty($featuresArray) ? $featuresArray : null;
+        DB::beginTransaction();
+        try {
+            // Handle icon upload
+            $iconPath = null;
+            if ($request->hasFile('icon_path')) {
+                $iconPath = $request->file('icon_path')->store('services/icons', 'public');
+            }
+
+            // Create service
+            $service = Service::create([
+                'slug' => $validated['slug'],
+                'icon_path' => $iconPath,
+                'display_order' => $validated['display_order'] ?? 0,
+                'is_featured' => $request->boolean('is_featured'),
+                'is_active' => $request->boolean('is_active', true),
+            ]);
+
+            // Create English translation
+            ServiceTranslation::create([
+                'service_id' => $service->id,
+                'locale' => 'en',
+                'name' => $validated['name_en'],
+                'short_description' => $validated['short_description_en'],
+                'long_description' => $validated['long_description_en'],
+            ]);
+
+            // Create Arabic translation
+            ServiceTranslation::create([
+                'service_id' => $service->id,
+                'locale' => 'ar',
+                'name' => $validated['name_ar'],
+                'short_description' => $validated['short_description_ar'],
+                'long_description' => $validated['long_description_ar'],
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('admin.services.index')
+                ->with('success', 'Service created successfully!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            
+            // Delete uploaded icon if exists
+            if (isset($iconPath)) {
+                Storage::disk('public')->delete($iconPath);
+            }
+
+            return back()->withInput()
+                ->with('error', 'Failed to create service: ' . $e->getMessage());
         }
-
-        // Create service with multilingual data
-        Service::create([
-            'title' => [
-                'en' => $request->title_en,
-                'ar' => $request->title_ar,
-            ],
-            'description' => [
-                'en' => $request->description_en,
-                'ar' => $request->description_ar,
-            ],
-            'category' => $request->category,
-            'icon' => $request->icon,
-            'features' => $features,
-            'timeline' => $request->timeline,
-        ]);
-
-        return redirect()->route('admin.services.index')
-            ->with('success', 'Service created successfully.');
     }
 
     /**
@@ -82,6 +126,7 @@ class ServiceController extends AdminController
      */
     public function show(Service $service)
     {
+        $service->load('translations');
         return view('admin.services.show', compact('service'));
     }
 
@@ -90,33 +135,13 @@ class ServiceController extends AdminController
      */
     public function edit(Service $service)
     {
-        $categories = [
-            'development' => 'Development',
-            'cloud' => 'Cloud Services',
-            'consulting' => 'Consulting',
-            'design' => 'Design',
-            'support' => 'Support & Maintenance',
-        ];
+        $service->load('translations');
         
-        // Get translations for each language
-        $translations = [
-            'en' => [
-                'title' => $service->getTranslation('title', 'en'),
-                'description' => $service->getTranslation('description', 'en'),
-            ],
-            'ar' => [
-                'title' => $service->getTranslation('title', 'ar'),
-                'description' => $service->getTranslation('description', 'ar'),
-            ],
-        ];
-        
-        // Format features for display
-        $featuresString = '';
-        if (is_array($service->features) && count($service->features) > 0) {
-            $featuresString = implode("\n", $service->features);
-        }
-        
-        return view('admin.services.edit', compact('service', 'categories', 'translations', 'featuresString'));
+        // Get translations by locale
+        $enTranslation = $service->translations->where('locale', 'en')->first();
+        $arTranslation = $service->translations->where('locale', 'ar')->first();
+
+        return view('admin.services.edit', compact('service', 'enTranslation', 'arTranslation'));
     }
 
     /**
@@ -124,42 +149,74 @@ class ServiceController extends AdminController
      */
     public function update(Request $request, Service $service)
     {
-        $request->validate([
-            'title_en' => 'required|string|max:255',
-            'title_ar' => 'required|string|max:255',
-            'description_en' => 'required|string',
-            'description_ar' => 'required|string',
-            'category' => 'required|string|max:255',
-            'icon' => 'nullable|string|max:255',
-            'features' => 'nullable|string',
-            'timeline' => 'nullable|string|max:255',
+        $validated = $request->validate([
+            'slug' => 'required|string|max:255|unique:services,slug,' . $service->id,
+            'icon_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'display_order' => 'nullable|integer|min:0',
+            'is_featured' => 'boolean',
+            'is_active' => 'boolean',
+            
+            // English translations
+            'name_en' => 'required|string|max:255',
+            'short_description_en' => 'required|string|max:500',
+            'long_description_en' => 'nullable|string',
+            
+            // Arabic translations
+            'name_ar' => 'required|string|max:255',
+            'short_description_ar' => 'required|string|max:500',
+            'long_description_ar' => 'nullable|string',
         ]);
 
-        // Process features if provided
-        $features = null;
-        if ($request->filled('features')) {
-            $featuresArray = array_filter(array_map('trim', explode("\n", $request->features)));
-            $features = !empty($featuresArray) ? $featuresArray : null;
+        DB::beginTransaction();
+        try {
+            // Handle icon upload
+            if ($request->hasFile('icon_path')) {
+                // Delete old icon
+                if ($service->icon_path) {
+                    Storage::disk('public')->delete($service->icon_path);
+                }
+                $iconPath = $request->file('icon_path')->store('services/icons', 'public');
+                $service->icon_path = $iconPath;
+            }
+
+            // Update service
+            $service->update([
+                'slug' => $validated['slug'],
+                'display_order' => $validated['display_order'] ?? 0,
+                'is_featured' => $request->boolean('is_featured'),
+                'is_active' => $request->boolean('is_active'),
+            ]);
+
+            // Update or create English translation
+            ServiceTranslation::updateOrCreate(
+                ['service_id' => $service->id, 'locale' => 'en'],
+                [
+                    'name' => $validated['name_en'],
+                    'short_description' => $validated['short_description_en'],
+                    'long_description' => $validated['long_description_en'],
+                ]
+            );
+
+            // Update or create Arabic translation
+            ServiceTranslation::updateOrCreate(
+                ['service_id' => $service->id, 'locale' => 'ar'],
+                [
+                    'name' => $validated['name_ar'],
+                    'short_description' => $validated['short_description_ar'],
+                    'long_description' => $validated['long_description_ar'],
+                ]
+            );
+
+            DB::commit();
+
+            return redirect()->route('admin.services.index')
+                ->with('success', 'Service updated successfully!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return back()->withInput()
+                ->with('error', 'Failed to update service: ' . $e->getMessage());
         }
-
-        // Update service with multilingual data
-        $service->update([
-            'title' => [
-                'en' => $request->title_en,
-                'ar' => $request->title_ar,
-            ],
-            'description' => [
-                'en' => $request->description_en,
-                'ar' => $request->description_ar,
-            ],
-            'category' => $request->category,
-            'icon' => $request->icon,
-            'features' => $features,
-            'timeline' => $request->timeline,
-        ]);
-
-        return redirect()->route('admin.services.index')
-            ->with('success', 'Service updated successfully.');
     }
 
     /**
@@ -167,9 +224,22 @@ class ServiceController extends AdminController
      */
     public function destroy(Service $service)
     {
-        $service->delete();
+        try {
+            // Delete icon if exists
+            if ($service->icon_path) {
+                Storage::disk('public')->delete($service->icon_path);
+            }
 
-        return redirect()->route('admin.services.index')
-            ->with('success', 'Service deleted successfully.');
+            // Delete translations
+            $service->translations()->delete();
+
+            // Delete service
+            $service->delete();
+
+            return redirect()->route('admin.services.index')
+                ->with('success', 'Service deleted successfully!');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to delete service: ' . $e->getMessage());
+        }
     }
 }

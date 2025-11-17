@@ -1,0 +1,1539 @@
+/*
+ * RTL (Right-to-Left) Stylesheet for Arabic Language Support
+ * This file provides comprehensive RTL styling when [dir="rtl"] is applied
+ * Designed to work seamlessly with Laravel Blade integration
+ */
+
+/* ===========================
+   Base RTL Adjustments
+   =========================== */
+
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* ===========================
+   Typography & Text Alignment
+   =========================== */
+
+[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+
+[dir="rtl"] .text-right {
+  text-align: left !important;
+}
+
+[dir="rtl"] p,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6 {
+  text-align: right;
+}
+
+/* ===========================
+   Padding & Margin Reversals
+   =========================== */
+
+/* Padding Left to Right */
+[dir="rtl"] .pl-60,
+[dir="rtl"] .ps-60 {
+  padding-right: 60px !important;
+  padding-left: 0 !important;
+}
+
+[dir="rtl"] .techin-about-content.pl-60 {
+  padding-right: 60px;
+  padding-left: 0;
+}
+
+/* Margin Auto Adjustments */
+[dir="rtl"] .ms-auto {
+  margin-right: auto !important;
+  margin-left: 0 !important;
+}
+
+[dir="rtl"] .me-auto {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+/* ===========================
+   Navigation & Menu
+   =========================== */
+
+[dir="rtl"] .navbar {
+  direction: rtl;
+}
+
+/* Main Menu Item RTL Fixes */
+[dir="rtl"] .techin-main-menu-item {
+  text-align: right;
+  border-radius: 0 50px 50px 0;
+  border-right: 5px solid var(--accent-bg2);
+  border-left: none;
+}
+
+[dir="rtl"] .techin-main-menu-item.d-flex.align-items-center {
+  justify-content: flex-end;
+}
+
+[dir="rtl"] .techin-mobile-menu {
+  text-align: right;
+}
+
+[dir="rtl"] .main-menu ul,
+[dir="rtl"] .techin-mobile-menu ul {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+[dir="rtl"] .main-menu ul li,
+[dir="rtl"] .techin-mobile-menu ul li {
+  text-align: right;
+}
+
+/* Mobile menu expand icon positioning */
+[dir="rtl"] .techin-mobile-menu ul .techin-item-has-children > a .techin-mean-expand {
+  right: auto;
+  left: 0;
+}
+
+/* Mobile menu expand arrow rotation */
+[dir="rtl"] .techin-mobile-menu ul .techin-item-has-children > a .techin-mean-expand:before {
+  transform: rotate(-180deg);
+}
+
+/* Mobile menu expand arrow hover state */
+
+[dir="rtl"] .techin-mobile-menu ul .techin-item-has-children.techin-active > a .techin-mean-expand:before {
+  transform: rotate(-90deg);
+}
+
+[dir="rtl"] .sub-menu {
+  right: auto;
+  left: 0;
+}
+
+[dir="rtl"] .main-menu ul.sub-menu {
+  left: auto;
+  right: -27px;
+}
+
+[dir="rtl"] .main-menu ul li ul.sub-menu {
+  left: auto;
+  right: -27px;
+}
+
+[dir="rtl"] .menu-item-has-children > a::after {
+  margin-right: 8px;
+  margin-left: 0;
+  transform: rotate(0deg);
+}
+
+[dir="rtl"] .main-menu ul li.menu-item-has-children > a:after {
+  transform: rotate(-180deg);
+}
+
+
+
+/* RTL fix for nested submenu arrows */
+[dir="rtl"] .main-menu ul.sub-menu li.menu-item-has-children a.no-border:after {
+    right: auto;
+    left: 0;
+    /* transform: rotate(180deg); */
+}
+
+[dir="rtl"] .main-menu ul.sub-menu li ul.sub-menu {
+    left: auto;
+    right: 100%;
+}
+
+/* Mobile Menu Toggle */
+[dir="rtl"] .techin-menu-toggle {
+  left: 15px;
+  right: auto;
+}
+
+/* Reverse margin for menu toggle in RTL */
+[dir="rtl"] .site-header .techin-menu-toggle {
+  margin-right: 40px;
+  margin-left: 0;
+}
+
+/* Mobile Menu Toggle Responsive Fixes */
+@media (max-width: 1199px) {
+  /* LTR - Header menu toggle on right side */
+  .site-header .techin-menu-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  /* RTL - Header menu toggle on left side */
+  [dir="rtl"] .site-header .techin-menu-toggle {
+    position: absolute;
+    left: 15px;
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  /* Ensure navbar has relative positioning for absolute children */
+  .site-navbar {
+    position: relative;
+    padding-right: 50px;
+  }
+  
+  [dir="rtl"] .site-navbar {
+    padding-right: 0;
+    padding-left: 50px;
+  }
+  
+  /* Fix header layout for mobile */
+  .techin-header-menu .w-100.d-flex.justify-content-between {
+    position: relative;
+  }
+  
+  /* Ensure proper spacing for header content */
+  .techin-header-menu {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+
+@media (max-width: 991px) {
+  .site-header .techin-menu-toggle {
+    right: 15px;
+  }
+  
+  [dir="rtl"] .site-header .techin-menu-toggle {
+    left: 15px;
+    right: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-header .techin-menu-toggle {
+    right: 10px;
+  }
+  
+  [dir="rtl"] .site-header .techin-menu-toggle {
+    left: 10px;
+    right: auto;
+  }
+}
+
+/* ===========================
+   Header & Logo
+   =========================== */
+
+/* Header Logo RTL Fixes */
+[dir="rtl"] .header-logo1 {
+  text-align: right;
+  padding: 20px 370px 20px 60px;
+  border-radius: 50px 0 0 50px;
+  border-left: 5px solid var(--accent-bg2);
+  border-right: none;
+}
+
+@media (max-width: 1399px) {
+  [dir="rtl"] .header-logo1 {
+    padding: 20px 245px 20px 60px;
+  }
+}
+
+@media (max-width: 1299px) {
+  [dir="rtl"] .header-logo1 {
+    padding: 20px 208px 20px 60px;
+  }
+}
+
+@media (max-width: 1199px) {
+  /* LTR Logo fixes */
+  .header-logo1 {
+    padding: 0;
+    background: transparent;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+  }
+  
+  /* RTL Logo fixes */
+  [dir="rtl"] .header-logo1 {
+    padding: 0;
+    background: transparent;
+    border-left: none;
+    border-radius: 0;
+  }
+  
+  /* Ensure logo container has proper spacing */
+  .header-logo1 a {
+    display: inline-block;
+  }
+  
+  /* Hide desktop menu items on mobile */
+  .techin-main-menu-item {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  
+  [dir="rtl"] .techin-main-menu-item {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Adjust header button spacing on mobile */
+  .header-btn.header-btn-l1.ms-auto {
+    margin-right: 50px;
+  }
+  
+  [dir="rtl"] .header-btn.header-btn-l1.ms-auto {
+    margin-left: 50px !important;
+    margin-right: 0 !important;
+  }
+  
+  /* Fix screen fix classes on mobile */
+  .techin_screenfix_left,
+  .techin_screenfix_right {
+    margin: 0 !important;
+  }
+  
+  [dir="rtl"] .techin_screenfix_left,
+  [dir="rtl"] .techin_screenfix_right {
+    margin: 0 !important;
+  }
+}
+
+[dir="rtl"] .mobile-logo {
+  text-align: right;
+}
+
+[dir="rtl"] .header-btn {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+[dir="rtl"] .techin-header-triger {
+  margin-right: 15px;
+  margin-left: 0;
+}
+
+/* Search Form */
+[dir="rtl"] .header-search-form input {
+  padding-right: 40px;
+  padding-left: 15px;
+  text-align: right;
+}
+
+[dir="rtl"] .header-search-form i {
+  right: auto;
+  left: 15px;
+}
+
+/* ===========================
+   Hero Section
+   =========================== */
+
+[dir="rtl"] .techin-hero-content {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-hero-tag {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-hero-tag img {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+/* ===========================
+   Buttons
+   =========================== */
+
+[dir="rtl"] .techin-default-btn,
+[dir="rtl"] .techin-title-btn a {
+  direction: rtl;
+}
+
+[dir="rtl"] .button-wraper,
+[dir="rtl"] .btn-wraper {
+  direction: rtl;
+}
+
+/* ===========================
+   Content Sections
+   =========================== */
+
+[dir="rtl"] .techin-about-content,
+[dir="rtl"] .techin-service-content,
+[dir="rtl"] .techin-team-content {
+  text-align: right;
+}
+
+/* Icon Boxes */
+[dir="rtl"] .techin-iconbox-wrap {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .techin-iconbox-icon {
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin-iconbox-data {
+  text-align: right;
+}
+
+/* About Section */
+[dir="rtl"] .techin-about-info-wrap {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .techin-about-info-icon {
+  margin-left: 15px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin-about-info-text {
+  text-align: right;
+}
+
+/* ===========================
+   Grid & Layout
+   =========================== */
+
+[dir="rtl"] .row {
+  direction: rtl;
+}
+
+[dir="rtl"] .d-flex {
+  direction: rtl;
+}
+
+/* Justify Content Reversals */
+[dir="rtl"] .justify-content-end {
+  justify-content: flex-start !important;
+}
+
+[dir="rtl"] .justify-content-start {
+  justify-content: flex-end !important;
+}
+
+/* ===========================
+   Forms
+   =========================== */
+
+[dir="rtl"] input[type="text"],
+[dir="rtl"] input[type="email"],
+[dir="rtl"] input[type="search"],
+[dir="rtl"] textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] input::placeholder,
+[dir="rtl"] textarea::placeholder {
+  text-align: right;
+}
+
+/* ===========================
+   Counter Section
+   =========================== */
+
+[dir="rtl"] .techin-counter-wrap {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-counter-icon {
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin-counter-data {
+  text-align: right;
+}
+
+/* ===========================
+   Team Section
+   =========================== */
+
+[dir="rtl"] .techin-team-wrap {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-team-social ul {
+  direction: rtl;
+  padding-right: 0;
+}
+
+[dir="rtl"] .techin-team-social ul li {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+/* ===========================
+   Footer
+   =========================== */
+
+[dir="rtl"] footer {
+  text-align: right;
+}
+
+[dir="rtl"] .footer-widget {
+  text-align: right;
+}
+
+[dir="rtl"] .footer-social ul {
+  padding-right: 0;
+  direction: rtl;
+}
+
+[dir="rtl"] .footer-social ul li {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+/* Footer RTL Comprehensive Fixes */
+[dir="rtl"] .techin-footer-section1 {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-footer-textarea {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-footer-textarea p {
+  text-align: right;
+}
+
+/* Footer Menu Spacing */
+[dir="rtl"] .techin-footer-menu.ml-60 {
+  margin-left: 0;
+  margin-right: 60px;
+}
+
+[dir="rtl"] .techin-footer-menu.ml-35 {
+  margin-left: 0;
+  margin-right: 35px;
+}
+
+[dir="rtl"] .techin-footer-menu2.ml-60 {
+  margin-left: 0;
+  margin-right: 60px;
+}
+
+/* Footer Menu Lists */
+[dir="rtl"] .techin-footer-menu ul,
+[dir="rtl"] .techin-footer-menu2 ul {
+  padding-right: 0;
+  text-align: right;
+}
+
+[dir="rtl"] .techin-footer-menu ul li,
+[dir="rtl"] .techin-footer-menu2 ul li {
+  text-align: right;
+}
+
+/* Footer Menu Links with SVG Arrows */
+[dir="rtl"] .techin-footer-menu ul li a,
+[dir="rtl"] .techin-footer-menu2 ul li a {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .techin-footer-menu ul li a svg {
+  margin-left: 8px;
+  margin-right: 0;
+  transform: rotate(180deg);
+}
+
+/* Subscribe Form - Button stays on left in RTL */
+
+[dir="rtl"] .subscribe-form input {
+  text-align: right;
+  padding-right: 20px;
+  padding-left: 10px;
+}
+
+[dir="rtl"] .subscribe-form .button2 {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .subscribe-form .button2 img {
+  margin-left: 8px;
+  margin-right: 0;
+  transform: scaleX(-1);
+}
+
+/* Footer Info Section */
+[dir="rtl"] .techin-footer-info-wraper {
+  /* flex-direction: row-reverse; */
+}
+
+[dir="rtl"] .techin-footer-info-item {
+  /* flex-direction: row-reverse; */
+  text-align: right;
+}
+
+[dir="rtl"] .techin-footer-info-icon {
+  margin-left: 15px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin-footer-info-text {
+  text-align: right;
+}
+
+/* Footer Bottom */
+[dir="rtl"] .techin-footer-bottom {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .techin-copywright {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-header-social {
+  text-align: left;
+}
+
+[dir="rtl"] .techin-header-social ul {
+  flex-direction: row-reverse;
+  padding-right: 0;
+}
+
+[dir="rtl"] .techin-header-social ul li {
+  margin-left: 15px;
+  margin-right: 0;
+}
+
+/* Instagram Grid */
+[dir="rtl"] .techin-instagram-wrap {
+  direction: rtl;
+}
+
+/* Footer Titles */
+[dir="rtl"] .techin-footer-title h5 {
+  text-align: right;
+}
+
+/* Footer Title Underline */
+[dir="rtl"] .techin-footer-title.footer-one:before {
+  left: auto;
+  right: 0;
+}
+
+/* Footer Menu Hover Effects */
+[dir="rtl"] .techin-footer-menu ul li a:hover:before {
+  left: auto;
+  right: 12px;
+}
+
+/* Subscribe Form RTL Fixes */
+[dir="rtl"] .subscribe-form input::placeholder {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .subscribe-form input {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .subscribe-form button.button2 {
+  direction: ltr;
+}
+
+/* Subscribe Form Button Position */
+[dir="rtl"] .subscribe-form button {
+  right: auto;
+  left: 0;
+}
+
+/* Subscribe Form Input Padding */
+[dir="rtl"] .subscribe-form input {
+  padding: 18px 25px 18px 42% !important;
+}
+
+/* Subscribe Form Button Image */
+[dir="rtl"] .subscribe-form button img {
+  padding-right: 0;
+  padding-left: 10px;
+}
+
+/* ===========================
+   Sidebar & Sidemenu
+   =========================== */
+
+[dir="rtl"] .techin-sidemenu-wraper,
+[dir="rtl"] .techin-sidemenu-body {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-contact-info {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-contact-info i {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin-header-social ul {
+  padding-right: 0;
+  direction: rtl;
+}
+
+[dir="rtl"] .techin-header-social ul li {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+/* ===========================
+   Positioning Adjustments
+   =========================== */
+
+[dir="rtl"] .techin-about-tag,
+[dir="rtl"] .techin-about-frame,
+[dir="rtl"] .techin-about-thumb2 {
+  right: auto;
+  left: 0;
+}
+
+/* Position reversals for absolute positioned elements */
+[dir="rtl"] [class*="position-r"] [class*="left-"] {
+  right: var(--position-value);
+  left: auto;
+}
+
+[dir="rtl"] [class*="position-r"] [class*="right-"] {
+  left: var(--position-value);
+  right: auto;
+}
+
+/* ===========================
+   Slick Slider RTL Support
+   =========================== */
+
+/* General Slick Slider RTL */
+[dir="rtl"] .slick-slider {
+  direction: rtl;
+}
+
+[dir="rtl"] .slick-slide {
+  float: right;
+}
+
+[dir="rtl"] .slick-prev {
+  right: auto;
+  left: 25px;
+}
+
+/* ===========================
+   Testimonials Slider RTL Fix
+   =========================== */
+
+/* Force LTR direction for testimonials slider to work properly */
+[dir="rtl"] .techin-t-section .techin-t-slider-init {
+  direction: ltr !important;
+}
+
+[dir="rtl"] .techin-t-section .slick-list {
+  direction: ltr !important;
+}
+
+[dir="rtl"] .techin-t-section .slick-track {
+  direction: ltr !important;
+}
+
+/* Keep text content RTL aligned */
+[dir="rtl"] .techin-t-section .techin-t-slider-wrap {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .techin-t-section .techin-t-slider-title,
+[dir="rtl"] .techin-t-section .techin-t-slider-text {
+  text-align: right;
+}
+
+/* Fix slider arrows positioning */
+[dir="rtl"] .techin-t-slider-init .techin-t-slider-init-next,
+[dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+  left: auto;
+  right: -51%;
+}
+
+[dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+  right: -42%;
+  left: auto;
+  transform: rotate(0deg);
+}
+
+/* Responsive RTL arrow positioning */
+@media (max-width: 1399px) {
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-next,
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+    /* bottom: 0;
+    left: 0;
+    right: auto; */
+  }
+  
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+    /* left: 50px;
+    right: auto; */
+  }
+}
+
+@media (max-width: 1199px) {
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-next,
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+    top: -50%;
+    left: auto;
+    right: 82%;
+  }
+  
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+    right: 87%;
+    left: auto;
+  }
+}
+
+@media (max-width: 991px) {
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-next,
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+    top: -12%;
+    left: auto;
+    right: 65%;
+  }
+  
+  [dir="rtl"] .techin-t-slider-init .techin-t-slider-init-prev {
+    right: 75%;
+    left: auto;
+  }
+}
+
+/* Section title RTL alignment */
+[dir="rtl"] .techin-t-section .techin-t-wrap {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-t-section .techin-title-tag {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .techin-t-section .techin-title-tag span img {
+  transform: scaleX(-1) !important;
+}
+
+[dir="rtl"] .techin-t-section h2,
+[dir="rtl"] .techin-t-section p {
+  text-align: right;
+}
+
+[dir="rtl"] .slick-next {
+  left: auto;
+  right: 25px;
+}
+
+[dir="rtl"] .slick-prev:before {
+  content: '→';
+}
+
+[dir="rtl"] .slick-next:before {
+  content: '←';
+}
+
+/* Brand Slider RTL Support */
+[dir="rtl"] .techin-brand-slider {
+  direction: rtl;
+}
+
+[dir="rtl"] .techin-brand-slider.slick-initialized {
+  direction: rtl;
+}
+
+[dir="rtl"] .techin-brand-slider .slick-slide {
+  float: right;
+}
+
+[dir="rtl"] .techin-brand-slider .slick-track {
+  direction: rtl;
+}
+
+[dir="rtl"] .techin-slider-logo-section {
+  direction: rtl;
+}
+
+[dir="rtl"] .techin-slider-logo-item {
+  direction: ltr; /* Keep logo items in LTR for proper display */
+  text-align: center;
+}
+
+/* Additional Slick RTL fixes */
+[dir="rtl"] .slick-list {
+  direction: rtl;
+}
+
+[dir="rtl"] .slick-track {
+  direction: rtl;
+  transform: translate3d(0px, 0px, 0px);
+}
+
+/* Ensure proper RTL animation */
+[dir="rtl"] .slick-slide {
+  transform: none;
+}
+
+/* Fix for brand slider container */
+[dir="rtl"] .techin-brand-slider .slick-list {
+  direction: rtl;
+}
+
+[dir="rtl"] .techin-brand-slider .slick-track {
+  direction: rtl;
+}
+
+/* Brand slider arrows RTL support */
+[dir="rtl"] .techin-brand-next {
+  right: auto;
+  left: 25px;
+}
+
+[dir="rtl"] .techin-brand-prev {
+  left: auto;
+  right: 25px;
+}
+
+/* Ensure slider arrows are properly positioned */
+[dir="rtl"] .slide-arrow {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .techin-brand-slider .slick-arrow {
+  transform: scaleX(-1);
+}
+
+/* ===========================
+   Service Cards
+   =========================== */
+
+[dir="rtl"] .techin-service-wrap {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-service-icon {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+/* ===========================
+   CTA Section
+   =========================== */
+
+[dir="rtl"] .techin-cta-content {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-cta-content-top,
+[dir="rtl"] .techin-cta-content-bottom {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-cta-content-top img:first-child {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin-cta-content-top img:last-child {
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+/* ===========================
+   Breadcrumb
+   =========================== */
+
+[dir="rtl"] .breadcrumb {
+  direction: rtl;
+}
+
+[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+  padding-right: 0;
+  padding-left: 0.5rem;
+  content: "/";
+}
+
+/* ===========================
+   Lists
+   =========================== */
+
+[dir="rtl"] ul,
+[dir="rtl"] ol {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+[dir="rtl"] li {
+  text-align: right;
+}
+
+/* ===========================
+   Progress Bar
+   =========================== */
+
+[dir="rtl"] .progress-wrap {
+  right: auto;
+  left: 20px;
+}
+
+[dir="rtl"] .progress-bar {
+  transform-origin: right;
+}
+
+[dir="rtl"] .techin-menu-mobile-top {
+    padding-left: initial;
+    padding-right: 15px;
+  }
+
+/* ===========================
+   Mobile Menu Wrapper RTL - Slide from Right
+   =========================== */
+
+[dir="rtl"] .techin-menu-wrapper {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .techin-menu-wrapper .techin-menu-area {
+  left: auto;
+  right: -310px;
+  text-align: right;
+}
+
+[dir="rtl"] .techin-menu-wrapper.techin-body-visible .techin-menu-area {
+  left: auto;
+  right: 0;
+}
+
+[dir="rtl"] .techin-menu-wrapper .mobile-logo {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-menu-wrapper .techin-menu-toggle {
+  border-left: none;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 400px) {
+  [dir="rtl"] .techin-menu-wrapper .techin-menu-area {
+    right: -100%;
+  }
+  
+  [dir="rtl"] .techin-menu-wrapper.techin-body-visible .techin-menu-area {
+    right: 0;
+  }
+}
+
+/* ===========================
+   Mobile Responsive RTL
+   =========================== */
+
+@media (max-width: 991px) {
+  [dir="rtl"] .techin-mobile-menu {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .techin-menu-mobile-top {
+    direction: rtl;
+  }
+  
+  [dir="rtl"] .mobile-logo {
+    margin-right: 0;
+    margin-left: auto;
+  }
+  
+  /* Additional header spacing fixes */
+  .header-btn.header-btn-l1.ms-auto {
+    margin-right: 45px;
+  }
+  
+  [dir="rtl"] .header-btn.header-btn-l1.ms-auto {
+    margin-left: 45px !important;
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  [dir="rtl"] .techin-hero-content h1,
+  [dir="rtl"] .techin-about-content h2 {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .techin-section-title.center h2,
+  [dir="rtl"] .techin-section-title.center h6 {
+    text-align: center;
+  }
+}
+
+/* ===========================
+   Bootstrap RTL Overrides
+   =========================== */
+
+[dir="rtl"] .col-1,
+[dir="rtl"] .col-2,
+[dir="rtl"] .col-3,
+[dir="rtl"] .col-4,
+[dir="rtl"] .col-5,
+[dir="rtl"] .col-6,
+[dir="rtl"] .col-7,
+[dir="rtl"] .col-8,
+[dir="rtl"] .col-9,
+[dir="rtl"] .col-10,
+[dir="rtl"] .col-11,
+[dir="rtl"] .col-12 {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* ===========================
+   Custom Utilities
+   =========================== */
+
+[dir="rtl"] .float-left {
+  float: right !important;
+}
+
+[dir="rtl"] .float-right {
+  float: left !important;
+}
+
+[dir="rtl"] .border-left {
+  border-right: 1px solid;
+  border-left: none;
+}
+
+[dir="rtl"] .border-right {
+  border-left: 1px solid;
+  border-right: none;
+}
+
+/* ===========================
+   Animation Adjustments
+   =========================== */
+
+[dir="rtl"] [data-aos="fade-left"] {
+  transform: translate3d(100px, 0, 0);
+}
+
+[dir="rtl"] [data-aos="fade-right"] {
+  transform: translate3d(-100px, 0, 0);
+}
+
+/* ===========================
+   Logo & Brand Section
+   =========================== */
+
+[dir="rtl"] .techin-brand-slider,
+[dir="rtl"] .techin-slider-logo-section {
+  direction: rtl;
+}
+
+[dir="rtl"] .techin-slider-logo-item {
+  text-align: center;
+}
+
+/* ===========================
+   Contact Info
+   =========================== */
+
+[dir="rtl"] .techin-contact-info-wrap {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-contact-info a {
+  direction: rtl;
+}
+
+/* ===========================
+   Title & Tags
+   =========================== */
+
+[dir="rtl"] .techin-title-tag {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .techin-title-tag.center,
+[dir="rtl"] .techin-title-tag.center2 {
+  text-align: center;
+  justify-content: center;
+}
+
+[dir="rtl"] .techin-title-tag span {
+  margin: 0 10px;
+}
+
+/* ===========================
+   Arabic Font Optimization
+   =========================== */
+
+[dir="rtl"] body,
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] h4,
+[dir="rtl"] h5,
+[dir="rtl"] h6,
+[dir="rtl"] p {
+  font-family: 'Arial', 'Tahoma', 'Segoe UI', sans-serif;
+}
+
+/* Optional: You can add a custom Arabic font */
+/* [dir="rtl"] body {
+  font-family: 'Tajawal', 'Cairo', 'Almarai', 'Arial', sans-serif;
+} */
+
+/* ===========================
+   Screen Fix Classes RTL
+   =========================== */
+
+/* Basic screen fix classes */
+[dir="rtl"] .techin_screenfix_left {
+  margin-right: calc((-111vw + 100%) / 5);
+  margin-left: 0;
+}
+
+[dir="rtl"] .techin_screenfix_right {
+  margin-left: calc((-82vw + 100%) / 2);
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin_screenfix_right2 {
+  margin-left: calc((-105vw + 100%) / 2);
+  margin-right: 0;
+  direction: rtl;
+}
+
+/* Numbered screen fix classes */
+[dir="rtl"] .techin_screenfix_left1 {
+  margin-right: calc((-111vw + 100%) / 5);
+  margin-left: 0;
+}
+
+[dir="rtl"] .techin_screenfix_left2 {
+  margin-right: calc((-100vw + 100%) / 2);
+  margin-left: 0;
+}
+
+[dir="rtl"] .techin_screenfix_left3 {
+  margin-right: calc((-100vw + 100%) / 2);
+  margin-left: 0;
+}
+
+[dir="rtl"] .techin_screenfix_right1 {
+  margin-left: calc((-82vw + 100%) / 2);
+  margin-right: 0;
+}
+
+[dir="rtl"] .techin_screenfix_right3 {
+  margin-left: calc((-100vw + 100%) / 2);
+  margin-right: 0;
+}
+
+/* Responsive adjustments for screen fix classes */
+@media (max-width: 1199px) {
+  [dir="rtl"] .techin_screenfix_left,
+  [dir="rtl"] .techin_screenfix_left1 {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 1399px) {
+  [dir="rtl"] .techin_screenfix_left2 {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 991px) {
+  [dir="rtl"] .techin_screenfix_left3 {
+    margin-right: auto;
+    margin-left: 0;
+  }
+  
+  [dir="rtl"] .techin_screenfix_right2 {
+    max-width: 100%;
+  }
+}
+
+/* ===========================
+   Misc Adjustments
+   =========================== */
+
+[dir="rtl"] .d-inline-flex {
+  direction: rtl;
+}
+
+[dir="rtl"] .align-items-center {
+  direction: rtl;
+}
+
+/* Additional flexbox and alignment fixes */
+[dir="rtl"] .d-flex.align-items-center {
+  direction: rtl;
+}
+
+[dir="rtl"] .justify-content-between {
+  direction: rtl;
+}
+
+[dir="rtl"] .w-100.d-flex.justify-content-between {
+  direction: rtl;
+}
+
+/* Header specific RTL fixes */
+[dir="rtl"] .techin-header-menu {
+  direction: rtl;
+}
+
+[dir="rtl"] .site-navbar {
+  direction: rtl;
+}
+
+/* Ensure proper RTL flow for header elements - removed conflicting rule */
+/* Specific margin values are handled in responsive breakpoints above */
+
+[dir="rtl"] .flex-grow-1.w-100 {
+  direction: rtl;
+}
+
+/* Close buttons */
+[dir="rtl"] .ri-close-line {
+  transform: scaleX(-1);
+}
+
+/* Arrow icons */
+[dir="rtl"] .top-arrow img {
+  transform: rotate(180deg);
+}
+
+/* ===========================
+   Print RTL Support
+   =========================== */
+
+@media print {
+  [dir="rtl"] * {
+    direction: rtl !important;
+    text-align: right !important;
+  }
+}
+
+/* ===========================
+   Language Switcher Button
+   =========================== */
+
+.language-switcher-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: var(--white-color);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 10px;
+  padding: 0;
+}
+
+.language-switcher-btn:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-bg);
+  transform: scale(1.05);
+}
+
+.language-switcher-btn span {
+  display: block;
+  line-height: 1;
+}
+
+/* Sticky header language button */
+.reveal-header .language-switcher-btn {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: var(--heading-color);
+}
+
+.reveal-header .language-switcher-btn:hover {
+  background: var(--accent-bg);
+  border-color: var(--accent-bg);
+  color: var(--white-color);
+}
+
+/* RTL positioning */
+[dir="rtl"] .language-switcher-btn {
+  margin: 0 10px;
+}
+
+/* Mobile responsive */
+@media (max-width: 991px) {
+  .language-switcher-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 13px;
+    margin: 0 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .language-switcher-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 12px;
+    margin: 0 5px;
+  }
+}
+
+@media (max-width: 479px) {
+  .language-switcher-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 11px;
+    margin: 0 3px;
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 11;
+  }
+  
+  .language-switcher-btn:hover {
+    transform: translateY(-50%) !important;
+  }
+  
+  [dir="rtl"] .language-switcher-btn {
+    left: 60px;
+    right: auto;
+  }
+}
+
+/* ===========================
+   FAQ Section RTL Fixes
+   =========================== */
+
+/* FAQ Section Layout */
+[dir="rtl"] .techin-faq-section-padding {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-faq-section-padding .row {
+  flex-direction: row-reverse;
+}
+
+/* FAQ Content Wrapper */
+[dir="rtl"] .techin-faq-content-wrap {
+  text-align: right;
+}
+
+/* FAQ Title Tag */
+[dir="rtl"] .techin-faq-content-wrap .techin-title-tag {
+  justify-content: flex-end;
+  direction: ltr;
+}
+
+[dir="rtl"] .techin-faq-content-wrap .techin-title-tag span img {
+  transform: none !important;
+}
+
+/* FAQ Title and Text */
+[dir="rtl"] .techin-faq-content-wrap h2.faq-title {
+  text-align: right;
+}
+
+/* FAQ Items */
+[dir="rtl"] .techin-faq-item {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-faq-header {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+[dir="rtl"] .techin-faq-header h6 {
+  text-align: right;
+}
+
+[dir="rtl"] .techin-faq-body p {
+  text-align: right;
+}
+
+/* FAQ Arrow Icons */
+[dir="rtl"] .techin-active-icon {
+  margin-right: 15px;
+  margin-left: 0;
+}
+
+[dir="rtl"] .techin-active-icon img {
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .techin-faq-item.open .techin-active-icon img {
+  transform: rotate(0deg);
+}
+
+/* FAQ Video Thumb */
+[dir="rtl"] .techin-faq-thumb {
+  text-align: left;
+}
+
+[dir="rtl"] .techin-popup-video {
+  /* Keep video button centered */
+}
+
+/* Screen Fix for RTL */
+[dir="rtl"] .techin_screenfix_left3 {
+  padding-right: 0;
+  padding-left: 60px;
+}
+
+/* Responsive FAQ RTL */
+@media (max-width: 991px) {
+  [dir="rtl"] .techin-faq-section-padding .row {
+    flex-direction: column;
+  }
+  
+  [dir="rtl"] .techin_screenfix_left3 {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 767px) {
+  [dir="rtl"] .techin_screenfix_left3 {
+    padding-left: 0;
+  }
+}
+
+/* ===========================
+   End of RTL Stylesheet
+   =========================== */

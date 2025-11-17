@@ -1,0 +1,51 @@
+<?php
+
+return [
+    'site_title' => 'Techin - IT Solution & Technology',
+    'menu' => [
+        'home' => 'Home',
+        'about' => 'About Us',
+        'service' => 'Service',
+        'blog' => 'Blog',
+        'contact' => 'Contact Us',
+        'demo' => 'Demo',
+        'pages' => 'Pages',
+        'portfolio' => 'Portfolio',
+        'portfolio_details' => 'Portfolio Details',
+        'blog_grid' => 'Blog Grid',
+        'blog_details' => 'Blog details',
+        'pricing' => 'Pricing',
+        'team' => 'Team',
+        'faq' => 'FAQ',
+        'errors_404' => 'Errors 404',
+        'testimonial' => 'Testimonial',
+        'our_services' => 'Our Services',
+        'our_project' => 'Our Project',
+    ],
+    'search' => [
+        'placeholder' => 'Search Here...',
+        'placeholder_alt' => 'Search here...',
+        'type_to_search' => 'Type above and press Enter to search. Press Close to cancel.',
+    ],
+    'buttons' => [
+        'get_in_touch' => 'Get in Touch',
+        'subscribe' => 'Subscribe',
+    ],
+    'footer' => [
+        'description' => 'At Techin, we deliver innovative IT solutions to help businesses thrive, offering customized strategies, robust support, and cutting-edge technology for efficiency, security, and reliability.',
+        'email_placeholder' => 'Your Email Address',
+        'quick_links' => 'Quick Links',
+        'explore' => 'Explore',
+        'about_us' => 'About Us',
+        'blog_us' => 'Blog Us',
+        'contact' => 'Contact',
+        'copyright' => 'Copyright © :year Techin. All Rights Reserved.',
+    ],
+    'sidebar' => [
+        'testimonial' => '"TechIN completely transformed our IT infrastructure. Their team was knowledgeable, responsive, and solutions that improved our efficiency. Highly recommended!"',
+        'address' => 'Address',
+        'address_text' => '12th Street, New York, USA',
+        'contact' => 'Contact',
+        'email' => 'info@techin.com',
+    ],
+];
