@@ -36,11 +36,6 @@ class Blog extends Model
         return BlogTranslation::class;
     }
 
-    public function translations(): HasMany
-    {
-        return parent::translations();
-    }
-
     public function scopePublished($query)
     {
         return $query->where('status', self::STATUS_PUBLISHED)

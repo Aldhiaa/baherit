@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\CounterController as AdminCounterController;
+use App\Http\Controllers\Admin\WorkingProcessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,9 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
 
     // FAQs Management
     Route::resource('faqs', AdminFaqController::class)->except(['show']);
+
+    // Working Processes Management
+    Route::resource('working-processes', WorkingProcessController::class)->except(['show']);
     
     // Blog Management
     // Route::resource('blogs', BlogController::class);

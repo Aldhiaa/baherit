@@ -101,8 +101,21 @@ return [
             'quote' => 'TechIN completely transformed our IT infrastructure. Their team was knowledgeable, responsive, and provided solutions that significantly improved our efficiency. Highly recommended!',
         ],
     ],
+    'working_process' => [
+        'label' => 'Working Process',
+        'title' => 'TechIn Have Most Unique Working Style',
+        'empty' => 'Our working process steps will appear here soon.',
+        'fallback' => [
+            'title' => 'Our Process',
+            'description' => 'We follow a structured approach to deliver exceptional results.',
+        ],
+    ],
     'blog' => [
         'label' => 'News & Blog',
         'title' => 'Our Latest News And Updates',
+        'read_time' => 'Read Time',
+        'read_more' => 'Read More',
+        'default_author' => 'Admin',
+        'empty' => 'No blog posts available at the moment.',
     ],
 ];

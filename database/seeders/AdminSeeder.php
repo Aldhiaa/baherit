@@ -25,29 +25,17 @@ class AdminSeeder extends Seeder
             'edit-services',
             'delete-services',
             
+            // Projects Management
+            'view-projects',
+            'create-projects',
+            'edit-projects',
+            'delete-projects',
+            
             // Blog Management
             'view-blogs',
             'create-blogs',
             'edit-blogs',
             'delete-blogs',
-            
-            // Portfolio Management
-            'view-portfolios',
-            'create-portfolios',
-            'edit-portfolios',
-            'delete-portfolios',
-            
-            // FAQ Management
-            'view-faqs',
-            'create-faqs',
-            'edit-faqs',
-            'delete-faqs',
-            
-            // Team Management
-            'view-team',
-            'create-team',
-            'edit-team',
-            'delete-team',
             
             // Testimonial Management
             'view-testimonials',
@@ -55,11 +43,29 @@ class AdminSeeder extends Seeder
             'edit-testimonials',
             'delete-testimonials',
             
+            // Working Process Management
+            'view-working-processes',
+            'create-working-processes',
+            'edit-working-processes',
+            'delete-working-processes',
+            
             // Counter Management
             'view-counters',
             'create-counters',
             'edit-counters',
             'delete-counters',
+            
+            // FAQ Management
+            'view-faqs',
+            'create-faqs',
+            'edit-faqs',
+            'delete-faqs',
+            
+            // FAQ Category Management
+            'view-faq-categories',
+            'create-faq-categories',
+            'edit-faq-categories',
+            'delete-faq-categories',
             
             // Banner Management
             'view-banners',
@@ -72,6 +78,12 @@ class AdminSeeder extends Seeder
             'create-pages',
             'edit-pages',
             'delete-pages',
+            
+            // Team Management
+            'view-team',
+            'create-team',
+            'edit-team',
+            'delete-team',
             
             // Settings Management
             'view-settings',
@@ -116,11 +128,14 @@ class AdminSeeder extends Seeder
         $editorRole->syncPermissions([
             'view-dashboard',
             'view-services', 'edit-services',
+            'view-projects', 'edit-projects',
             'view-blogs', 'create-blogs', 'edit-blogs',
-            'view-portfolios', 'create-portfolios', 'edit-portfolios',
-            'view-faqs', 'create-faqs', 'edit-faqs',
-            'view-team', 'edit-team',
             'view-testimonials', 'edit-testimonials',
+            'view-working-processes', 'edit-working-processes',
+            'view-counters', 'edit-counters',
+            'view-faqs', 'create-faqs', 'edit-faqs',
+            'view-faq-categories', 'edit-faq-categories',
+            'view-team', 'edit-team',
         ]);
 
         // Create Content Manager Role
@@ -130,11 +145,14 @@ class AdminSeeder extends Seeder
         $contentManagerRole->syncPermissions([
             'view-dashboard',
             'view-services', 'create-services', 'edit-services', 'delete-services',
+            'view-projects', 'create-projects', 'edit-projects', 'delete-projects',
             'view-blogs', 'create-blogs', 'edit-blogs', 'delete-blogs',
-            'view-portfolios', 'create-portfolios', 'edit-portfolios', 'delete-portfolios',
-            'view-faqs', 'create-faqs', 'edit-faqs', 'delete-faqs',
-            'view-team', 'create-team', 'edit-team', 'delete-team',
             'view-testimonials', 'create-testimonials', 'edit-testimonials', 'delete-testimonials',
+            'view-working-processes', 'create-working-processes', 'edit-working-processes', 'delete-working-processes',
+            'view-counters', 'create-counters', 'edit-counters', 'delete-counters',
+            'view-faqs', 'create-faqs', 'edit-faqs', 'delete-faqs',
+            'view-faq-categories', 'create-faq-categories', 'edit-faq-categories', 'delete-faq-categories',
+            'view-team', 'create-team', 'edit-team', 'delete-team',
             'view-banners', 'edit-banners',
             'view-pages', 'edit-pages',
         ]);

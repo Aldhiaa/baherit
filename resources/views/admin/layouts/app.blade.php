@@ -271,8 +271,9 @@
                 </a>
             </li>
 
-            @can('view-services')
             <li class="menu-label">Content Management</li>
+            
+            @can('view-services', 'admin')
             <li>
                 <a href="{{ route('admin.services.index') }}" class="{{ request()->routeIs('admin.services.*') ? 'active' : '' }}">
                     <i class="fas fa-cogs"></i>
@@ -281,52 +282,25 @@
             </li>
             @endcan
 
-            @can('view-counters')
+            @can('view-projects', 'admin')
             <li>
-                <a href="{{ route('admin.counters.index') }}" class="{{ request()->routeIs('admin.counters.*') ? 'active' : '' }}">
-                    <i class="fas fa-sort-numeric-up"></i>
-                    <span>Counters</span>
+                <a href="#" class="{{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Projects</span>
                 </a>
             </li>
             @endcan
 
-            @can('view-blogs')
+            @can('view-blogs', 'admin')
             <li>
-                <a href="#" class="{{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.blogs.index') }}" class="{{ request()->routeIs('admin.blogs.*') ? 'active' : '' }}">
                     <i class="fas fa-blog"></i>
                     <span>Blog Posts</span>
                 </a>
             </li>
             @endcan
 
-            @can('view-portfolios')
-            <li>
-                <a href="#" class="{{ request()->routeIs('admin.portfolios.*') ? 'active' : '' }}">
-                    <i class="fas fa-briefcase"></i>
-                    <span>Portfolio</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('view-faqs')
-            <li>
-                <a href="#" class="{{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}">
-                    <i class="fas fa-question-circle"></i>
-                    <span>FAQs</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('view-team')
-            <li>
-                <a href="#" class="{{ request()->routeIs('admin.team.*') ? 'active' : '' }}">
-                    <i class="fas fa-users"></i>
-                    <span>Team Members</span>
-                </a>
-            </li>
-            @endcan
-
-            @can('view-testimonials')
+            @can('view-testimonials', 'admin')
             <li>
                 <a href="{{ route('admin.testimonials.index') }}" class="{{ request()->routeIs('admin.testimonials.*') ? 'active' : '' }}">
                     <i class="fas fa-comments"></i>
@@ -335,7 +309,61 @@
             </li>
             @endcan
 
-            @can('view-settings')
+            @can('view-working-processes', 'admin')
+            <li>
+                <a href="{{ route('admin.working-processes.index') }}" class="{{ request()->routeIs('admin.working-processes.*') ? 'active' : '' }}">
+                    <i class="fas fa-tasks"></i>
+                    <span>Working Processes</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('view-counters', 'admin')
+            <li>
+                <a href="{{ route('admin.counters.index') }}" class="{{ request()->routeIs('admin.counters.*') ? 'active' : '' }}">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Counters</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('view-faqs', 'admin')
+            <li>
+                <a href="{{ route('admin.faqs.index') }}" class="{{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}">
+                    <i class="fas fa-question-circle"></i>
+                    <span>FAQs</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('view-faq-categories', 'admin')
+            <li>
+                <a href="{{ route('admin.faq-categories.index') }}" class="{{ request()->routeIs('admin.faq-categories.*') ? 'active' : '' }}">
+                    <i class="fas fa-list"></i>
+                    <span>FAQ Categories</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('view-banners', 'admin')
+            <li>
+                <a href="#" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
+                    <i class="fas fa-image"></i>
+                    <span>Banners</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('view-pages', 'admin')
+            <li>
+                <a href="#" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Pages</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('view-settings', 'admin')
             <li class="menu-label">Settings</li>
             <li>
                 <a href="#" class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
@@ -345,7 +373,7 @@
             </li>
             @endcan
 
-            @can('view-admins')
+            @can('view-admins', 'admin')
             <li class="menu-label">Administration</li>
             <li>
                 <a href="#" class="{{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
@@ -355,7 +383,7 @@
             </li>
             @endcan
 
-            @can('view-roles')
+            @can('view-roles', 'admin')
             <li>
                 <a href="#" class="{{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                     <i class="fas fa-key"></i>

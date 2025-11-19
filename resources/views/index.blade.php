@@ -467,12 +467,12 @@
                     <div class="col-xl-8 col-lg-8">
                         <div class="techin-cta-content">
                             <div class="techin-cta-content-top">
-                                <img src="assets/images/shape/cta-shape1.svg" alt="">
-                                <h6>Knock Us To Know 24/7</h6>
-                                <img src="assets/images/shape/cta-shape1.svg" alt="">
+                                <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
+                                <h6>{{ __('index.cta.tagline') }}</h6>
+                                <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
                             </div>
                             <div class="techin-cta-content-bottom">
-                                <h2>Need A Consultation?</h2>
+                                <h2>{{ __('index.cta.title') }}</h2>
                             </div>
                         </div>
                     </div>
@@ -794,92 +794,140 @@
         <div class="container">
             <div class="techin-section-title center">
                 <div class="techin-title-tag center2">
-                    <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-                    <h6>Working Process</h6>
-                    <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                    <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+                    <h6>{{ __('index.working_process.label') }}</h6>
+                    <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                 </div>
-                <h2>TechIn Have Most Unique Working Style</h2>
+                <h2>{{ __('index.working_process.title') }}</h2>
             </div>
+            @if(($workingProcesses ?? collect())->count() > 0)
             <div class="row">
+                @php
+                    $processesArray = $workingProcesses->toArray();
+                    $leftProcesses = array_slice($processesArray, 0, 2);
+                    $rightProcesses = array_slice($processesArray, 2, 2);
+                @endphp
+                
+                <!-- Left Column -->
                 <div class="col-xl-4 col-md-6">
-                    <div class="techin-iconbox-wrap2-item1">
-                        <div class="techin-iconbox-title-wrap2">
-                            <div class="techin-iconbox-title-icon">
-                                <img src="assets/images/v1/icon-s1.svg" alt="">
+                    @foreach($leftProcesses as $process)
+                        @php
+                            $processObj = (object) $process;
+                            $translation = optional($processObj->translation ?? null);
+                            $fallbackTranslation = collect($processObj->translations ?? [])->firstWhere('locale', config('app.fallback_locale'));
+                            $title = $translation->title ?? optional($fallbackTranslation)->title ?? __('index.working_process.fallback.title');
+                            $description = $translation->description ?? optional($fallbackTranslation)->description ?? __('index.working_process.fallback.description');
+                            
+                            // Handle icon path
+                            $iconPath = $processObj->icon_path ?? null;
+                            if ($iconPath && (str_starts_with($iconPath, 'http://') || str_starts_with($iconPath, 'https://'))) {
+                                $iconUrl = $iconPath;
+                            } elseif ($iconPath) {
+                                $relativeIconPath = ltrim($iconPath, '/');
+                                $publicIconPath = public_path('storage/' . $relativeIconPath);
+                                $iconUrl = file_exists($publicIconPath) ? asset('storage/' . $relativeIconPath) : asset('assets/images/v1/icon-s1.svg');
+                            } else {
+                                $iconUrl = asset('assets/images/v1/icon-s1.svg');
+                            }
+                            
+                            // Handle number tag path
+                            $numberTagPath = $processObj->number_tag_path ?? null;
+                            if ($numberTagPath && (str_starts_with($numberTagPath, 'http://') || str_starts_with($numberTagPath, 'https://'))) {
+                                $numberTagUrl = $numberTagPath;
+                            } elseif ($numberTagPath) {
+                                $relativeTagPath = ltrim($numberTagPath, '/');
+                                $publicTagPath = public_path('storage/' . $relativeTagPath);
+                                $numberTagUrl = file_exists($publicTagPath) ? asset('storage/' . $relativeTagPath) : asset('assets/images/v1/tag2.svg');
+                            } else {
+                                $numberTagUrl = asset('assets/images/v1/tag2.svg');
+                            }
+                        @endphp
+                        <div class="techin-iconbox-wrap2-item1">
+                            <div class="techin-iconbox-title-wrap2">
+                                <div class="techin-iconbox-title-icon">
+                                    <img src="{{ $iconUrl }}" alt="{{ $title }}">
+                                </div>
+                                <div class="techin-iconbox-title-content">
+                                    <h5>{{ $title }}</h5>
+                                </div>
                             </div>
-                            <div class="techin-iconbox-title-content">
-                                <h5>Consultation And Assessment</h5>
+                            <div class="techin-iconbox-title-text">
+                                <p>{{ $description }}</p>
+                            </div>
+                            <div class="techin-iconbox-number">
+                                <img src="{{ $numberTagUrl }}" alt="">
                             </div>
                         </div>
-                        <div class="techin-iconbox-title-text">
-                            <p>We start by understanding your business needs and challenges, then conduct a thorough
-                                assessment to identify the best tailored IT solutions.</p>
-                        </div>
-                        <div class="techin-iconbox-number">
-                            <img src="assets/images/v1/tag2.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="techin-iconbox-wrap2-item1">
-                        <div class="techin-iconbox-title-wrap2">
-                            <div class="techin-iconbox-title-icon">
-                                <img src="assets/images/v1/icon-s3.svg" alt="">
-                            </div>
-                            <div class="techin-iconbox-title-content">
-                                <h5>Implementation And Integration</h5>
-                            </div>
-                        </div>
-                        <div class="techin-iconbox-title-text">
-                            <p>Our team implements solutions seamlessly, ensuring smooth integration with your
-                                infrastructure and minimal business disruption.</p>
-                        </div>
-                        <div class="techin-iconbox-number">
-                            <img src="assets/images/v1/tag3.svg" alt="">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+                
+                <!-- Right Column -->
                 <div class="col-xl-4 col-md-6 order-xl-2">
-                    <div class="techin-iconbox-wrap2-item1">
-                        <div class="techin-iconbox-title-wrap2">
-                            <div class="techin-iconbox-title-icon">
-                                <img src="assets/images/v1/icon-s2.svg" alt="">
+                    @foreach($rightProcesses as $process)
+                        @php
+                            $processObj = (object) $process;
+                            $translation = optional($processObj->translation ?? null);
+                            $fallbackTranslation = collect($processObj->translations ?? [])->firstWhere('locale', config('app.fallback_locale'));
+                            $title = $translation->title ?? optional($fallbackTranslation)->title ?? __('index.working_process.fallback.title');
+                            $description = $translation->description ?? optional($fallbackTranslation)->description ?? __('index.working_process.fallback.description');
+                            
+                            // Handle icon path
+                            $iconPath = $processObj->icon_path ?? null;
+                            if ($iconPath && (str_starts_with($iconPath, 'http://') || str_starts_with($iconPath, 'https://'))) {
+                                $iconUrl = $iconPath;
+                            } elseif ($iconPath) {
+                                $relativeIconPath = ltrim($iconPath, '/');
+                                $publicIconPath = public_path('storage/' . $relativeIconPath);
+                                $iconUrl = file_exists($publicIconPath) ? asset('storage/' . $relativeIconPath) : asset('assets/images/v1/icon-s2.svg');
+                            } else {
+                                $iconUrl = asset('assets/images/v1/icon-s2.svg');
+                            }
+                            
+                            // Handle number tag path
+                            $numberTagPath = $processObj->number_tag_path ?? null;
+                            if ($numberTagPath && (str_starts_with($numberTagPath, 'http://') || str_starts_with($numberTagPath, 'https://'))) {
+                                $numberTagUrl = $numberTagPath;
+                            } elseif ($numberTagPath) {
+                                $relativeTagPath = ltrim($numberTagPath, '/');
+                                $publicTagPath = public_path('storage/' . $relativeTagPath);
+                                $numberTagUrl = file_exists($publicTagPath) ? asset('storage/' . $relativeTagPath) : asset('assets/images/v1/tag3.svg');
+                            } else {
+                                $numberTagUrl = asset('assets/images/v1/tag3.svg');
+                            }
+                        @endphp
+                        <div class="techin-iconbox-wrap2-item1">
+                            <div class="techin-iconbox-title-wrap2">
+                                <div class="techin-iconbox-title-icon">
+                                    <img src="{{ $iconUrl }}" alt="{{ $title }}">
+                                </div>
+                                <div class="techin-iconbox-title-content">
+                                    <h5>{{ $title }}</h5>
+                                </div>
                             </div>
-                            <div class="techin-iconbox-title-content">
-                                <h5>Strategy And Planning</h5>
+                            <div class="techin-iconbox-title-text">
+                                <p>{{ $description }}</p>
+                            </div>
+                            <div class="techin-iconbox-number">
+                                <img src="{{ $numberTagUrl }}" alt="">
                             </div>
                         </div>
-                        <div class="techin-iconbox-title-text">
-                            <p>Based on the assessment, we create a tailored IT strategy, detailing the technologies
-                                needed to enhance your operations, efficiency, and security.</p>
-                        </div>
-                        <div class="techin-iconbox-number">
-                            <img src="assets/images/v1/tag2%2b2.svg" alt="">
-                        </div>
-                    </div>
-                    <div class="techin-iconbox-wrap2-item1">
-                        <div class="techin-iconbox-title-wrap2">
-                            <div class="techin-iconbox-title-icon">
-                                <img src="assets/images/v1/icon-s4.svg" alt="">
-                            </div>
-                            <div class="techin-iconbox-title-content">
-                                <h5>Support And Optimization</h5>
-                            </div>
-                        </div>
-                        <div class="techin-iconbox-title-text">
-                            <p>After deployment, we offer ongoing support and optimization to keep your systems secure,
-                                efficient, and scalable as your business grows.</p>
-                        </div>
-                        <div class="techin-iconbox-number">
-                            <img src="assets/images/v1/tag4.svg" alt="">
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
+                
+                <!-- Center Image -->
                 <div class="col-xl-4 col-lg-6">
                     <div class="techin-iconbox-title-thumb">
-                        <img data-aos="zoom-out" data-aos-duration="700" src="assets/images/v1/img1.png"
-                            alt="">
+                        <img data-aos="zoom-out" data-aos-duration="700" src="{{ asset('assets/images/v1/img1.png') }}" alt="">
                     </div>
                 </div>
             </div>
+            @else
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="text-muted">{{ __('index.working_process.empty') }}</p>
+                </div>
+            </div>
+            @endif
         </div>
     </div>
     <!-- end section -->
@@ -889,9 +937,9 @@
             <div class="row techin_screenfix_left3">
                 <div class="col-lg-6">
                     <div class="techin-faq-thumb">
-                        <img src="assets/images/v1/img2.png" alt="">
+                        <img src="{{ asset('assets/images/v1/img2.png') }}" alt="">
                         <a class="techin-popup-video video-init" href="https://www.youtube.com/watch?v=zE_WFiHnSlY">
-                            <img src="assets/images/blog/play-btn.svg" alt="">
+                            <img src="{{ asset('assets/images/blog/play-btn.svg') }}" alt="">
                             <div class="waves wave-1"></div>
                             <div class="waves wave-2"></div>
                             <div class="waves wave-3"></div>
@@ -901,9 +949,9 @@
                 <div class="col-lg-6 d-flex align-items-center">
                     <div class="techin-faq-content-wrap">
                         <div class="techin-title-tag">
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                             <h6>FAQs</h6>
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                         </div>
                         <h2 class="faq-title">Frequently Asked Any Questions</h2>
                         <div class="techin-faq-wrap1">
@@ -911,7 +959,7 @@
                                 <div class="techin-faq-header">
                                     <h6>What services does TechIn offer?</h6>
                                     <div class="techin-active-icon">
-                                        <img class="active-icon" src="assets/images/v1/top-arrow.svg" alt="">
+                                        <img class="active-icon" src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
                                     </div>
                                 </div>
                                 <div class="techin-faq-body body2">
@@ -981,9 +1029,9 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-8">
                         <div class="techin-title-tag">
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                             <h6>{{ __('index.projects.label') }}</h6>
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                         </div>
                         <h2>{{ __('index.projects.title') }}</h2>
                     </div>
@@ -1020,7 +1068,7 @@
                             <h6>{{ $title }}</h6>
                             <div class="btn-icon">
                                 <a href="{{ $projectUrl }}" target="_blank" rel="noopener">
-                                    <img src="assets/images/v1/r-arrow.svg" alt="{{ __('index.projects.button') }}">
+                                    <img src="{{ asset('assets/images/v1/r-arrow.svg') }}" alt="{{ __('index.projects.button') }}">
                                 </a>
                             </div>
                         </div>
@@ -1048,9 +1096,9 @@
                 <div class="col-lg-6 d-flex align-items-center order-lg-2">
                     <div class="techin-appointment-content">
                         <div class="techin-title-tag">
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                             <h6>Contact Us</h6>
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                         </div>
                         <h2 class="appointment-title">To Make Request For Contact Us</h2>
                         <p class="text">At Techin, we are dedicated to delivering innovative IT solutions and
@@ -1058,7 +1106,7 @@
                         <div class="techin-about-info-wrap techin-appointment-info">
                             <div class="techin-about-info-icon">
                                 <a href="tel:009">
-                                    <img src="assets/images/v1/phone.svg" alt="">
+                                    <img src="{{ asset('assets/images/v1/phone.svg') }}" alt="">
                                 </a>
                             </div>
                             <div class="techin-about-info-text">
@@ -1070,7 +1118,7 @@
                         </div>
                         <div class="techin-about-info-wrap techin-appointment-info">
                             <div class="techin-about-info-icon">
-                                <a href="mailto:name@gmail.com"><img src="assets/images/v1/6.svg" alt=""></a>
+                                <a href="mailto:name@gmail.com"><img src="{{ asset('assets/images/v1/6.svg') }}" alt=""></a>
                             </div>
                             <div class="techin-about-info-text">
                                 <a href="mailto:name@gmail.com">Email Address</a>
@@ -1081,7 +1129,7 @@
                         </div>
                         <div class="techin-about-info-wrap techin-appointment-info">
                             <div class="techin-about-info-icon">
-                                <img src="assets/images/v1/7.svg" alt="">
+                                <img src="{{ asset('assets/images/v1/7.svg') }}" alt="">
                             </div>
                             <div class="techin-about-info-text">
                                 <a href="#">Office Address</a>
@@ -1096,20 +1144,20 @@
                     <div class="techin-appointment-box">
                         <div class="techin-appointment-title">
                             <div class="techin-title-tag center2">
-                                <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                                <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                                 <h6>Appointment</h6>
-                                <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                                <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                             </div>
                             <h3>Make An Appointment</h3>
                         </div>
                         <form action="#">
                             <div class="techin-main-field">
                                 <input type="text" placeholder="Full Name">
-                                <img src="assets/images/v1/a1.svg" alt="">
+                                <img src="{{ asset('assets/images/v1/a1.svg') }}" alt="">
                             </div>
                             <div class="techin-main-field">
                                 <input type="email" placeholder="Email Address">
-                                <img src="assets/images/v1/a2.svg" alt="">
+                                <img src="{{ asset('assets/images/v1/a2.svg') }}" alt="">
                             </div>
                             <div class="teching-slect-wrapper">
                                 <select class="techin-a-select">
@@ -1153,9 +1201,9 @@
                 <div class="col-xl-4">
                     <div class="techin-t-wrap">
                         <div class="techin-title-tag">
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                             <h6>{{ __('index.testimonials.label') }}</h6>
-                            <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                            <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                         </div>
                         <h2>{{ __('index.testimonials.title') }}</h2>
                         <p>{{ __('index.testimonials.description') }}</p>
@@ -1204,7 +1252,7 @@
                                     <p>“{{ $quote }}”</p>
                                 </div>
                                 <div class="techin-t-slider-icon">
-                                    <img src="assets/images/v1/8.svg" alt="">
+                                    <img src="{{ asset('assets/images/v1/8.svg') }}" alt="">
                                 </div>
                             </div>
                         @empty
@@ -1214,7 +1262,7 @@
                                     <p>{{ __('index.testimonials.fallback.author_title') }}</p>
                                 </div>
                                 <div class="techin-t-slider-thumb">
-                                    <img src="assets/images/v1/img8.png" alt="{{ __('index.testimonials.fallback.author_name') }}">
+                                    <img src="{{ asset('assets/images/v1/img8.png') }}" alt="{{ __('index.testimonials.fallback.author_name') }}">
                                 </div>
                                 <div class="techin-t-slider-rating" aria-label="Rating 5 / 5">
                                     <span>{{ str_repeat('★', 5) }}</span>
@@ -1223,7 +1271,7 @@
                                     <p>“{{ __('index.testimonials.fallback.quote') }}”</p>
                                 </div>
                                 <div class="techin-t-slider-icon">
-                                    <img src="assets/images/v1/8.svg" alt="">
+                                    <img src="{{ asset('assets/images/v1/8.svg') }}" alt="">
                                 </div>
                             </div>
                         @endforelse
@@ -1238,139 +1286,88 @@
         <div class="container">
             <div class="techin-section-title center">
                 <div class="techin-title-tag center2">
-                    <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-                    <h6>News & Blog</h6>
-                    <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+                    <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+                    <h6>{{ __('index.blog.label') }}</h6>
+                    <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                 </div>
-                <h2>Our Latest News And Updates</h2>
+                <h2>{{ __('index.blog.title') }}</h2>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-md-6">
-                    <div class="blog-wrapper">
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a href='single-blog.html'>
-                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7 8C5.5625 8 4.25 7.25 3.53125 6C2.8125 4.78125 2.8125 3.25 3.53125 2C4.25 0.78125 5.5625 0 7 0C8.40625 0 9.71875 0.78125 10.4375 2C11.1562 3.25 11.1562 4.78125 10.4375 6C9.71875 7.25 8.40625 8 7 8ZM5.5625 9.5H8.40625C11.5 9.5 14 12 14 15.0938C14 15.5938 13.5625 16 13.0625 16H0.90625C0.40625 16 0 15.5938 0 15.0938C0 12 2.46875 9.5 5.5625 9.5Z"
-                                            fill="#222627" />
-                                    </svg>By Admin
+                @forelse(($blogs ?? collect()) as $blog)
+                    @php
+                        $translation = optional($blog->translation);
+                        $fallbackTranslation = $blog->translations->firstWhere('locale', config('app.fallback_locale'));
+                        $title = $translation->title ?? optional($fallbackTranslation)->title ?? '';
+                        $excerpt = $translation->excerpt ?? optional($fallbackTranslation)->excerpt ?? '';
+                        $slug = $blog->slug;
+                        $readTime = $blog->getReadTime();
+                        $publishedAt = $blog->published_at;
+                        $publishedYear = $publishedAt ? $publishedAt->format('Y') : now()->format('Y');
+                        $publishedDay = $publishedAt ? $publishedAt->format('d') : now()->format('d');
+                        $publishedMonth = $publishedAt ? $publishedAt->format(app()->isLocale('ar') ? 'M' : 'M') : now()->format(app()->isLocale('ar') ? 'M' : 'M');
+                        $authorName = $blog->author_name ?? __('index.blog.default_author');
+                        $imagePath = $blog->featured_image;
+                        if ($imagePath && (str_starts_with($imagePath, 'http://') || str_starts_with($imagePath, 'https://'))) {
+                            $imageUrl = $imagePath;
+                        } elseif ($imagePath) {
+                            $relativeImagePath = ltrim($imagePath, '/');
+                            $publicBlogPath = public_path($relativeImagePath);
+                            if (file_exists($publicBlogPath)) {
+                                $imageUrl = asset($relativeImagePath);
+                            } else {
+                                $imageUrl = asset('storage/' . $relativeImagePath);
+                            }
+                        } else {
+                            $imageUrl = asset('assets/images/blog/img1.png');
+                        }
+                        $permalink = \Illuminate\Support\Facades\Route::has('blog.show')
+                            ? route('blog.show', $slug)
+                            : url('/blog/' . $slug);
+                        $readTimeLabel = trans_choice('index.blog.read_time', $readTime, ['count' => $readTime]);
+                    @endphp
+                    <div class="col-xl-4 col-md-6">
+                        <div class="blog-wrapper">
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span>
+                                        <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 8C5.5625 8 4.25 7.25 3.53125 6C2.8125 4.78125 2.8125 3.25 3.53125 2C4.25 0.78125 5.5625 0 7 0C8.40625 0 9.71875 0.78125 10.4375 2C11.1562 3.25 11.1562 4.78125 10.4375 6C9.71875 7.25 8.40625 8 7 8ZM5.5625 9.5H8.40625C11.5 9.5 14 12 14 15.0938C14 15.5938 13.5625 16 13.0625 16H0.90625C0.40625 16 0 15.5938 0 15.0938C0 12 2.46875 9.5 5.5625 9.5Z" fill="#222627" />
+                                        </svg>
+                                        {{ $authorName }} · {{ $readTimeLabel }}
+                                    </span>
+                                    <span>
+                                        <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7.5 11C6.28125 11 5.1875 10.75 4.21875 10.2812C3.96875 10.4062 3.71875 10.5 3.4375 10.625C2.84375 10.8438 2.15625 11 1.5 11C1.28125 11 1.09375 10.875 1 10.6562C0.9375 10.4688 1.03125 10.25 1.1875 10.125V10.0938H1.21875C1.25 10.0625 1.3125 10 1.375 9.96875C1.46875 9.875 1.625 9.71875 1.78125 9.53125C1.9375 9.3125 2.125 9.03125 2.21875 8.75C1.4375 7.84375 1 6.71875 1 5.5C1 2.46875 3.90625 0 7.5 0C11.0625 0 14 2.46875 14 5.5C14 8.5625 11.0625 11 7.5 11ZM15 5.5H14.9688C14.9688 5.34375 14.9688 5.1875 14.9688 5.03125C18.3438 5.21875 20.9688 7.625 20.9688 10.5C20.9688 11.7188 20.5312 12.8438 19.75 13.75C19.8438 14.0312 20.0312 14.2812 20.1875 14.5C20.3438 14.7188 20.5 14.8438 20.5938 14.9688C20.6562 15 20.7188 15.0625 20.75 15.0625C20.75 15.0938 20.7812 15.0938 20.7812 15.0938C20.9688 15.25 21.0312 15.4688 20.9688 15.6562C20.9062 15.875 20.6875 16 20.5 16C19.8125 16 19.125 15.8438 18.5312 15.625C18.25 15.5 18 15.4062 17.75 15.2812C16.7812 15.75 15.6875 16 14.5 16C11.5 16 8.96875 14.3125 8.21875 11.9688C11.875 11.6562 15 9.03125 15 5.5Z" fill="#222627" />
+                                        </svg>
+                                        {{ $publishedYear }} · {{ $publishedDay }} {{ $publishedMonth }}
+                                    </span>
+                                </div>
+                                <h5 class="blog-title"><a href="{{ $permalink }}">{{ $title }}</a></h5>
+                                <p>{{ \Illuminate\Support\Str::limit(strip_tags($excerpt), 150) }}</p>
+                            </div>
+                            <div class="blog-img">
+                                <a href="{{ $permalink }}"><img src="{{ $imageUrl }}" alt="{{ $title }}">
+                                    <div class="blog-date-wrap">
+                                        <div class="blog-year">
+                                            <span>{{ $publishedYear }}</span>
+                                        </div>
+                                        <div class="blog-month">
+                                            <h4>{{ $publishedDay }}</h4>
+                                            <h6>{{ $publishedMonth }}</h6>
+                                        </div>
+                                    </div>
                                 </a>
-                                <a href='single-blog.html'>
-                                    <svg width="22" height="16" viewBox="0 0 22 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7.5 11C6.28125 11 5.1875 10.75 4.21875 10.2812C3.96875 10.4062 3.71875 10.5 3.4375 10.625C2.84375 10.8438 2.15625 11 1.5 11C1.28125 11 1.09375 10.875 1 10.6562C0.9375 10.4688 1.03125 10.25 1.1875 10.125V10.0938H1.21875C1.25 10.0625 1.3125 10 1.375 9.96875C1.46875 9.875 1.625 9.71875 1.78125 9.53125C1.9375 9.3125 2.125 9.03125 2.21875 8.75C1.4375 7.84375 1 6.71875 1 5.5C1 2.46875 3.90625 0 7.5 0C11.0625 0 14 2.46875 14 5.5C14 8.5625 11.0625 11 7.5 11ZM15 5.5H14.9688C14.9688 5.34375 14.9688 5.1875 14.9688 5.03125C18.3438 5.21875 20.9688 7.625 20.9688 10.5C20.9688 11.7188 20.5312 12.8438 19.75 13.75C19.8438 14.0312 20.0312 14.2812 20.1875 14.5C20.3438 14.7188 20.5 14.8438 20.5938 14.9688C20.6562 15 20.7188 15.0625 20.75 15.0625C20.75 15.0938 20.7812 15.0938 20.7812 15.0938C20.9688 15.25 21.0312 15.4688 20.9688 15.6562C20.9062 15.875 20.6875 16 20.5 16C19.8125 16 19.125 15.8438 18.5312 15.625C18.25 15.5 18 15.4062 17.75 15.2812C16.7812 15.75 15.6875 16 14.5 16C11.5 16 8.96875 14.3125 8.21875 11.9688C11.875 11.6562 15 9.03125 15 5.5Z"
-                                            fill="#222627" />
-                                    </svg>(03) Comments
+                                <a class='techin-default-btn blog-btn1' data-text='{{ __('index.blog.read_more') }}' href="{{ $permalink }}">
+                                    <span class="button-wraper">{{ __('index.blog.read_more') }}</span>
                                 </a>
                             </div>
-                            <h5 class="blog-title"><a href='single-blog.html'>How to Optimize Your IT Infrastructure
-                                    for Maximum Efficiency</a></h5>
-                        </div>
-                        <div class="blog-img">
-                            <a href='single-blog.html'><img src="assets/images/blog/img1.png" alt="Blog Image">
-                                <div class="blog-date-wrap">
-                                    <div class="blog-year">
-                                        <span>2024</span>
-                                    </div>
-                                    <div class="blog-month">
-                                        <h4>12</h4>
-                                        <h6>Jun</h6>
-                                    </div>
-                                </div>
-                            </a>
-                            <a class='techin-default-btn blog-btn1' data-text='Read More' href='single-blog.html'>
-                                <span class="button-wraper">Read More</span>
-                            </a>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="blog-wrapper">
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a href='single-blog.html'>
-                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7 8C5.5625 8 4.25 7.25 3.53125 6C2.8125 4.78125 2.8125 3.25 3.53125 2C4.25 0.78125 5.5625 0 7 0C8.40625 0 9.71875 0.78125 10.4375 2C11.1562 3.25 11.1562 4.78125 10.4375 6C9.71875 7.25 8.40625 8 7 8ZM5.5625 9.5H8.40625C11.5 9.5 14 12 14 15.0938C14 15.5938 13.5625 16 13.0625 16H0.90625C0.40625 16 0 15.5938 0 15.0938C0 12 2.46875 9.5 5.5625 9.5Z"
-                                            fill="#222627" />
-                                    </svg>By Admin
-                                </a>
-                                <a href='single-blog.html'>
-                                    <svg width="22" height="16" viewBox="0 0 22 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7.5 11C6.28125 11 5.1875 10.75 4.21875 10.2812C3.96875 10.4062 3.71875 10.5 3.4375 10.625C2.84375 10.8438 2.15625 11 1.5 11C1.28125 11 1.09375 10.875 1 10.6562C0.9375 10.4688 1.03125 10.25 1.1875 10.125V10.0938H1.21875C1.25 10.0625 1.3125 10 1.375 9.96875C1.46875 9.875 1.625 9.71875 1.78125 9.53125C1.9375 9.3125 2.125 9.03125 2.21875 8.75C1.4375 7.84375 1 6.71875 1 5.5C1 2.46875 3.90625 0 7.5 0C11.0625 0 14 2.46875 14 5.5C14 8.5625 11.0625 11 7.5 11ZM15 5.5H14.9688C14.9688 5.34375 14.9688 5.1875 14.9688 5.03125C18.3438 5.21875 20.9688 7.625 20.9688 10.5C20.9688 11.7188 20.5312 12.8438 19.75 13.75C19.8438 14.0312 20.0312 14.2812 20.1875 14.5C20.3438 14.7188 20.5 14.8438 20.5938 14.9688C20.6562 15 20.7188 15.0625 20.75 15.0625C20.75 15.0938 20.7812 15.0938 20.7812 15.0938C20.9688 15.25 21.0312 15.4688 20.9688 15.6562C20.9062 15.875 20.6875 16 20.5 16C19.8125 16 19.125 15.8438 18.5312 15.625C18.25 15.5 18 15.4062 17.75 15.2812C16.7812 15.75 15.6875 16 14.5 16C11.5 16 8.96875 14.3125 8.21875 11.9688C11.875 11.6562 15 9.03125 15 5.5Z"
-                                            fill="#222627" />
-                                    </svg>(03) Comments
-                                </a>
-                            </div>
-                            <h5 class="blog-title"><a href='single-blog.html'>How IT Infrastructure Can Improve
-                                    Efficiency and Productivity</a></h5>
-                        </div>
-                        <div class="blog-img">
-                            <a href='single-blog.html'><img src="assets/images/blog/img3.png" alt="Blog Image">
-                                <div class="blog-date-wrap">
-                                    <div class="blog-year">
-                                        <span>2024</span>
-                                    </div>
-                                    <div class="blog-month">
-                                        <h4>12</h4>
-                                        <h6>Jun</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <a class='techin-default-btn blog-btn1' data-text='Read More' href='single-blog.html'>
-                            <span class="button-wraper">Read More</span>
-                        </a>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center">{{ __('index.blog.empty') }}</p>
                     </div>
-                </div>
-                <div class="col-xl-4 col-md-6">
-                    <div class="blog-wrapper">
-                        <div class="blog-content">
-                            <div class="blog-meta">
-                                <a href='single-blog.html'>
-                                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7 8C5.5625 8 4.25 7.25 3.53125 6C2.8125 4.78125 2.8125 3.25 3.53125 2C4.25 0.78125 5.5625 0 7 0C8.40625 0 9.71875 0.78125 10.4375 2C11.1562 3.25 11.1562 4.78125 10.4375 6C9.71875 7.25 8.40625 8 7 8ZM5.5625 9.5H8.40625C11.5 9.5 14 12 14 15.0938C14 15.5938 13.5625 16 13.0625 16H0.90625C0.40625 16 0 15.5938 0 15.0938C0 12 2.46875 9.5 5.5625 9.5Z"
-                                            fill="#222627" />
-                                    </svg>By Admin
-                                </a>
-                                <a href='single-blog.html'>
-                                    <svg width="22" height="16" viewBox="0 0 22 16" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M7.5 11C6.28125 11 5.1875 10.75 4.21875 10.2812C3.96875 10.4062 3.71875 10.5 3.4375 10.625C2.84375 10.8438 2.15625 11 1.5 11C1.28125 11 1.09375 10.875 1 10.6562C0.9375 10.4688 1.03125 10.25 1.1875 10.125V10.0938H1.21875C1.25 10.0625 1.3125 10 1.375 9.96875C1.46875 9.875 1.625 9.71875 1.78125 9.53125C1.9375 9.3125 2.125 9.03125 2.21875 8.75C1.4375 7.84375 1 6.71875 1 5.5C1 2.46875 3.90625 0 7.5 0C11.0625 0 14 2.46875 14 5.5C14 8.5625 11.0625 11 7.5 11ZM15 5.5H14.9688C14.9688 5.34375 14.9688 5.1875 14.9688 5.03125C18.3438 5.21875 20.9688 7.625 20.9688 10.5C20.9688 11.7188 20.5312 12.8438 19.75 13.75C19.8438 14.0312 20.0312 14.2812 20.1875 14.5C20.3438 14.7188 20.5 14.8438 20.5938 14.9688C20.6562 15 20.7188 15.0625 20.75 15.0625C20.75 15.0938 20.7812 15.0938 20.7812 15.0938C20.9688 15.25 21.0312 15.4688 20.9688 15.6562C20.9062 15.875 20.6875 16 20.5 16C19.8125 16 19.125 15.8438 18.5312 15.625C18.25 15.5 18 15.4062 17.75 15.2812C16.7812 15.75 15.6875 16 14.5 16C11.5 16 8.96875 14.3125 8.21875 11.9688C11.875 11.6562 15 9.03125 15 5.5Z"
-                                            fill="#222627" />
-                                    </svg>(03) Comments
-                                </a>
-                            </div>
-                            <h5 class="blog-title"><a href='single-blog.html'>How to Ensure Seamless IT Integration
-                                    Across Departments</a></h5>
-                        </div>
-                        <div class="blog-img">
-                            <a href='single-blog.html'><img src="assets/images/blog/img2.png" alt="Blog Image">
-                                <div class="blog-date-wrap">
-                                    <div class="blog-year">
-                                        <span>2024</span>
-                                    </div>
-                                    <div class="blog-month">
-                                        <h4>12</h4>
-                                        <h6>Jun</h6>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <a class='techin-default-btn blog-btn1' data-text='Read More' href='single-blog.html'>
-                            <span class="button-wraper">Read More</span>
-                        </a>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </div>

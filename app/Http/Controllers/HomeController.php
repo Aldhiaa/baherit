@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Blog;
 use App\Models\Counter;
 use App\Models\Page;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Testimonial;
+use App\Models\WorkingProcess;
 use Illuminate\View\View;
 
 class HomeController extends Controller
@@ -55,7 +57,21 @@ class HomeController extends Controller
             ->withTranslations($locale)
             ->get();
 
-        return view('index', compact('hero', 'about', 'services', 'projects', 'counters', 'testimonials'));
+        $blogs = Blog::query()
+            ->published()
+            ->withTranslations($locale)
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->limit(3)
+            ->get();
+
+        $workingProcesses = WorkingProcess::query()
+            ->active()
+            ->ordered()
+            ->withTranslations($locale)
+            ->get();
+
+        return view('index', compact('hero', 'about', 'services', 'projects', 'counters', 'testimonials', 'blogs', 'workingProcesses'));
     }
     
 }
