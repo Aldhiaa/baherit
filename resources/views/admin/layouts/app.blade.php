@@ -284,7 +284,7 @@
 
             @can('view-projects', 'admin')
             <li>
-                <a href="#" class="{{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.projects.index') }}" class="{{ request()->routeIs('admin.projects.*') ? 'active' : '' }}">
                     <i class="fas fa-briefcase"></i>
                     <span>Projects</span>
                 </a>
@@ -347,7 +347,7 @@
 
             @can('view-banners', 'admin')
             <li>
-                <a href="#" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.banners.index') }}" class="{{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">
                     <i class="fas fa-image"></i>
                     <span>Banners</span>
                 </a>
@@ -356,7 +356,7 @@
 
             @can('view-pages', 'admin')
             <li>
-                <a href="#" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.pages.index') }}" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">
                     <i class="fas fa-file-alt"></i>
                     <span>Pages</span>
                 </a>
@@ -366,7 +366,7 @@
             @can('view-settings', 'admin')
             <li class="menu-label">Settings</li>
             <li>
-                <a href="#" class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.settings.index') }}" class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                     <i class="fas fa-cog"></i>
                     <span>General Settings</span>
                 </a>
@@ -376,7 +376,7 @@
             @can('view-admins', 'admin')
             <li class="menu-label">Administration</li>
             <li>
-                <a href="#" class="{{ request()->routeIs('admin.admins.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.admin-users.index') }}" class="{{ request()->routeIs('admin.admin-users.*') ? 'active' : '' }}">
                     <i class="fas fa-user-shield"></i>
                     <span>Admin Users</span>
                 </a>
@@ -385,7 +385,7 @@
 
             @can('view-roles', 'admin')
             <li>
-                <a href="#" class="{{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
+                <a href="{{ route('admin.roles.index') }}" class="{{ request()->routeIs('admin.roles.*') ? 'active' : '' }}">
                     <i class="fas fa-key"></i>
                     <span>Roles & Permissions</span>
                 </a>

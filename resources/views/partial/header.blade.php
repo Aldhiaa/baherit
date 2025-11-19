@@ -7,7 +7,7 @@
                         <div class=" ">
                             <div class="header-logo1  techin_screenfix_left">
                                 <a href='{{ LaravelLocalization::localizeUrl('/') }}'>
-                                    <img src="assets/images/logo/logo-white.svg" alt="logo">
+                                    <img src="{{ site_logo(true) }}" alt="{{ setting('site_name') }}">
                                 </a>
                             </div>
                         </div>

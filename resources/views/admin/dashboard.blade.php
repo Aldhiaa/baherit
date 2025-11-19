@@ -256,42 +256,6 @@
     </div>
 
     <!-- Recent Activity -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">System Information</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th width="200">Your Role</th>
-                                    <td>
-                                        @foreach(Auth::guard('admin')->user()->roles as $role)
-                                            <span class="badge badge-primary">{{ $role->name }}</span>
-                                        @endforeach
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>Laravel Version</th>
-                                    <td>{{ app()->version() }}</td>
-                                </tr>
-                                <tr>
-                                    <th>PHP Version</th>
-                                    <td>{{ PHP_VERSION }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Last Login</th>
-                                    <td>{{ now()->format('F d, Y h:i A') }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 </div>
 @endsection

@@ -8,6 +8,12 @@ use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Admin\CounterController as AdminCounterController;
 use App\Http\Controllers\Admin\WorkingProcessController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,22 +61,22 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // Working Processes Management
     Route::resource('working-processes', WorkingProcessController::class)->except(['show']);
     
-    // Blog Management
-    // Route::resource('blogs', BlogController::class);
+    // Projects Management
+    Route::resource('projects', ProjectController::class)->except(['show']);
     
-    // Portfolio Management
-    // Route::resource('portfolios', PortfolioController::class);
+    // Banners Management
+    Route::resource('banners', BannerController::class)->except(['show']);
     
-    // FAQ Management
-    // Route::resource('faqs', FaqController::class);
-    
-    // Team Management
-    // Route::resource('team', TeamController::class);
-    
-    // Testimonials Management
-    // Route::resource('testimonials', TestimonialController::class);
+    // Pages Management
+    Route::resource('pages', PageController::class)->except(['show']);
     
     // Settings
-    // Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
-    // Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::get('settings', [SettingController::class, 'index'])->name('settings.index');
+    Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+    
+    // Admin Users Management
+    Route::resource('admin-users', AdminUserController::class)->except(['show']);
+    
+    // Roles & Permissions Management
+    Route::resource('roles', RoleController::class)->except(['show']);
 });

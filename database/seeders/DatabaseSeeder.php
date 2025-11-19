@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CounterSeeder::class,
             LanguageSeeder::class,
             SettingSeeder::class,
+            SettingsSeeder::class,
             BannerSeeder::class,
             PageSeeder::class,
             ServiceSeeder::class,
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             TestimonialSeeder::class,
             TeamMemberSeeder::class,
+            WorkingProcessSeeder::class,
         ]);
     }
 }

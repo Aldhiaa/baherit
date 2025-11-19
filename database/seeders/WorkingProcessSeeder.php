@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\WorkingProcess;
 use App\Models\WorkingProcessTranslation;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class WorkingProcessSeeder extends Seeder
 {
@@ -14,10 +14,13 @@ class WorkingProcessSeeder extends Seeder
      */
     public function run(): void
     {
+        WorkingProcessTranslation::query()->delete();
+        WorkingProcess::query()->delete();
+
         $workingProcesses = [
             [
-                'icon_path' => null,
-                'number_tag_path' => null,
+                'icon_asset' => 'assets/images/v1/icon-s1.svg',
+                'number_tag_asset' => 'assets/images/v1/tag2.svg',
                 'display_order' => 1,
                 'is_active' => true,
                 'translations' => [
@@ -32,8 +35,8 @@ class WorkingProcessSeeder extends Seeder
                 ],
             ],
             [
-                'icon_path' => null,
-                'number_tag_path' => null,
+                'icon_asset' => 'assets/images/v1/icon-s2.svg',
+                'number_tag_asset' => 'assets/images/v1/tag2.svg',
                 'display_order' => 2,
                 'is_active' => true,
                 'translations' => [
@@ -48,8 +51,8 @@ class WorkingProcessSeeder extends Seeder
                 ],
             ],
             [
-                'icon_path' => null,
-                'number_tag_path' => null,
+                'icon_asset' => 'assets/images/v1/icon-s3.svg',
+                'number_tag_asset' => 'assets/images/v1/tag3.svg',
                 'display_order' => 3,
                 'is_active' => true,
                 'translations' => [
@@ -64,8 +67,8 @@ class WorkingProcessSeeder extends Seeder
                 ],
             ],
             [
-                'icon_path' => null,
-                'number_tag_path' => null,
+                'icon_asset' => 'assets/images/v1/icon-s4.svg',
+                'number_tag_asset' => 'assets/images/v1/tag3.svg',
                 'display_order' => 4,
                 'is_active' => true,
                 'translations' => [
@@ -83,7 +86,27 @@ class WorkingProcessSeeder extends Seeder
 
         foreach ($workingProcesses as $processData) {
             $translations = $processData['translations'];
-            unset($processData['translations']);
+            $iconAsset = $processData['icon_asset'] ?? null;
+            $tagAsset = $processData['number_tag_asset'] ?? null;
+            unset($processData['translations'], $processData['icon_asset'], $processData['number_tag_asset']);
+
+            if ($iconAsset) {
+                $iconSourcePath = public_path($iconAsset);
+                if (file_exists($iconSourcePath)) {
+                    $iconStoragePath = 'working-processes/icons/' . basename($iconAsset);
+                    Storage::disk('public')->put($iconStoragePath, file_get_contents($iconSourcePath));
+                    $processData['icon_path'] = $iconStoragePath;
+                }
+            }
+
+            if ($tagAsset) {
+                $tagSourcePath = public_path($tagAsset);
+                if (file_exists($tagSourcePath)) {
+                    $tagStoragePath = 'working-processes/tags/' . basename($tagAsset);
+                    Storage::disk('public')->put($tagStoragePath, file_get_contents($tagSourcePath));
+                    $processData['number_tag_path'] = $tagStoragePath;
+                }
+            }
 
             $workingProcess = WorkingProcess::create($processData);
 

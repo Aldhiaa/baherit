@@ -16,6 +16,8 @@ class AdminAuthenticate
      */
     public function handle(Request $request, Closure $next): Response
     {
+        Auth::shouldUse('admin');
+
         if (!Auth::guard('admin')->check()) {
             return redirect()->route('admin.login');
         }

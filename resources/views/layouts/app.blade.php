@@ -6,10 +6,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ __('layout.site_title') }}</title>
+    <title>{{ setting('meta_title', __('layout.site_title')) }}</title>
+    <meta name="description" content="{{ setting('meta_description', setting('site_description')) }}">
+    <meta name="keywords" content="{{ setting('meta_keywords') }}">
+    <meta name="author" content="{{ setting('site_name') }}">
 
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('assets/images/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ site_favicon() }}" type="image/x-icon">
+    <link rel="icon" href="{{ site_favicon() }}" type="image/x-icon">
     <!--- End favicon-->
 
     <link
@@ -71,8 +74,8 @@
         <div class="techin-menu-area text-center">
             <div class="techin-menu-mobile-top">
                 <div class="mobile-logo">
-                    <a href='index.html'>
-                        <img src="{{ asset('assets/images/logo/logo1.svg') }}" alt="logo">
+                    <a href='{{ LaravelLocalization::localizeUrl('/') }}'>
+                        <img src="{{ site_logo() }}" alt="{{ setting('site_name') }}">
                     </a>
                 </div>
                 <button class="techin-menu-toggle mobile">
