@@ -7,7 +7,7 @@
                         <div class=" ">
                             <div class="header-logo1  techin_screenfix_left">
                                 <a href='{{ LaravelLocalization::localizeUrl('/') }}'>
-                                    <img src="{{ site_logo(true) }}" alt="{{ setting('site_name') }}">
+                                    <img src="{{ site_logo(true) }}" alt="{{ setting('site_name') }}" style="max-height: 158px; height: auto;">
                                 </a>
                             </div>
                         </div>

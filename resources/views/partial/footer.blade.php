@@ -5,7 +5,7 @@
                     <div class="col-xl-4 col-lg-12">
                         <div class="techin-footer-textarea footer1">
                             <a href='{{ LaravelLocalization::localizeUrl('/') }}'>
-                                <img src="{{ site_logo(true) }}" alt="{{ setting('site_name') }}">
+                                <img src="{{ site_logo(true) }}" alt="{{ setting('site_name') }}" style="max-height: 148px; height: auto;">
                             </a>
                             <p>{{ setting('site_description', __('layout.footer.description')) }}</p>
                             <form class="subscribe-form">

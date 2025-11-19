@@ -116,6 +116,7 @@ class SettingController extends Controller
                 'meta_description' => 'Professional technology solutions, software development, and digital services for modern businesses in Saudi Arabia',
                 'meta_keywords' => 'baherit, technology solutions, software development, web development, digital transformation, saudi arabia',
                 'logo' => 'images/settings/logo.png',
+                'logo_dark' => 'images/settings/logo.png',
             ];
             
             return array_merge($defaults, $settings);

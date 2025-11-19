@@ -58,6 +58,13 @@ class SettingsSeeder extends Seeder
                 'group' => 'branding',
                 'is_translatable' => false,
             ],
+            [
+                'key' => 'logo_dark',
+                'value' => 'images/settings/logo.png',
+                'type' => 'image',
+                'group' => 'branding',
+                'is_translatable' => false,
+            ],
 
             // SEO Settings
             [
