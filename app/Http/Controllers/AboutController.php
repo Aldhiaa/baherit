@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Blog;
 use App\Models\Counter;
 use App\Models\Faq;
 use App\Models\Page;
@@ -60,6 +61,15 @@ class AboutController extends Controller
             ->limit(3)
             ->get();
 
-        return view('about-us', compact('about', 'services', 'workingProcesses', 'testimonials', 'counters', 'faqs'));
+        // Blog section
+        $blogs = Blog::query()
+            ->published()
+            ->withTranslations($locale)
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->limit(3)
+            ->get();
+
+        return view('about-us', compact('about', 'services', 'workingProcesses', 'testimonials', 'counters', 'faqs', 'blogs'));
     }
 }
