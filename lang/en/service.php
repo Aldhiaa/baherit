@@ -13,4 +13,9 @@ return [
     'it_consulting' => 'IT Consulting & Strategy',
     'data_backup' => 'Data Backup & Recovery',
     'software_development' => 'Software Development',
+    'working_process' => 'Working Process',
+    'our_unique_services' => 'Our Unique And Awesome Services',
+    'read_more' => 'Read More',
+    'read_less' => 'Read Less',
+    'no_services' => 'No services available at the moment.',
 ];

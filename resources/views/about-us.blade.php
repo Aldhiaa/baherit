@@ -53,8 +53,8 @@
               <h6>About Us</h6>
               <span><img src="assets/images/v1/shape1.svg" alt=""></span>
             </div>
-            <h2>Empowering Your Business With <span class="title">techin</span> IT Solutions</h2>
-            <p>At Techin, we deliver innovative IT solutions that empower businesses in the digital age. Our experienced team provides customized strategies, robust support, and cutting-edge technology tailored to your needs, ensuring efficiency, security, and reliability.</p>
+            <h2>{{ optional(optional($about)->translation)->title ?? 'Empowering Your Business With IT Solutions' }}</h2>
+            {!! optional(optional($about)->translation)->content ?? '<p>At Techin, we deliver innovative IT solutions that empower businesses in the digital age. Our experienced team provides customized strategies, robust support, and cutting-edge technology tailored to your needs, ensuring efficiency, security, and reliability.</p>' !!}
             <div class="techin-iconbox-wraper">
               <div class="techin-iconbox-wrap">
                 <div class="techin-iconbox-icon">
@@ -102,81 +102,31 @@
         </div>
       </div>
       <div class="techin-three-column2">
+        @foreach(($services ?? collect()) as $service)
         <div class="techin-service-wrap2">
           <div class="techin-service-thumb">
-            <img src="assets/images/v2/s1.png" alt="">
+            @if($service->image_path)
+              <img src="{{ asset($service->image_path) }}" alt="">
+            @else
+              <img src="assets/images/v2/s1.png" alt="">
+            @endif
             <div class="techin-service-icon2">
-              <img src="assets/images/v2/icon4.svg" alt="">
+              @if($service->icon_path)
+                <img src="{{ asset($service->icon_path) }}" alt="">
+              @else
+                <img src="assets/images/v2/icon4.svg" alt="">
+              @endif
             </div>
           </div>
           <div class="techin-service-content2">
-            <h5>IT Management</h5>
-            <p>Comprehensive management of your IT infrastructure, network monitoring, security, minimal downtime.</p>
-            <a class='techin-default-btn techin-service-btn' data-text='Read More' href='about-us.html'>
+            <h5>{{ optional($service->translation)->name }}</h5>
+            <p>{{ optional($service->translation)->short_description }}</p>
+            <a class='techin-default-btn techin-service-btn' data-text='Read More' href='#'>
               <span class="button-wraper">Read More</span>
             </a>
           </div>
         </div>
-        <div class="techin-service-wrap2">
-          <div class="techin-service-thumb">
-            <img src="assets/images/v2/s2.png" alt="">
-            <div class="techin-service-icon2">
-              <img src="assets/images/v2/icon5.svg" alt="">
-            </div>
-          </div>
-          <div class="techin-service-content2">
-            <h5>Cloud Solutions</h5>
-            <p>Design, deployment, and management of cloud tailored to your business needs, scalability, flexibility, and cost-efficiency.</p>
-            <a class='techin-default-btn techin-service-btn' data-text='Read More' href='about-us.html'>
-              <span class="button-wraper">Read More</span>
-            </a>
-          </div>
-        </div>
-        <div class="techin-service-wrap2">
-          <div class="techin-service-thumb">
-            <img src="assets/images/v2/s3.png" alt="">
-            <div class="techin-service-icon2">
-              <img src="assets/images/v2/icon6.svg" alt="">
-            </div>
-          </div>
-          <div class="techin-service-content2">
-            <h5>Cybersecurity</h5>
-            <p>Protection of your digital assets through security measures, encryption to safeguard against cyber threats.</p>
-            <a class='techin-default-btn techin-service-btn' data-text='Read More' href='about-us.html'>
-              <span class="button-wraper">Read More</span>
-            </a>
-          </div>
-        </div>
-        <div class="techin-service-wrap2">
-          <div class="techin-service-thumb">
-            <img src="assets/images/v2/s1.png" alt="">
-            <div class="techin-service-icon2">
-              <img src="assets/images/v2/icon4.svg" alt="">
-            </div>
-          </div>
-          <div class="techin-service-content2">
-            <h5>IT Management</h5>
-            <p>Comprehensive management of your IT infrastructure, network monitoring, security, minimal downtime.</p>
-            <a class='techin-default-btn techin-service-btn' data-text='Read More' href='about-us.html'>
-              <span class="button-wraper">Read More</span>
-            </a>
-          </div>
-        </div>
-        <div class="techin-service-wrap2">
-          <div class="techin-service-thumb">
-            <img src="assets/images/v2/s2.png" alt="">
-            <div class="techin-service-icon2">
-              <img src="assets/images/v2/icon4.svg" alt="">
-            </div>
-          </div>
-          <div class="techin-service-content2">
-            <h5>IT Management</h5>
-            <p>Comprehensive management of your IT infrastructure, network monitoring, security, minimal downtime.</p>
-            <a class='techin-default-btn techin-service-btn' data-text='Read More' href='about-us.html'>
-              <span class="button-wraper">Read More</span>
-            </a>
-          </div>
-        </div>
+        @endforeach
       </div>
     </div>
   </div>
@@ -193,79 +143,77 @@
         <h2>TechIn Have Most Unique Working Style</h2>
       </div>
       <div class="row">
-        <div class="col-xl-4 col-md-6">
-          <div class="techin-iconbox-wrap2-item1">
-            <div class="techin-iconbox-title-wrap2">
-              <div class="techin-iconbox-title-icon">
-                <img src="assets/images/v1/icon-s1.svg" alt="">
+        @if(($workingProcesses ?? collect())->count() > 0)
+          @php
+            $leftProcesses = $workingProcesses->take(2);
+            $rightProcesses = $workingProcesses->slice(2, 2);
+          @endphp
+          <div class="col-xl-4 col-md-6">
+            @foreach($leftProcesses as $process)
+            <div class="techin-iconbox-wrap2-item1">
+              <div class="techin-iconbox-title-wrap2">
+                <div class="techin-iconbox-title-icon">
+                  @if($process->icon_path)
+                    <img src="{{ asset($process->icon_path) }}" alt="">
+                  @else
+                    <img src="assets/images/v1/icon-s1.svg" alt="">
+                  @endif
+                </div>
+                <div class="techin-iconbox-title-content">
+                  <h5>{{ optional($process->translation)->title }}</h5>
+                </div>
               </div>
-              <div class="techin-iconbox-title-content">
-                <h5>Consultation And Assessment</h5>
+              <div class="techin-iconbox-title-text">
+                <p>{{ optional($process->translation)->description }}</p>
+              </div>
+              <div class="techin-iconbox-number">
+                @if($process->number_tag_path)
+                  <img src="{{ asset($process->number_tag_path) }}" alt="">
+                @else
+                  <img src="assets/images/v1/tag2.svg" alt="">
+                @endif
               </div>
             </div>
-            <div class="techin-iconbox-title-text">
-              <p>We start by understanding your business needs and challenges, then conduct a thorough assessment to identify the best tailored IT solutions.</p>
+            @endforeach
+          </div>
+          <div class="col-xl-4 col-md-6 order-xl-2">
+            @foreach($rightProcesses as $process)
+            <div class="techin-iconbox-wrap2-item1">
+              <div class="techin-iconbox-title-wrap2">
+                <div class="techin-iconbox-title-icon">
+                  @if($process->icon_path)
+                    <img src="{{ asset($process->icon_path) }}" alt="">
+                  @else
+                    <img src="assets/images/v1/icon-s2.svg" alt="">
+                  @endif
+                </div>
+                <div class="techin-iconbox-title-content">
+                  <h5>{{ optional($process->translation)->title }}</h5>
+                </div>
+              </div>
+              <div class="techin-iconbox-title-text">
+                <p>{{ optional($process->translation)->description }}</p>
+              </div>
+              <div class="techin-iconbox-number">
+                @if($process->number_tag_path)
+                  <img src="{{ asset($process->number_tag_path) }}" alt="">
+                @else
+                  <img src="assets/images/v1/tag3.svg" alt="">
+                @endif
+              </div>
             </div>
-            <div class="techin-iconbox-number">
-              <img src="assets/images/v1/tag2.svg" alt="">
+            @endforeach
+          </div>
+          <div class="col-xl-4 col-md-6">
+            <div class="techin-iconbox-title-thumb">
+              <img data-aos="zoom-out" data-aos-duration="700" src="assets/images/v1/img1.png" alt="">
             </div>
           </div>
-          <div class="techin-iconbox-wrap2-item1">
-            <div class="techin-iconbox-title-wrap2">
-              <div class="techin-iconbox-title-icon">
-                <img src="assets/images/v1/icon-s3.svg" alt="">
-              </div>
-              <div class="techin-iconbox-title-content">
-                <h5>Implementation And Integration</h5>
-              </div>
-            </div>
-            <div class="techin-iconbox-title-text">
-              <p>Our team implements solutions seamlessly, ensuring smooth integration with your infrastructure and minimal business disruption.</p>
-            </div>
-            <div class="techin-iconbox-number">
-              <img src="assets/images/v1/tag3.svg" alt="">
-            </div>
+        @else
+          <div class="col-12 text-center">
+            <p>No working processes available.</p>
           </div>
-        </div>
-        <div class="col-xl-4 col-md-6 order-xl-2">
-          <div class="techin-iconbox-wrap2-item1">
-            <div class="techin-iconbox-title-wrap2">
-              <div class="techin-iconbox-title-icon">
-                <img src="assets/images/v1/icon-s2.svg" alt="">
-              </div>
-              <div class="techin-iconbox-title-content">
-                <h5>Strategy And Planning</h5>
-              </div>
-            </div>
-            <div class="techin-iconbox-title-text">
-              <p>Based on the assessment, we create a tailored IT strategy, detailing the technologies needed to enhance your operations, efficiency, and security.</p>
-            </div>
-            <div class="techin-iconbox-number">
-              <img src="assets/images/v1/tag2%2b2.svg" alt="">
-            </div>
-          </div>
-          <div class="techin-iconbox-wrap2-item1">
-            <div class="techin-iconbox-title-wrap2">
-              <div class="techin-iconbox-title-icon">
-                <img src="assets/images/v1/icon-s4.svg" alt="">
-              </div>
-              <div class="techin-iconbox-title-content">
-                <h5>Support And Optimization</h5>
-              </div>
-            </div>
-            <div class="techin-iconbox-title-text">
-              <p>After deployment, we offer ongoing support and optimization to keep your systems secure, efficient, and scalable as your business grows.</p>
-            </div>
-            <div class="techin-iconbox-number">
-              <img src="assets/images/v1/tag4.svg" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="techin-iconbox-title-thumb">
-            <img data-aos="zoom-out" data-aos-duration="700" src="assets/images/v1/img1.png" alt="">
-          </div>
-        </div>
+        @endif
       </div>
     </div>
   </div>
@@ -348,9 +296,13 @@
         <div class="col-xl-8">
           <div id="techin-counter"></div>
           <div class="row">
+            @foreach(($counters ?? collect()) as $counter)
             <div class="col-lg-3 col-md-6">
               <div class="techin-counter-wrap wrap2">
                 <div class="techin-counter-icon">
+                  @if($counter->icon_path)
+                    <img src="{{ asset($counter->icon_path) }}" alt="" style="width: 60px; height: 60px;">
+                  @else
                   <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1_13062)">
                       <path d="M56.6115 8.06578L54.0476 5.80809L56.6115 3.55087C57.0102 3.1993 57.1467 2.65136 56.9594 2.15423C56.7713 1.65664 56.3067 1.33529 55.7752 1.33529H45.1652V0.879362C45.1652 0.393676 44.7715 0 44.2858 0C43.8001 0 43.4064 0.393676 43.4064 0.879362V12.7391L36.1843 16.6607C36.1445 16.343 36.0493 16.0309 35.8987 15.737L34.8811 13.7503C34.1825 12.3861 32.5044 11.8455 31.1412 12.5436L30.3543 12.9464C29.6932 13.2852 29.2039 13.8601 28.9759 14.5669C28.748 15.2733 28.8088 16.0263 29.1476 16.6868L30.1652 18.674C30.4028 19.1377 30.7539 19.5048 31.1668 19.7621C30.6266 20.4895 30.3703 21.3839 30.1066 22.3132L29.9171 22.9843C29.7848 23.4516 30.0567 23.9378 30.5241 24.0696C30.6037 24.0925 30.6843 24.103 30.7635 24.103C31.1471 24.103 31.4996 23.8504 31.6094 23.4626L31.799 22.7929C32.1844 21.4338 32.4211 20.706 33.1745 20.2967L34.5254 19.563L34.692 19.4778C34.7474 19.4494 34.7991 19.4174 34.8518 19.3858L44.4794 14.1577C44.4186 15.3611 43.7708 16.4982 42.7042 17.146L36.4434 20.95C36.4361 20.9541 36.4288 20.9582 36.4219 20.9628L34.4732 22.1466C34.0585 22.3988 33.9262 22.9399 34.1784 23.3551C34.416 23.7464 34.9104 23.8856 35.3137 23.6892L33.8351 28.1588L32.7543 28.6019L29.8155 29.8063L30.6623 26.8125C30.7942 26.3452 30.5227 25.859 30.0553 25.7267C29.5875 25.594 29.1018 25.8663 28.9695 26.3337L27.6315 31.0656C27.6141 31.1265 27.6026 31.1933 27.5999 31.257L27.2497 37.6894C27.2392 37.9348 27.2914 38.3985 27.1778 38.6379L23.2887 46.82H20.4625C18.8067 46.82 17.46 48.1667 17.46 49.822V52.3603C17.081 52.1868 16.6603 52.0897 16.2167 52.0897H9.03945C7.38418 52.0897 6.03744 53.436 6.03744 55.0918V58.2412H3.92624C3.44055 58.2412 3.04688 58.6348 3.04688 59.1205C3.04688 59.6062 3.44055 59.9999 3.92624 59.9999H55.7743C56.26 59.9999 56.6536 59.6062 56.6536 59.1205C56.6536 58.6348 56.26 58.2412 55.7743 58.2412H53.4873V35.575C53.4873 33.9198 52.1406 32.573 50.4853 32.573H45.1652V17.232C46.1402 15.9105 46.5014 14.1783 46.0487 12.5322C45.9777 12.2735 45.7923 12.0611 45.5451 11.9563C45.4238 11.9046 45.2938 11.8817 45.1652 11.8867V10.2814H55.7747C56.3067 10.2814 56.7713 9.96 56.959 9.46287C57.1467 8.96574 57.0102 8.41734 56.6115 8.06578ZM30.65 15.1071C30.7337 14.8475 30.9132 14.636 31.1558 14.512L31.9427 14.1092C32.091 14.0332 32.2494 13.997 32.406 13.997C32.7767 13.997 33.1352 14.1998 33.3155 14.5518L34.3336 16.539C34.5712 17.0031 34.4174 17.5657 33.9948 17.85L33.7083 18.0052L33.1036 18.3151C32.6032 18.5714 31.9871 18.3728 31.7307 17.872L30.7127 15.8853C30.5886 15.6427 30.5662 15.3662 30.65 15.1071ZM28.883 47.0905C28.5841 46.9541 28.2591 46.8648 27.9176 46.8333L28.883 45.5511V47.0905ZM33.0583 40.0048C33.4812 39.4981 33.598 38.9062 33.6923 38.4292C33.7161 38.3157 34.15 35.9454 34.15 35.9454C34.15 35.9454 34.5606 36.2013 34.6037 36.2196C34.6334 36.2328 34.6545 36.2621 34.6577 36.2965L35.136 41.1593H32.189L33.0583 40.0048ZM38.2584 35.1511L37.516 41.1552H36.903L36.4082 36.1243C36.345 35.4798 35.9504 34.9172 35.3723 34.6375L34.4879 34.0768L35.077 30.8116C35.077 30.8116 37.559 33.76 37.6167 33.8351C38.1303 34.503 38.3061 34.7703 38.2584 35.1511ZM28.7599 39.407C28.9375 38.8723 29.0199 38.328 29.0061 37.7746L29.3257 31.9079L33.3929 30.2412L32.6536 34.3363C32.6513 34.3473 32.649 34.3588 32.6476 34.3697L32.0361 37.7558C31.9564 38.1065 31.8868 38.6384 31.668 38.9272L25.7258 46.82H25.236L28.7599 39.407ZM7.79616 55.0913C7.79616 54.406 8.35372 53.8485 9.03945 53.8485H16.2167C16.9024 53.8485 17.4605 54.406 17.4605 55.0913V58.2412H7.79616V55.0913ZM19.2187 55.0913V49.822C19.2187 49.1363 19.7767 48.5787 20.4625 48.5787H27.6397C28.3255 48.5787 28.883 49.1363 28.883 49.822V58.2412H19.2192V55.0913H19.2187ZM51.7286 35.575V58.2412H42.0647V52.9686C42.0647 52.483 41.6711 52.0893 41.1854 52.0893C40.6992 52.0893 40.3056 52.483 40.3056 52.9686V58.2412H30.6417V44.1608C30.6417 43.4756 31.1993 42.918 31.885 42.918H39.0623C39.748 42.918 40.3056 43.4756 40.3056 44.1608V48.5691C40.3056 49.0548 40.6992 49.4484 41.1849 49.4484C41.6711 49.4484 42.0643 49.0548 42.0643 48.5691V35.575C42.0643 34.8893 42.6223 34.3317 43.308 34.3317H44.2767C44.2794 34.3317 44.2826 34.3322 44.2858 34.3322C44.2886 34.3322 44.2918 34.3317 44.2945 34.3317H50.4848C51.1706 34.3317 51.7286 34.8898 51.7286 35.575ZM43.308 32.573C41.6528 32.573 40.306 33.9198 40.306 35.575V41.4298C39.9911 41.2861 39.6478 41.195 39.2866 41.1684L40.0039 35.3677C40.1449 34.237 39.5681 33.4876 39.0106 32.7625C38.9515 32.6856 35.5334 28.6271 35.5334 28.6271L37.6304 22.2871L43.4064 18.7779V32.573H43.308ZM45.1652 8.52217V3.09448H54.4683L52.4647 4.85869C52.1918 5.09902 52.0353 5.44509 52.0353 5.80855C52.0353 6.17202 52.1918 6.51808 52.4647 6.75841L54.4683 8.52263H45.1652V8.52217Z" fill="white" />
@@ -361,14 +313,16 @@
                       </clipPath>
                     </defs>
                   </svg>
+                  @endif
                 </div>
                 <div class="techin-counter-data">
-                  <div class="techin-counter-number"><span data-percentage="950" class="techin-counter"></span>+</div>
-                  <p>Successfully Project</p>
+                  <div class="techin-counter-number"><span data-percentage="{{ $counter->target_value }}" class="techin-counter"></span></div>
+                  <p>{{ optional($counter->translation)->label }}</p>
                 </div>
               </div>
             </div>
-            <div class="col-lg-3 col-md-6">
+            @endforeach
+            <div class="col-lg-3 col-md-6" style="display: none;">
               <div class="techin-counter-wrap wrap2">
                 <div class="techin-counter-icon">
                   <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -476,50 +430,19 @@
             </div>
             <h2 class="faq-title">Frequently Asked Any Questions</h2>
             <div class="techin-faq-wrap1">
-              <div class="techin-faq-item open">
+              @foreach(($faqs ?? collect()) as $index => $faq)
+              <div class="techin-faq-item {{ $index === 0 ? 'open' : '' }}">
                 <div class="techin-faq-header">
-                  <h6>What services does TechIn offer?</h6>
+                  <h6>{{ optional($faq->translation)->question }}</h6>
                   <div class="techin-active-icon">
                     <img src="assets/images/v1/top-arrow.svg" alt="">
                   </div>
                 </div>
                 <div class="techin-faq-body body2">
-                  <p>Our consulting process typically starts with an initial consultation to understand your business needs and challenges. We then provide continuous conduct a thorough analysis, develop a tailored strategy, and work closely with you to implement the solutions. We provide continuous support and monitor progress to ensure long-term success.</p>
+                  <p>{{ optional($faq->translation)->answer }}</p>
                 </div>
               </div>
-              <div class="techin-faq-item">
-                <div class="techin-faq-header">
-                  <h6>How does the consulting process work?</h6>
-                  <div class="techin-active-icon">
-                    <img src="assets/images/v1/top-arrow.svg" alt="">
-                  </div>
-                </div>
-                <div class="techin-faq-body body2">
-                  <p>Our consulting process typically starts with an initial consultation to understand your business needs and challenges. We then conduct a thorough analysis, develop a tailored strategy, and work closely with you to implement the solutions. We provide continuous support and monitor progress to ensure long-term success.</p>
-                </div>
-              </div>
-              <div class="techin-faq-item">
-                <div class="techin-faq-header">
-                  <h6>How can I get started with TechIn?</h6>
-                  <div class="techin-active-icon">
-                    <img src="assets/images/v1/top-arrow.svg" alt="">
-                  </div>
-                </div>
-                <div class="techin-faq-body body2">
-                  <p>Our consulting process typically starts with an initial consultation to understand your business needs and challenges. We then conduct a thorough analysis, develop a tailored strategy, and work closely with you to implement the solutions. We provide continuous support and monitor progress to ensure long-term success.</p>
-                </div>
-              </div>
-              <div class="techin-faq-item">
-                <div class="techin-faq-header">
-                  <h6>Do you offer virtual consulting services?</h6>
-                  <div class="techin-active-icon">
-                    <img src="assets/images/v1/top-arrow.svg" alt="">
-                  </div>
-                </div>
-                <div class="techin-faq-body body2">
-                  <p>Our consulting process typically starts with an initial consultation to understand your business needs and challenges. We then conduct a thorough analysis, develop a tailored strategy, and work closely with you to implement the solutions. We provide continuous support and monitor progress to ensure long-term success.</p>
-                </div>
-              </div>
+              @endforeach
             </div>
           </div>
         </div>
@@ -527,191 +450,7 @@
     </div>
   </section>
   <!-- end faq -->
-  <section class="techin-section-padding2">
-    <div class="container">
-      <div class="techin-section-title center">
-        <div class="techin-title-tag center2">
-          <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-          <h6>Our Price</h6>
-          <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-        </div>
-        <h2>Choose Our Awesome Pricing Plan</h2>
-      </div>
-      <div class="row">
-        <div class="col-xl-4 col-md-6">
-          <div class="techin-pricing-wrap wrap2">
-            <div class="techin-pricing-header">
-              <h4>Basic Plan</h4>
-              <p>Get 20 % Save for Services</p>
-            </div>
-            <div class="techin-pricing-price proAnnuallyPrice">
-              <h5>$49</h5>
-              <span>Per Month</span>
-            </div>
-            <div class="techin-pricing-body body2">
-              <ul>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Ad Management
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Live Chat
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Multi-Language Content
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Conversational Bots
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Programmable Chatbots
-                </li>
-              </ul>
-              <div class="techin-pricing-shape shape-show">
-                <img src="assets/images/v1/shape-show.png" alt="">
-              </div>
-              <div class="techin-pricing-shape shape-hide">
-                <img src="assets/images/v1/shape-hide.png" alt="">
-              </div>
-            </div>
-            <div class="techin-pricing-footer">
-              <a class='techin-default-btn btn3' data-text='Choose Plan' href='contact-us.html'>
-                <span class="button-wraper">Choose Plan</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="techin-pricing-wrap wrap2 pricing-active">
-            <div class="techin-pricing-header">
-              <h4>Stander Plan</h4>
-              <p>Get 20 % Save for Services</p>
-            </div>
-            <div class="techin-pricing-price proAnnuallyPrice">
-              <h5>$79</h5>
-              <span>Per Month</span>
-            </div>
-            <div class="techin-pricing-body body2">
-              <ul>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Ad Management
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Live Chat
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Multi-Language Content
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Conversational Bots
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Programmable Chatbots
-                </li>
-              </ul>
-              <div class="techin-pricing-shape shape-show">
-                <img src="assets/images/v1/shape-show.png" alt="">
-              </div>
-              <div class="techin-pricing-shape shape-hide">
-                <img src="assets/images/v1/shape-hide.png" alt="">
-              </div>
-            </div>
-            <div class="techin-pricing-footer">
-              <a class='techin-default-btn btn3' data-text='Choose Plan' href='contact-us.html'>
-                <span class="button-wraper">Choose Plan</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-          <div class="techin-pricing-wrap wrap2 mb-0">
-            <div class="techin-pricing-header">
-              <h4>Premium Plan</h4>
-              <p>Get 20 % Save for Services</p>
-            </div>
-            <div class="techin-pricing-price proAnnuallyPrice">
-              <h5>$99</h5>
-              <span>Per Month</span>
-            </div>
-            <div class="techin-pricing-body body2">
-              <ul>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Ad Management
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Live Chat
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Multi-Language Content
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Conversational Bots
-                </li>
-                <li>
-                  <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M8 14.75C5.48438 14.75 3.1875 13.4375 1.92969 11.25C0.671875 9.08984 0.671875 6.4375 1.92969 4.25C3.1875 2.08984 5.48438 0.75 8 0.75C10.4883 0.75 12.7852 2.08984 14.043 4.25C15.3008 6.4375 15.3008 9.08984 14.043 11.25C12.7852 13.4375 10.4883 14.75 8 14.75ZM11.0898 6.46484H11.0625C11.3359 6.21875 11.3359 5.80859 11.0625 5.53516C10.8164 5.28906 10.4062 5.28906 10.1602 5.53516L7.125 8.59766L5.83984 7.3125C5.56641 7.03906 5.15625 7.03906 4.91016 7.3125C4.63672 7.55859 4.63672 7.96875 4.91016 8.21484L6.66016 9.96484C6.90625 10.2383 7.31641 10.2383 7.58984 9.96484L11.0898 6.46484Z" fill="#2BC8EB" />
-                  </svg>
-                  Programmable Chatbots
-                </li>
-              </ul>
-              <div class="techin-pricing-shape shape-show">
-                <img src="assets/images/v1/shape-show.png" alt="">
-              </div>
-              <div class="techin-pricing-shape shape-hide">
-                <img src="assets/images/v1/shape-hide.png" alt="">
-              </div>
-            </div>
-            <div class="techin-pricing-footer">
-              <a class='techin-default-btn btn3' data-text='Choose Plan' href='contact-us.html'>
-                <span class="button-wraper">Choose Plan</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+ 
   <!-- end pricing -->
   <section class="techin-section-padding6 bg-light3">
     <div class="container">

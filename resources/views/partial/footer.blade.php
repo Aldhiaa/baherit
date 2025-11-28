@@ -1,4 +1,4 @@
-<footer class="techin-footer-section1 section" style="background-image: url(assets/images/v1/pricing-bg.png);">
+<footer class="techin-footer-section1 section" style="background-image: url({{ asset('assets/images/v1/pricing-bg.png') }});">
         <div class="container">
             <div class="techin-footer-top">
                 <div class="row">
@@ -10,7 +10,7 @@
                             <p>{{ setting('site_description', __('layout.footer.description')) }}</p>
                             <form class="subscribe-form">
                                 <input type="email" placeholder="{{ __('layout.footer.email_placeholder') }}">
-                                <button class="button2" type="submit"><img src="assets/images/footer/plane.svg"
+                                <button class="button2" type="submit"><img src="{{ asset('assets/images/footer/plane.svg') }}"
                                         alt="">{{ __('layout.buttons.subscribe') }}</button>
                             </form>
                         </div>
@@ -42,7 +42,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href='portfolio.html'>
+                                    <a href='{{ LaravelLocalization::localizeUrl('/portfolio') }}'>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -52,7 +52,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href='team.html'>
+                                    <a href='{{ LaravelLocalization::localizeUrl('/team') }}'>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -150,27 +150,27 @@
                             </div>
                             <div class="techin-instagram-wrap">
                                 <div class="techin-instagram-thumb">
-                                    <a href='portfolio.html'><img src="assets/images/footer/f1.png"
+                                    <a href='portfolio.html'><img src="{{ asset('assets/images/footer/f1.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="techin-instagram-thumb">
-                                    <a href='portfolio.html'><img src="assets/images/footer/f4.png"
+                                    <a href='portfolio.html'><img src="{{ asset('assets/images/footer/f4.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="techin-instagram-thumb">
-                                    <a href='portfolio.html'><img src="assets/images/footer/f2.png"
+                                    <a href='portfolio.html'><img src="{{ asset('assets/images/footer/f2.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="techin-instagram-thumb">
-                                    <a href='portfolio.html'><img src="assets/images/footer/f5.png"
+                                    <a href='portfolio.html'><img src="{{ asset('assets/images/footer/f5.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="techin-instagram-thumb">
-                                    <a href='portfolio.html'><img src="assets/images/footer/f6.png"
+                                    <a href='portfolio.html'><img src="{{ asset('assets/images/footer/f6.png') }}"
                                             alt=""></a>
                                 </div>
                                 <div class="techin-instagram-thumb">
-                                    <a href='portfolio.html'><img src="assets/images/footer/f3.png"
+                                    <a href='portfolio.html'><img src="{{ asset('assets/images/footer/f3.png') }}"
                                             alt=""></a>
                                 </div>
                             </div>

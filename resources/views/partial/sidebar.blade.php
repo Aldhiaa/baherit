@@ -8,7 +8,7 @@
                 </div>
                 <p>{{ setting('site_description', __('layout.sidebar.testimonial')) }}</p>
                 <div class="techin-sidemenu-thumb">
-                    <img src="assets/images/blog/img15.png" alt="">
+                    <img src="{{ setting('sidebar_image', asset('assets/images/blog/img15.png')) }}" alt="">
                 </div>
                 <div class="techin-contact-info-wrap">
                     <div class="techin-contact-info">
