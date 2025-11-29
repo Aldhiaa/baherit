@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="breadcrumb-wrapper" style="background-image: url(assets/images/blog/blog-thumb.png)">
+    <div class="breadcrumb-wrapper" style="background-image: url({{ asset('assets/images/blog/blog-thumb.png') }})">
         <div class="container">
 
             <div class="breadcrumb-content">

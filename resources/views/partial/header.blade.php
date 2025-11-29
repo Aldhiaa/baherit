@@ -28,6 +28,9 @@
                                             <a href="{{ LaravelLocalization::localizeUrl('/blog') }}">{{ __('layout.menu.blog') }}</a>
                                         </li>
                                         <li class="menu-item">
+                                            <a href="{{ LaravelLocalization::localizeUrl('/portfolio') }}">{{ __('layout.menu.portfolio') }}</a>
+                                        </li>
+                                        <li class="menu-item">
                                             <a href="{{ LaravelLocalization::localizeUrl('/contact-us') }}">{{ __('layout.menu.contact') }}</a>
                                         </li>
                                     </ul>

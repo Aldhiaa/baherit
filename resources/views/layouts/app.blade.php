@@ -101,12 +101,8 @@
                             <li><a href="testimonial.html">{{ __('layout.menu.testimonial') }}</a></li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">{{ __('layout.menu.portfolio') }}</a>
-                        <ul class="sub-menu">
-                            <li><a href='portfolio.html'>{{ __('layout.menu.portfolio') }}</a></li>
-                            <li><a href='single-portfolio.html'>{{ __('layout.menu.portfolio_details') }}</a></li>
-                        </ul>
+                    <li>
+                        <a href='{{ LaravelLocalization::localizeUrl('/portfolio') }}'>{{ __('layout.menu.portfolio') }}</a>
                     </li>
                     <li class="menu-item-has-children">
                         <a href="#">{{ __('layout.menu.blog') }}</a>
