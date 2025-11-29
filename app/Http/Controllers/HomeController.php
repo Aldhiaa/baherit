@@ -71,7 +71,20 @@ class HomeController extends Controller
             ->withTranslations($locale)
             ->get();
 
-        return view('index', compact('hero', 'about', 'services', 'projects', 'counters', 'testimonials', 'blogs', 'workingProcesses'));
+        $faqs = \App\Models\Faq::query()
+            ->active()
+            ->ordered()
+            ->withTranslations($locale)
+            ->limit(5)
+            ->get();
+
+        $settingsCollection = \App\Models\Setting::withTranslations($locale)->get();
+        $settings = $settingsCollection->mapWithKeys(function ($setting) {
+            $value = $setting->is_translatable ? optional($setting->translation)->value : $setting->value;
+            return [$setting->key => $value];
+        });
+
+        return view('index', compact('hero', 'about', 'services', 'projects', 'counters', 'testimonials', 'blogs', 'workingProcesses', 'faqs', 'settings'));
     }
     
 }
