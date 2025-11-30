@@ -5,14 +5,14 @@
         <div class="container">
 
             <div class="breadcrumb-content">
-                <h1 class="breadcrumb-title">About Us</h1>
+                <h1 class="breadcrumb-title">{{ __('about.title') }}</h1>
                 <div class="breadcrumb-menu-wrapper">
                     <div class="breadcrumb-menu-wrap">
                         <div class="breadcrumb-menu">
                             <ul>
-                                <li><a href='index.html'>Home</a></li>
+                                <li><a href='{{ route('home') }}'>{{ __('layout.menu.home') }}</a></li>
                                 <li><img src="{{ asset('assets/images/breadcrumb/line.svg') }}" alt="right-arrow"></li>
-                                <li aria-current="page">About Us</li>
+                                <li aria-current="page">{{ __('about.title') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -34,11 +34,11 @@
                         </div>
                         <div class="techin-about-info-wrap wrap2">
                             <div class="techin-about-info-icon">
-                                <a href="tel:009"><img src="{{ asset('assets/images/v2/Icon1.svg') }}" alt=""></a>
+                                <a href="tel:{{ $settings['site_phone'] ?? '' }}"><img src="{{ asset('assets/images/v2/Icon1.svg') }}" alt=""></a>
                             </div>
                             <div class="techin-about-info-text text2">
-                                <a href="tel:009">Call Us Any Time</a>
-                                <a href="tel:009"><span>+(009) 1888 000 2222</span></a>
+                                <a href="tel:{{ $settings['site_phone'] ?? '' }}">{{ __('about.call_us') }}</a>
+                                <a href="tel:{{ $settings['site_phone'] ?? '' }}"><span>{{ $settings['site_phone'] ?? '+(009) 1888 000 2222' }}</span></a>
                             </div>
                         </div>
                         <div class="techin-about-frame frame1">
@@ -50,20 +50,20 @@
                     <div class="techin-about-content">
                         <div class="techin-title-tag">
                             <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
-                            <h6>About Us</h6>
+                            <h6>{{ __('about.tagline') }}</h6>
                             <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                         </div>
-                        <h2>{{ optional(optional($about)->translation)->title ?? 'Empowering Your Business With IT Solutions' }}
+                        <h2>{{ optional(optional($about)->translation)->title ?? __('about.title') }}
                         </h2>
                         {!! optional(optional($about)->translation)->content ??
-                            '<p>At Techin, we deliver innovative IT solutions that empower businesses in the digital age. Our experienced team provides customized strategies, robust support, and cutting-edge technology tailored to your needs, ensuring efficiency, security, and reliability.</p>' !!}
+                            '<p>' . __('about.description') . '</p>' !!}
                         <div class="techin-iconbox-wraper">
                             <div class="techin-iconbox-wrap">
                                 <div class="techin-iconbox-icon">
                                     <img src="{{ asset('assets/images/v1/icon1.svg') }}" alt="">
                                 </div>
                                 <div class="techin-iconbox-data">
-                                    <h5>Providing Skillful Services</h5>
+                                    <h5>{{ __('about.service_1') }}</h5>
                                 </div>
                             </div>
                             <div class="techin-iconbox-wrap">
@@ -71,13 +71,13 @@
                                     <img src="{{ asset('assets/images/v1/icon2.svg') }}" alt="">
                                 </div>
                                 <div class="techin-iconbox-data">
-                                    <h5>24/7 Support For Clients</h5>
+                                    <h5>{{ __('about.service_2') }}</h5>
                                 </div>
                             </div>
                         </div>
                         <div class="techin-about-info-wraper">
-                            <a class='techin-default-btn' data-text='More Information' href='about-us.html'>
-                                <span class="button-wraper">More Information</span>
+                            <a class='techin-default-btn' data-text='{{ __('about.more_info') }}' href='{{ route('about') }}'>
+                                <span class="button-wraper">{{ __('about.more_info') }}</span>
                             </a>
                         </div>
                     </div>
@@ -94,17 +94,17 @@
                     <div class="col-xl-6 col-lg-8">
                         <div class="techin-title-tag">
                             <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
-                            <h6>Our Service</h6>
+                            <h6>{{ __('services.tagline') }}</h6>
                             <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                         </div>
-                        <h2>Our Unique And Awesome Services</h2>
+                        <h2>{{ __('services.title') }}</h2>
                     </div>
                     <div class="col-xl-6 col-lg-4 d-flex justify-content-end align-items-center">
                     </div>
                 </div>
             </div>
             <div class="techin-three-column2">
-                @foreach ($services ?? collect() as $service)
+                @forelse ($services ?? collect() as $service)
                     <div class="techin-service-wrap2">
                         <div class="techin-service-thumb">
                             @if ($service->image_path)
@@ -123,12 +123,16 @@
                         <div class="techin-service-content2">
                             <h5>{{ optional($service->translation)->name }}</h5>
                             <p>{{ optional($service->translation)->short_description }}</p>
-                            <a class='techin-default-btn techin-service-btn' data-text='Read More' href='#'>
-                                <span class="button-wraper">Read More</span>
+                            <a class='techin-default-btn techin-service-btn' data-text='{{ __('services.read_more') }}' href='#'>
+                                <span class="button-wraper">{{ __('services.read_more') }}</span>
                             </a>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                    <div class="col-12 text-center">
+                        <p>{{ __('services.empty') }}</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>
@@ -139,10 +143,10 @@
             <div class="techin-section-title center">
                 <div class="techin-title-tag center2">
                     <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
-                    <h6>Working Process</h6>
+                    <h6>{{ __('index.working_process.label') }}</h6>
                     <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                 </div>
-                <h2>TechIn Have Most Unique Working Style</h2>
+                <h2>{{ __('index.working_process.title') }}</h2>
             </div>
             <div class="row">
                 @if (($workingProcesses ?? collect())->count() > 0)
@@ -214,7 +218,7 @@
                     </div>
                 @else
                     <div class="col-12 text-center">
-                        <p>No working processes available.</p>
+                        <p>{{ __('index.working_process.empty') }}</p>
                     </div>
                 @endif
             </div>
@@ -232,16 +236,16 @@
                     <div class="techin-counter-content">
                         <div class="techin-title-tag tag2">
                             <span><img src="{{ asset('assets/images/v1/shape2.svg') }}" alt=""></span>
-                            <h6>Facts</h6>
+                            <h6>{{ __('index.counters.label') }}</h6>
                             <span><img src="{{ asset('assets/images/v1/shape2.svg') }}" alt=""></span>
                         </div>
-                        <h2>Need To Know Some Fun Facts</h2>
+                        <h2>{{ __('index.counters.title') }}</h2>
                         <div class="techin-counter-author">
                             <div class="techin-counter-author-thumb">
                                 <img src="{{ asset('assets/images/v2/c1.png') }}" alt="">
                             </div>
                             <div class="techin-counter-author-text">
-                                <h6>We’ve 30k+ Globally Clients</h6>
+                                <h6>{{ __('index.counters.clients_count') }}</h6>
                             </div>
                         </div>
                     </div>
@@ -271,7 +275,7 @@
                             </div>
                         @empty
                             <div class="col-12 text-center">
-                                <p>No counter data available at the moment.</p>
+                                <p>{{ __('index.counters.empty') }}</p>
                             </div>
                         @endforelse
                     </div>
@@ -299,12 +303,12 @@
                     <div class="techin-faq-content-wrap">
                         <div class="techin-title-tag">
                             <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
-                            <h6>FAQs</h6>
+                            <h6>{{ __('faq.tagline') }}</h6>
                             <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                         </div>
-                        <h2 class="faq-title">Frequently Asked Any Questions</h2>
+                        <h2 class="faq-title">{{ __('faq.title') }}</h2>
                         <div class="techin-faq-wrap1">
-                            @foreach ($faqs ?? collect() as $index => $faq)
+                            @forelse ($faqs ?? collect() as $index => $faq)
                                 <div class="techin-faq-item {{ $index === 0 ? 'open' : '' }}">
                                     <div class="techin-faq-header">
                                         <h6>{{ optional($faq->translation)->question }}</h6>
@@ -316,7 +320,11 @@
                                         <p>{{ optional($faq->translation)->answer }}</p>
                                     </div>
                                 </div>
-                            @endforeach
+                            @empty
+                                <div class="col-12">
+                                    <p>{{ __('faq.empty') }}</p>
+                                </div>
+                            @endforelse
                         </div>
                     </div>
                 </div>
@@ -542,18 +550,18 @@
 
     <div class="techin-cta-content-top">
         <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
-        <h6>Knock Us To Know 24/7</h6>
+        <h6>{{ __('index.cta.tagline') }}</h6>
         <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
     </div>
     <div class="techin-cta-content-bottom">
-        <h2>Need A Consultation?</h2>
+        <h2>{{ __('index.cta.title') }}</h2>
     </div>
     </div>
     </div>
     <div class="col-xl-4 col-lg-4 d-flex align-items-center justify-content-end">
         <div class="techin-title-btn">
-            <a class="techin-default-btn pill techin-cta-btn" href="contact-us.html" data-text="Get A Quote">
-                <span class="button-wraper">Get A Quote</span>
+            <a class="techin-default-btn pill techin-cta-btn" href="{{ route('contact') }}" data-text="{{ __('index.cta.button') }}">
+                <span class="button-wraper">{{ __('index.cta.button') }}</span>
             </a>
         </div>
     </div>

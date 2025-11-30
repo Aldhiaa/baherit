@@ -1535,5 +1535,77 @@
 }
 
 /* ===========================
+   Service Slider RTL Support
+   =========================== */
+[dir="rtl"] .techin-s-slider-next {
+  right: auto;
+  left: -60px;
+}
+
+[dir="rtl"] .techin-s-slider-prev {
+  left: auto;
+  right: -60px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1399px) {
+  [dir="rtl"] .techin-s-slider-next {
+    left: 40%;
+    top: 110%;
+  }
+  
+  [dir="rtl"] .techin-s-slider-prev {
+    right: 40%;
+    top: 110%;
+  }
+}
+
+@media (max-width: 991px) {
+  [dir="rtl"] .techin-s-slider-next {
+    left: 35%;
+  }
+  
+  [dir="rtl"] .techin-s-slider-prev {
+    right: 35%;
+  }
+}
+
+/* ===========================
+   Project Slider RTL Support
+   =========================== */
+[dir="rtl"] .techin-p-slider-next {
+  right: auto;
+  left: -60px;
+}
+
+[dir="rtl"] .techin-p-slider-prev {
+  left: auto;
+  right: -60px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1399px) {
+  [dir="rtl"] .techin-p-slider-next {
+    left: 40%;
+    top: 110%;
+  }
+  
+  [dir="rtl"] .techin-p-slider-prev {
+    right: 40%;
+    top: 110%;
+  }
+}
+
+@media (max-width: 991px) {
+  [dir="rtl"] .techin-p-slider-next {
+    left: 35%;
+  }
+  
+  [dir="rtl"] .techin-p-slider-prev {
+    right: 35%;
+  }
+}
+
+/* ===========================
    End of RTL Stylesheet
    =========================== */

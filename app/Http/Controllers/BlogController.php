@@ -6,10 +6,19 @@ use App\Models\Blog;
 use App\Models\FaqCategory;
 use Illuminate\Http\Request;
 
+use App\Models\Setting;
+
 class BlogController extends Controller
 {
     public function index()
     {
+        $locale = app()->getLocale();
+
+        // Global Settings
+        $settings = Setting::withTranslations($locale)->get()->mapWithKeys(function ($setting) {
+            return [$setting->key => $setting->value];
+        });
+
         // Fetch published blogs with translations, paginated
         $blogs = Blog::published()
             ->withTranslations()
@@ -45,6 +54,6 @@ class BlogController extends Controller
             ]);
         }
 
-        return view('blog', compact('blogs', 'recentPosts', 'categories'));
+        return view('blog', compact('blogs', 'recentPosts', 'categories', 'settings'));
     }
 }

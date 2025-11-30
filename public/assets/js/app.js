@@ -35,6 +35,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     return this.length;
   };
   $(function () {
+    var isRtl = $('html').attr('dir') === 'rtl';
     /*--------------------------------------------------------------
     TECHIN PRELOADER JS INIT
     --------------------------------------------------------------*/
@@ -137,7 +138,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         slidesToShow: 5,
         slidesToScroll: 1,
         autoplay: false,
-        arrows: true
+        arrows: true,
+        rtl: isRtl
       }, "slidesToScroll", 1), "infinite", true), "speed", 500), "centerMode", true), "lazyLoad", 'progressive'), "prevArrow", '<button class="slide-arrow techin-brand-next"></button>'), "nextArrow", '<button class="slide-arrow techin-brand-prev"></button>'), "responsive", [{
         breakpoint: 1399,
         settings: {
@@ -169,6 +171,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         autoplaySpeed: 0,
         speed: 4000,
         arrows: false,
+        rtl: isRtl,
         centerMode: true,
         pauseOnHover: false,
         cssEase: 'linear',
@@ -256,7 +259,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: false,
-        arrows: true
+        arrows: true,
+        rtl: isRtl
       }, "slidesToScroll", 1), "infinite", true), "speed", 1000), "centerMode", true), "lazyLoad", 'progressive'), "prevArrow", '<button class="slide-arrow techin-p-slider-next"></button>'), "nextArrow", '<button class="slide-arrow techin-p-slider-prev"></button>'), "responsive", [{
         breakpoint: 1399,
         settings: {
@@ -285,7 +289,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         slidesToShow: 3,
         slidesToScroll: 1,
         autoplay: false,
-        arrows: true
+        arrows: true,
+        rtl: isRtl
       }, "slidesToScroll", 1), "infinite", true), "speed", 1000), "lazyLoad", 'progressive'), "prevArrow", '<button class="slide-arrow techin-s-slider-next"></button>'), "nextArrow", '<button class="slide-arrow techin-s-slider-prev"></button>'), "responsive", [{
         breakpoint: 1399,
         settings: {
@@ -315,7 +320,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: false,
-        arrows: true
+        arrows: true,
+        rtl: isRtl
       }, "slidesToScroll", 1), "infinite", true), "speed", 1000), "lazyLoad", 'progressive'), "prevArrow", '<button class="slide-arrow techin-t-slider-init-next"></button>'), "nextArrow", '<button class="slide-arrow techin-t-slider-init-prev"></button>'), "responsive", [{
         breakpoint: 1399,
         settings: {
@@ -438,9 +444,9 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     });
   }); /*End document ready*/
 
-  $(window).on("resize", function () {}); // end window resize
+  $(window).on("resize", function () { }); // end window resize
 
-  $(window).on('load', function () {}); // End window LODE
+  $(window).on('load', function () { }); // End window LODE
 
   /*--------------------------------------------------------------
   techin MAP JS

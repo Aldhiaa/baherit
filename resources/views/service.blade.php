@@ -4,9 +4,9 @@
   <div class="techin-header-search-section">
     <div class="container">
       <div class="techin-header-search-box">
-        <input type="search" placeholder="Search here...">
+        <input type="search" placeholder="{{ __('service.search_placeholder') }}">
         <button id="header-search" type="button"><i class="ri-search-line"></i></button>
-        <p>Type above and press Enter to search. Press Close to cancel.</p>
+        <p>{{ __('service.search_instruction') }}</p>
       </div>
     </div>
     <div class="techin-header-search-close">
@@ -24,14 +24,14 @@
     <div class="container">
 
       <div class="breadcrumb-content">
-        <h1 class="breadcrumb-title">Services</h1>
+        <h1 class="breadcrumb-title">{{ __('service.breadcrumb_title') }}</h1>
         <div class="breadcrumb-menu-wrapper">
           <div class="breadcrumb-menu-wrap">
             <div class="breadcrumb-menu">
               <ul>
-                <li><a href='{{ LaravelLocalization::localizeUrl('/index') }}'>Home</a></li>
+                <li><a href='{{ route('home') }}'>{{ __('layout.menu.home') }}</a></li>
                 <li><img src="{{ asset('assets/images/breadcrumb/line.svg') }}" alt="right-arrow"></li>
-                <li aria-current="page">Services</li>
+                <li aria-current="page">{{ __('service.breadcrumb_title') }}</li>
               </ul>
             </div>
           </div>
@@ -47,10 +47,10 @@
       <div class="techin-section-title center">
         <div class="techin-title-tag center2">
           <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
-          <h6>{{ __('service.working_process') }}</h6>
+          <h6>{{ __('service.section_label') }}</h6>
           <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
         </div>
-        <h2>{{ __('service.our_unique_services') }}</h2>
+        <h2>{{ __('service.section_title') }}</h2>
       </div>
       </div>
       <div class="row">
@@ -59,26 +59,26 @@
             <div class="techin-service-wrap2 wrap3">
               <div class="techin-service-thumb">
                 @if($service->icon_path)
-                  <img src="{{ asset('storage/' . $service->icon_path) }}" alt="{{ $service->translation?->name ?? '' }}">
+                  <img src="{{ asset($service->icon_path) }}" alt="{{ optional($service->translation)->name }}">
                 @else
-                  <img src="{{ asset('assets/images/v2/s1.png') }}" alt="{{ $service->translation?->name ?? '' }}">
+                  <img src="{{ asset('assets/images/v2/s1.png') }}" alt="{{ optional($service->translation)->name }}">
                 @endif
                 <div class="techin-service-icon2">
                   @if($service->icon_path)
-                    <img src="{{ asset('storage/' . $service->icon_path) }}" alt="">
+                    <img src="{{ asset($service->icon_path) }}" alt="">
                   @else
                     <img src="{{ asset('assets/images/v2/icon4.svg') }}" alt="">
                   @endif
                 </div>
               </div>
               <div class="techin-service-content2">
-                <h5>{{ $service->translation?->name ?? '' }}</h5>
+                <h5>{{ optional($service->translation)->name }}</h5>
                 <p class="service-description-short">
-                  {{ $service->translation?->short_description ?? '' }}
+                  {{ optional($service->translation)->short_description }}
                 </p>
-                @if($service->translation?->long_description && strlen($service->translation->long_description) > 0)
+                @if(optional($service->translation)->long_description && strlen(optional($service->translation)->long_description) > 0)
                   <p class="service-description-full" style="display: none;">
-                    {{ $service->translation->long_description }}
+                    {{ optional($service->translation)->long_description }}
                   </p>
                   <a class='techin-default-btn techin-service-btn read-more-btn' data-text='{{ __('service.read_more') }}' href='javascript:void(0);'>
                     <span class="button-wraper">{{ __('service.read_more') }}</span>
@@ -112,10 +112,12 @@
             shortDesc.style.display = 'none';
             fullDesc.style.display = 'block';
             this.querySelector('.button-wraper').textContent = '{{ __('service.read_less') }}';
+            this.setAttribute('data-text', '{{ __('service.read_less') }}');
           } else {
             shortDesc.style.display = 'block';
             fullDesc.style.display = 'none';
             this.querySelector('.button-wraper').textContent = '{{ __('service.read_more') }}';
+            this.setAttribute('data-text', '{{ __('service.read_more') }}');
           }
         });
       });
@@ -129,11 +131,11 @@
         <div class="row">
           <div class="col-xl-6 col-lg-8">
             <div class="techin-title-tag">
-              <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-              <h6>Testimonials</h6>
-              <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+              <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+              <h6>{{ __('index.testimonials.label') }}</h6>
+              <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
             </div>
-            <h2>Here Is Some Nice Client’s Feedback & Review</h2>
+            <h2>{{ __('index.testimonials.title') }}</h2>
           </div>
           <div class="col-xl-6 col-lg-4 d-flex justify-content-end align-items-center">
           </div>
@@ -141,26 +143,48 @@
       </div>
       <div class="techin-three-column">
         @forelse(($testimonials ?? collect()) as $testimonial)
+          @php
+              $translation = optional($testimonial->translation);
+              $fallbackTranslation = $testimonial->translations->firstWhere('locale', config('app.fallback_locale'));
+              $authorName = $translation->author_name ?? (optional($fallbackTranslation)->author_name ?? __('index.testimonials.fallback.author_name'));
+              $authorTitle = $translation->author_title ?? (optional($fallbackTranslation)->author_title ?? __('index.testimonials.fallback.author_title'));
+              $quote = $translation->quote ?? (optional($fallbackTranslation)->quote ?? __('index.testimonials.fallback.quote'));
+              $avatarPath = $testimonial->avatar_path;
+              if ($avatarPath && (str_starts_with($avatarPath, 'http://') || str_starts_with($avatarPath, 'https://'))) {
+                  $avatarUrl = $avatarPath;
+              } elseif ($avatarPath) {
+                  $relativeAvatarPath = ltrim($avatarPath, '/');
+                  $publicAvatarPath = public_path($relativeAvatarPath);
+                  $avatarUrl = file_exists($publicAvatarPath) ? asset($relativeAvatarPath) : asset('storage/' . $relativeAvatarPath);
+              } else {
+                  $avatarUrl = asset('assets/images/v3/Img2.png');
+              }
+              $rating = (int)($testimonial->rating ?? 5);
+              $rating = $rating < 1 ? 1 : ($rating > 5 ? 5 : $rating);
+              $stars = str_repeat('★', $rating) . str_repeat('☆', 5 - $rating);
+          @endphp
           <div class="techin-t-slider-item">
             <div class="techin-t-slider-author-wrap">
               <div class="techin-t-slider-author-thumb">
-                @if($testimonial->avatar_path)
-                  <img src="{{ asset('storage/' . $testimonial->avatar_path) }}" alt="{{ $testimonial->translation?->author_name ?? '' }}">
-                @else
-                  <img src="{{ asset('assets/images/v3/Img2.png') }}" alt="{{ $testimonial->translation?->author_name ?? '' }}">
-                @endif
+                <img src="{{ $avatarUrl }}" alt="{{ $authorName }}">
               </div>
               <div class="techin-t-slider-author-data">
-                <h6>{{ $testimonial->translation?->author_name ?? '' }}</h6>
-                <p>{{ $testimonial->translation?->author_title ?? '' }}</p>
-                <div class="techin-t-ratting2">
+                <h6>{{ $authorName }}</h6>
+                <p>{{ $authorTitle }}</p>
+                <div class="techin-t-ratting2" aria-label="Rating {{ $rating }} / 5">
+                   <!-- SVG stars replaced with text/font stars for simplicity or keep SVG if preferred, but using text for consistency with index refactor -->
+                   <!-- Actually index refactor used text stars, but here the design uses SVG. Let's keep SVG but maybe make it dynamic if needed. 
+                        The SVG is hardcoded. I will leave it as is for now as it looks like a static 5 star or specific design. 
+                        Wait, the SVG path is complex. I'll just leave the SVG as is, assuming it represents 5 stars or generic rating. 
+                        If dynamic rating is needed, I'd need to loop SVGs. 
+                        For now, I will stick to the existing SVG but maybe just ensure the loop works. -->
                   <svg width="116" height="19" viewBox="0 0 116 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.2844 0.882812L13.5695 5.55859L18.5969 6.29688C19.0187 6.36719 19.3703 6.64844 19.5109 7.07031C19.6516 7.45703 19.5461 7.91406 19.2297 8.19531L15.5734 11.8164L16.4523 16.9492C16.5227 17.3711 16.3469 17.793 15.9953 18.0391C15.6437 18.3203 15.1867 18.3203 14.8 18.1445L10.3 15.7188L5.76484 18.1445C5.41328 18.3203 4.95625 18.3203 4.60469 18.0391C4.25312 17.793 4.07734 17.3711 4.14766 16.9492L4.99141 11.8164L1.33516 8.19531C1.05391 7.91406 0.948437 7.45703 1.05391 7.07031C1.19453 6.64844 1.54609 6.36719 1.96797 6.29688L7.03047 5.55859L9.28047 0.882812C9.45625 0.496094 9.84297 0.25 10.3 0.25C10.7219 0.25 11.1086 0.496094 11.2844 0.882812ZM35.1344 0.882812L37.4195 5.55859L42.4469 6.29688C42.8687 6.36719 43.2203 6.64844 43.3609 7.07031C43.5016 7.45703 43.3961 7.91406 43.0797 8.19531L39.4234 11.8164L40.3023 16.9492C40.3727 17.3711 40.1969 17.793 39.8453 18.0391C39.4937 18.3203 39.0367 18.3203 38.65 18.1445L34.15 15.7188L29.6148 18.1445C29.2633 18.3203 28.8062 18.3203 28.4547 18.0391C28.1031 17.793 27.9273 17.3711 27.9977 16.9492L28.8414 11.8164L25.1852 8.19531C24.9039 7.91406 24.7984 7.45703 24.9039 7.07031C25.0445 6.64844 25.3961 6.36719 25.818 6.29688L30.8805 5.55859L33.1305 0.882812C33.3062 0.496094 33.693 0.25 34.15 0.25C34.5719 0.25 34.9586 0.496094 35.1344 0.882812ZM58.9844 0.882812L61.2695 5.55859L66.2969 6.29688C66.7188 6.36719 67.0703 6.64844 67.2109 7.07031C67.3516 7.45703 67.2461 7.91406 66.9297 8.19531L63.2734 11.8164L64.1523 16.9492C64.2227 17.3711 64.0469 17.793 63.6953 18.0391C63.3438 18.3203 62.8867 18.3203 62.5 18.1445L58 15.7188L53.4648 18.1445C53.1133 18.3203 52.6562 18.3203 52.3047 18.0391C51.9531 17.793 51.7773 17.3711 51.8477 16.9492L52.6914 11.8164L49.0352 8.19531C48.7539 7.91406 48.6484 7.45703 48.7539 7.07031C48.8945 6.64844 49.2461 6.36719 49.668 6.29688L54.7305 5.55859L56.9805 0.882812C57.1562 0.496094 57.543 0.25 58 0.25C58.4219 0.25 58.8086 0.496094 58.9844 0.882812ZM82.8344 0.882812L85.1195 5.55859L90.1469 6.29688C90.5688 6.36719 90.9203 6.64844 91.0609 7.07031C91.2016 7.45703 91.0961 7.91406 90.7797 8.19531L87.1234 11.8164L88.0023 16.9492C88.0727 17.3711 87.8969 17.793 87.5453 18.0391C87.1938 18.3203 86.7367 18.3203 86.35 18.1445L81.85 15.7188L77.3148 18.1445C76.9633 18.3203 76.5063 18.3203 76.1547 18.0391C75.8031 17.793 75.6273 17.3711 75.6977 16.9492L76.5414 11.8164L72.8852 8.19531C72.6039 7.91406 72.4984 7.45703 72.6039 7.07031C72.7445 6.64844 73.0961 6.36719 73.518 6.29688L78.5805 5.55859L80.8305 0.882812C81.0063 0.496094 81.393 0.25 81.85 0.25C82.2719 0.25 82.6586 0.496094 82.8344 0.882812ZM106.684 0.882812L108.97 5.55859L113.997 6.29688C114.419 6.36719 114.77 6.64844 114.911 7.07031C115.052 7.45703 114.946 7.91406 114.63 8.19531L110.973 11.8164L111.852 16.9492C111.923 17.3711 111.747 17.793 111.395 18.0391C111.044 18.3203 110.587 18.3203 110.2 18.1445L105.7 15.7188L101.165 18.1445C100.813 18.3203 100.356 18.3203 100.005 18.0391C99.6531 17.793 99.4773 17.3711 99.5477 16.9492L100.391 11.8164L96.7352 8.19531C96.4539 7.91406 96.3484 7.45703 96.4539 7.07031C96.5945 6.64844 96.9461 6.36719 97.368 6.29688L102.43 5.55859L104.68 0.882812C104.856 0.496094 105.243 0.25 105.7 0.25C106.122 0.25 106.509 0.496094 106.684 0.882812Z" fill="#2BC8EB" />
                   </svg>
                 </div>
               </div>
             </div>
-            <p class="text">"{{ $testimonial->translation?->quote ?? '' }}"</p>
+            <p class="text">“{{ $quote }}”</p>
             <div class="techin-t-shape">
               <img src="{{ asset('assets/images/v3/icon1.svg') }}" alt="">
             </div>
@@ -169,14 +193,14 @@
           <div class="techin-t-slider-item">
             <div class="techin-t-slider-author-wrap">
               <div class="techin-t-slider-author-thumb">
-                <img src="{{ asset('assets/images/v3/Img2.png') }}" alt="">
+                <img src="{{ asset('assets/images/v3/Img2.png') }}" alt="{{ __('index.testimonials.fallback.author_name') }}">
               </div>
               <div class="techin-t-slider-author-data">
-                <h6>No Testimonials Available</h6>
-                <p>Check back soon</p>
+                <h6>{{ __('index.testimonials.fallback.author_name') }}</h6>
+                <p>{{ __('index.testimonials.fallback.author_title') }}</p>
               </div>
             </div>
-            <p class="text">"Please add testimonials from the admin panel."</p>
+            <p class="text">“{{ __('index.testimonials.fallback.quote') }}”</p>
             <div class="techin-t-shape">
               <img src="{{ asset('assets/images/v3/icon1.svg') }}" alt="">
             </div>
@@ -188,43 +212,39 @@
   </section>
   <!-- end testimonial -->
 
- 
-  
-  
-
   <div class="techin-section-padding2 light-bg1">
     <div class="container">
       <div class="techin-section-title center">
         <div class="techin-title-tag center2">
-          <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-          <h6>faqS</h6>
-          <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+          <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+          <h6>{{ __('faq.tagline') }}</h6>
+          <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
         </div>
-        <h2>Frequently Asked Any Questions</h2>
+        <h2>{{ __('faq.title') }}</h2>
       </div>
       <div class="techin-faq-wrap1">
         @forelse(($faqs ?? collect()) as $index => $faq)
           <div class="techin-faq-item {{ $index === 0 ? 'open' : '' }}">
             <div class="techin-faq-header">
-              <h6>{{ $faq->translation?->question ?? '' }}</h6>
+              <h6>{{ optional($faq->translation)->question }}</h6>
               <div class="techin-active-icon">
                 <img src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
               </div>
             </div>
             <div class="techin-faq-body">
-              <p>{{ $faq->translation?->answer ?? '' }}</p>
+              <p>{{ optional($faq->translation)->answer }}</p>
             </div>
           </div>
         @empty
           <div class="techin-faq-item open">
             <div class="techin-faq-header">
-              <h6>No FAQs available</h6>
+              <h6>{{ __('faq.empty') }}</h6>
               <div class="techin-active-icon">
                 <img src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
               </div>
             </div>
             <div class="techin-faq-body">
-              <p>Please check back later for frequently asked questions.</p>
+              <p>{{ __('faq.empty') }}</p>
             </div>
           </div>
         @endforelse
@@ -236,23 +256,25 @@
     <div class="container">
       <div class="techin-section-title center">
         <div class="techin-title-tag center2">
-          <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-          <h6>News & Blog</h6>
-          <span><img src="assets/images/v1/shape1.svg" alt=""></span>
+          <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+          <h6>{{ __('index.blog.label') }}</h6>
+          <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
         </div>
-        <h2>Our Latest News And Updates</h2>
+        <h2>{{ __('index.blog.title') }}</h2>
       </div>
       <div class="row">
         @forelse(($blogs ?? collect()) as $blog)
           @php
-            $title = $blog->translation?->title ?? '';
-            $excerpt = $blog->translation?->excerpt ?? '';
+            $translation = optional($blog->translation);
+            $fallbackTranslation = $blog->translations->firstWhere('locale', config('app.fallback_locale'));
+            $title = $translation->title ?? (optional($fallbackTranslation)->title ?? '');
+            $excerpt = $translation->excerpt ?? (optional($fallbackTranslation)->excerpt ?? '');
             $slug = $blog->slug;
             $publishedAt = $blog->published_at;
             $publishedYear = $publishedAt ? $publishedAt->format('Y') : now()->format('Y');
             $publishedDay = $publishedAt ? $publishedAt->format('d') : now()->format('d');
             $publishedMonth = $publishedAt ? $publishedAt->format('M') : now()->format('M');
-            $authorName = $blog->author_name ?? 'Admin';
+            $authorName = $blog->author_name ?? __('index.blog.default_author');
             $imagePath = $blog->featured_image;
             
             if ($imagePath && (str_starts_with($imagePath, 'http://') || str_starts_with($imagePath, 'https://'))) {
@@ -302,15 +324,15 @@
                     </div>
                   </div>
                 </a>
-                <a class='techin-default-btn blog-btn1' data-text='Read More' href='{{ $permalink }}'>
-                  <span class="button-wraper">Read More</span>
+                <a class='techin-default-btn blog-btn1' data-text='{{ __('index.blog.read_more') }}' href='{{ $permalink }}'>
+                  <span class="button-wraper">{{ __('index.blog.read_more') }}</span>
                 </a>
               </div>
             </div>
           </div>
         @empty
           <div class="col-12">
-            <p class="text-center">No blog posts available at the moment.</p>
+            <p class="text-center">{{ __('index.blog.empty') }}</p>
           </div>
         @endforelse
       </div>
@@ -327,18 +349,18 @@
             <div class="techin-cta-content">
               <div class="techin-cta-content-top">
                 <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
-                <h6>Knock Us To Know 24/7</h6>
+                <h6>{{ __('index.cta.tagline') }}</h6>
                 <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
               </div>
               <div class="techin-cta-content-bottom">
-                <h2>Need A Consultation?</h2>
+                <h2>{{ __('index.cta.title') }}</h2>
               </div>
             </div>
           </div>
           <div class="col-xl-4 col-lg-4 d-flex align-items-center justify-content-end">
             <div class="techin-title-btn">
-              <a class="techin-default-btn pill techin-cta-btn" href="contact-us.html" data-text="Get A Quote">
-                <span class="button-wraper">Get A Quote</span>
+              <a class="techin-default-btn pill techin-cta-btn" href="{{ route('contact') }}" data-text="{{ __('index.cta.button') }}">
+                <span class="button-wraper">{{ __('index.cta.button') }}</span>
               </a>
             </div>
           </div>

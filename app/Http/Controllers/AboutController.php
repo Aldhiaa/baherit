@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Banner;
-use App\Models\Blog;
-use App\Models\Counter;
-use App\Models\Faq;
+use App\Models\Setting;
 use App\Models\Page;
 use App\Models\Service;
-use App\Models\Testimonial;
 use App\Models\WorkingProcess;
+use App\Models\Testimonial;
+use App\Models\Counter;
+use App\Models\Faq;
+use App\Models\Blog;
 use Illuminate\View\View;
 
 class AboutController extends Controller
@@ -17,6 +17,11 @@ class AboutController extends Controller
     public function index(): View
     {
         $locale = app()->getLocale();
+
+        // Global Settings
+        $settings = Setting::withTranslations($locale)->get()->mapWithKeys(function ($setting) {
+            return [$setting->key => $setting->value];
+        });
 
         // About page content
         $about = Page::query()
@@ -70,6 +75,6 @@ class AboutController extends Controller
             ->limit(3)
             ->get();
 
-        return view('about-us', compact('about', 'services', 'workingProcesses', 'testimonials', 'counters', 'faqs', 'blogs'));
+        return view('about-us', compact('about', 'services', 'workingProcesses', 'testimonials', 'counters', 'faqs', 'blogs', 'settings'));
     }
 }

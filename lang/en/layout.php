@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'site_title' => 'Techin - IT Solution & Technology',
+    'site_title' => 'Baher Technology',
     'menu' => [
         'home' => 'Home',
         'about' => 'About Us',

@@ -5,14 +5,14 @@
     <div class="container">
 
       <div class="breadcrumb-content">
-        <h1 class="breadcrumb-title">Contact Us</h1>
+        <h1 class="breadcrumb-title">{{ __('contact.breadcrumb_title') }}</h1>
         <div class="breadcrumb-menu-wrapper">
           <div class="breadcrumb-menu-wrap">
             <div class="breadcrumb-menu">
               <ul>
-                <li><a href='{{ route('home') }}'>Home</a></li>
+                <li><a href='{{ route('home') }}'>{{ __('layout.menu.home') }}</a></li>
                 <li><img src="{{ asset('assets/images/breadcrumb/line.svg') }}" alt="right-arrow"></li>
-                <li aria-current="page">Contact Us</li>
+                <li aria-current="page">{{ __('contact.breadcrumb_title') }}</li>
               </ul>
             </div>
           </div>
@@ -35,10 +35,10 @@
           <div class="techin-default-content pr-50">
             <div class="techin-title-tag">
               <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
-              <h6>Contact Us</h6>
+              <h6>{{ __('contact.tagline') }}</h6>
               <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
             </div>
-            <h2>TechIn Contact Information Here</h2>
+            <h2>{{ __('contact.title') }}</h2>
 
             @if(session('success'))
               <div class="alert alert-success mb-4" style="padding: 15px; margin-bottom: 20px; border: 1px solid #d4edda; border-radius: 4px; color: #155724; background-color: #d1ecf1;">
@@ -62,35 +62,35 @@
                 <div class="row">
                   <div class="col-lg-6">
                     <div class="techin-main-field field4">
-                      <input type="text" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required>
+                      <input type="text" name="first_name" placeholder="{{ __('contact.form.first_name') }}" value="{{ old('first_name') }}" required>
                       <img src="{{ asset('assets/images/v1/a1.svg') }}" alt="">
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="techin-main-field field4">
-                      <input type="text" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required>
+                      <input type="text" name="last_name" placeholder="{{ __('contact.form.last_name') }}" value="{{ old('last_name') }}" required>
                       <img src="{{ asset('assets/images/v1/a1.svg') }}" alt="">
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="techin-main-field field4">
-                      <input type="email" name="email" placeholder="Email Address" value="{{ old('email') }}" required>
+                      <input type="email" name="email" placeholder="{{ __('contact.form.email_placeholder') }}" value="{{ old('email') }}" required>
                       <img src="{{ asset('assets/images/v1/a2.svg') }}" alt="">
                     </div>
                   </div>
                   <div class="col-lg-6">
                     <div class="teching-slect-wrapper">
                       <select class="techin-a-select wrapper4" name="service_id">
-                        <option data-display="Select Service" value="">Select Service</option>
+                        <option data-display="{{ __('contact.form.select_service') }}" value="">{{ __('contact.form.select_service') }}</option>
                         @if(isset($services) && $services->count() > 0)
                           @foreach($services as $service)
                             <option value="{{ $service->id }}">{{ optional($service->translation)->name ?? 'Service' }}</option>
                           @endforeach
                         @else
-                          <option value="general">General Inquiry</option>
-                          <option value="it_support">IT Support</option>
-                          <option value="cloud_services">Cloud Services</option>
-                          <option value="cybersecurity">Cybersecurity</option>
+                          <option value="general">{{ __('contact.form.general_inquiry') }}</option>
+                          <option value="it_support">{{ __('contact.form.it_support') }}</option>
+                          <option value="cloud_services">{{ __('contact.form.cloud_services') }}</option>
+                          <option value="cybersecurity">{{ __('contact.form.cybersecurity') }}</option>
                         @endif
                       </select>
                     </div>
@@ -98,11 +98,11 @@
                   <div class="col-lg-12"></div>
                 </div>
                 <div class="techin-main-field-textarea textarea2">
-                  <textarea class="button-text2" name="message" placeholder="Message Here..." required>{{ old('message') }}</textarea>
+                  <textarea class="button-text2" name="message" placeholder="{{ __('contact.form.message_placeholder') }}" required>{{ old('message') }}</textarea>
                 </div>
                 <div class="techin-appointment-submit-btn mt-30">
-                  <button class="techin-default-btn" type="submit" data-text="Send Message">
-                    <span class="button-wraper">Send Message</span>
+                  <button class="techin-default-btn" type="submit" data-text="{{ __('contact.form.submit_btn') }}">
+                    <span class="button-wraper">{{ __('contact.form.submit_btn') }}</span>
                   </button>
                 </div>
               </form>
@@ -119,7 +119,7 @@
     <div class="container">
       <div class="techin-contact-us-info">
         <div class="techin-contact-us-title">
-          <h3>Let's Get In Touch!</h3>
+          <h3>{{ __('contact.lets_get_in_touch') }}</h3>
           <img src="{{ asset('assets/images/portfolio/line.svg') }}" alt="">
         </div>
         <div class="techin-iconbox-contact-wrap">
@@ -127,8 +127,8 @@
             <img src="{{ asset('assets/images/portfolio/icon1.svg') }}" alt="">
           </div>
           <div class="techin-iconbox-contact-data">
-            <h5>Office Time</h5>
-            <p>Mon-Fri: 10:00Am-09:00Pm</p>
+            <h5>{{ __('contact.office_time_title') }}</h5>
+            <p>{{ __('contact.office_time_value') }}</p>
           </div>
         </div>
         <a href="tel:+009188800002222">
@@ -137,7 +137,7 @@
               <img src="{{ asset('assets/images/portfolio/icon2.svg') }}" alt="">
             </div>
             <div class="techin-iconbox-contact-data">
-              <h5>Call Us Any Time</h5>
+              <h5>{{ __('contact.call_us') }}</h5>
               <p>+(009) 1888 000 2222</p>
             </div>
           </div>
@@ -148,7 +148,7 @@
               <img src="{{ asset('assets/images/portfolio/icon3.svg') }}" alt="">
             </div>
             <div class="techin-iconbox-contact-data">
-              <h5>Email Address</h5>
+              <h5>{{ __('contact.email_address') }}</h5>
               <p>info@techin.com</p>
             </div>
           </div>
@@ -158,7 +158,7 @@
             <img src="{{ asset('assets/images/portfolio/icon4.svg') }}" alt="">
           </div>
           <div class="techin-iconbox-contact-data">
-            <h5>Office Address</h5>
+            <h5>{{ __('contact.office_address') }}</h5>
             <p>12th Street, New York, USA</p>
           </div>
         </div>
@@ -180,10 +180,10 @@
       <div class="techin-section-title center">
         <div class="techin-title-tag center2">
           <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
-          <h6>FAQs</h6>
+          <h6>{{ __('faq.tagline') }}</h6>
           <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
         </div>
-        <h2>Frequently Asked Any Questions</h2>
+        <h2>{{ __('faq.title') }}</h2>
       </div>
       <div class="techin-faq-wrap1">
         @forelse(($faqs ?? collect()) as $index => $faq)
@@ -201,35 +201,13 @@
         @empty
           <div class="techin-faq-item open">
             <div class="techin-faq-header headr-2">
-              <h6>What services does TechIn offer?</h6>
+              <h6>{{ __('faq.default.q1') }}</h6>
               <div class="techin-active-icon">
                 <img src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
               </div>
             </div>
             <div class="techin-faq-body light-bg1">
-              <p>We offer comprehensive IT solutions including cloud services, cybersecurity, managed IT support, and digital transformation consulting to help businesses thrive in the digital age.</p>
-            </div>
-          </div>
-          <div class="techin-faq-item">
-            <div class="techin-faq-header headr-2">
-              <h6>How does the consulting process work?</h6>
-              <div class="techin-active-icon">
-                <img src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
-              </div>
-            </div>
-            <div class="techin-faq-body light-bg1">
-              <p>Our consulting process typically starts with an initial consultation to understand your business needs and challenges. We then conduct a thorough analysis, develop a tailored strategy, and work closely with you to implement the solutions.</p>
-            </div>
-          </div>
-          <div class="techin-faq-item">
-            <div class="techin-faq-header headr-2">
-              <h6>How can I get started with TechIn?</h6>
-              <div class="techin-active-icon">
-                <img src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
-              </div>
-            </div>
-            <div class="techin-faq-body light-bg1">
-              <p>Getting started is easy! Simply contact us through our contact form, give us a call, or send us an email. We'll schedule a consultation to discuss your needs and how we can help.</p>
+              <p>{{ __('faq.default.a1') }}</p>
             </div>
           </div>
         @endforelse
@@ -247,18 +225,18 @@
             <div class="techin-cta-content">
               <div class="techin-cta-content-top">
                 <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
-                <h6>Knock Us To Know 24/7</h6>
+                <h6>{{ __('index.cta.tagline') }}</h6>
                 <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
               </div>
               <div class="techin-cta-content-bottom">
-                <h2>Need A Consultation?</h2>
+                <h2>{{ __('index.cta.title') }}</h2>
               </div>
             </div>
           </div>
           <div class="col-xl-4 col-lg-4 d-flex align-items-center justify-content-end">
             <div class="techin-title-btn">
-              <a class="techin-default-btn pill techin-cta-btn" href="#" onclick="document.querySelector('form').scrollIntoView({behavior: 'smooth'}); return false;" data-text="Get A Quote">
-                <span class="button-wraper">Get A Quote</span>
+              <a class="techin-default-btn pill techin-cta-btn" href="#" onclick="document.querySelector('form').scrollIntoView({behavior: 'smooth'}); return false;" data-text="{{ __('index.cta.button') }}">
+                <span class="button-wraper">{{ __('index.cta.button') }}</span>
               </a>
             </div>
           </div>

@@ -6,10 +6,19 @@ use App\Models\Service;
 use App\Models\Faq;
 use Illuminate\Http\Request;
 
+use App\Models\Setting;
+
 class ContactController extends Controller
 {
     public function index()
     {
+        $locale = app()->getLocale();
+
+        // Global Settings
+        $settings = Setting::withTranslations($locale)->get()->mapWithKeys(function ($setting) {
+            return [$setting->key => $setting->value];
+        });
+
         // Fetch services for the contact form dropdown
         $services = Service::active()
             ->withTranslations()
@@ -23,7 +32,7 @@ class ContactController extends Controller
             ->take(6) // Limit to 6 FAQs for contact page
             ->get();
 
-        return view('contact-us', compact('services', 'faqs'));
+        return view('contact-us', compact('services', 'faqs', 'settings'));
     }
 
     public function store(Request $request)

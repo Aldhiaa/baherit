@@ -23,10 +23,14 @@ return [
         'empty' => 'No services available at the moment.',
     ],
     'counters' => [
+        'label' => 'Our Achievement',
+        'title' => 'Counting Our Success',
+        'clients_count' => 'Happy Clients',
         'projects' => 'Successfully Project',
         'experts' => 'Skilled Experts',
         'clients' => 'Happy Clients',
         'media' => 'Media Activities',
+        'empty' => 'No counters available.',
     ],
     'cta' => [
         'tagline' => 'Get A Quote',

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Setting;
 use App\Models\Service;
+use App\Models\Testimonial;
+use App\Models\Faq;
+use App\Models\Blog;
 use Illuminate\View\View;
 
 class ServiceController extends Controller
@@ -10,6 +14,11 @@ class ServiceController extends Controller
     public function index(): View
     {
         $locale = app()->getLocale();
+
+        // Global Settings
+        $settings = Setting::withTranslations($locale)->get()->mapWithKeys(function ($setting) {
+            return [$setting->key => $setting->value];
+        });
 
         $services = Service::query()
             ->active()
@@ -37,6 +46,6 @@ class ServiceController extends Controller
             ->limit(3)
             ->get();
 
-        return view('service', compact('services', 'testimonials', 'faqs', 'blogs'));
+        return view('service', compact('services', 'testimonials', 'faqs', 'blogs', 'settings'));
     }
 }
