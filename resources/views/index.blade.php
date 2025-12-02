@@ -99,48 +99,7 @@
     </section>
     <!--  end about -->
 
-    <div class="techin-slider-logo-section">
-        <div class="container">
-            <div class="techin-brand-slider">
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo1.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo2.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item active">
-                    <img src="assets/images/v1/logo3.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo4.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo5.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo1.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo2.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo3.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo4.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo5.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo4.svg" alt="">
-                </div>
-                <div class="techin-slider-logo-item">
-                    <img src="assets/images/v1/logo5.svg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+   
     <!-- end brand -->
 
     <div class="techin-section-padding2 light-bg1">
