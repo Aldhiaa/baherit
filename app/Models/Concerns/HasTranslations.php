@@ -60,6 +60,20 @@ trait HasTranslations
     }
 
     /**
+     * Retrieve a translation record for the given locale or create a new instance.
+     */
+    public function translateOrNew(?string $locale = null)
+    {
+        $locale = $locale ?? app()->getLocale();
+
+        if (($translation = $this->translate($locale, false))) {
+            return $translation;
+        }
+
+        return $this->translations()->make(['locale' => $locale]);
+    }
+
+    /**
      * Helper to fetch a translated attribute if available.
      */
     public function getTranslatedAttribute(string $attribute, ?string $locale = null, $default = null)

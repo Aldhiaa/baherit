@@ -35,4 +35,27 @@ class PortfolioController extends Controller
 
         return view('portfolio', compact('projects', 'recentBlogs', 'settings'));
     }
+
+    public function show($slug)
+    {
+        $locale = app()->getLocale();
+
+        $project = Project::withTranslations($locale)
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        // Global Settings
+        $settings = Setting::withTranslations($locale)->get()->mapWithKeys(function ($setting) {
+            return [$setting->key => $setting->value];
+        });
+
+        // You might want recent blogs here too for the footer/sidebar if reusable components need them
+        $recentBlogs = Blog::published()
+            ->withTranslations()
+            ->orderByDesc('created_at')
+            ->take(3)
+            ->get();
+
+        return view('single-portfolio', compact('project', 'settings', 'recentBlogs'));
+    }
 }

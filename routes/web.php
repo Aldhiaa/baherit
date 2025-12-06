@@ -22,8 +22,11 @@ Route::group([
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/about-us', [AboutController::class, 'index'])->name('about');
     Route::get('/services', [ServiceController::class, 'index'])->name('services');
+    Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('service.show');
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+    Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
     Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
+    Route::get('/portfolio/{slug}', [PortfolioController::class, 'show'])->name('portfolio.show');
     Route::get('/contact-us', [ContactController::class, 'index'])->name('contact');
     Route::post('/contact-us', [ContactController::class, 'store'])->name('contact.store');
     Route::get('/faq', [FaqController::class, 'index'])->name('faq');

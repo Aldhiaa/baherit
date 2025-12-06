@@ -30,13 +30,17 @@
           <div class="blog-left">
             <div class="techin-blog">
               <div class="techin-blog-img">
-                <img src="assets/images/blog/img12.png" alt="Blog Image">
+                @if($blog->featured_image)
+                  <img src="{{ Storage::url($blog->featured_image) }}" alt="{{ $blog->translation->title }}">
+                @else
+                  <img src="{{ asset('assets/images/blog/img12.png') }}" alt="Default Blog Image">
+                @endif
                 <div class="blog-meta-box">
                   <div class="blog-meta single-meta">
-                    <a href='single-blog.html'>
+                    <a href='#'>
                       <svg width="18" height="21" viewBox="0 0 18 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.25 0.5C5.91406 0.5 6.5 1.08594 6.5 1.75V3H11.5V1.75C11.5 1.08594 12.0469 0.5 12.75 0.5C13.4141 0.5 14 1.08594 14 1.75V3H15.875C16.8906 3 17.75 3.85938 17.75 4.875V6.75H0.25V4.875C0.25 3.85938 1.07031 3 2.125 3H4V1.75C4 1.08594 4.54688 0.5 5.25 0.5ZM0.25 8H17.75V18.625C17.75 19.6797 16.8906 20.5 15.875 20.5H2.125C1.07031 20.5 0.25 19.6797 0.25 18.625V8ZM2.75 11.125V12.375C2.75 12.7266 3.02344 13 3.375 13H4.625C4.9375 13 5.25 12.7266 5.25 12.375V11.125C5.25 10.8125 4.9375 10.5 4.625 10.5H3.375C3.02344 10.5 2.75 10.8125 2.75 11.125ZM7.75 11.125V12.375C7.75 12.7266 8.02344 13 8.375 13H9.625C9.9375 13 10.25 12.7266 10.25 12.375V11.125C10.25 10.8125 9.9375 10.5 9.625 10.5H8.375C8.02344 10.5 7.75 10.8125 7.75 11.125ZM13.375 10.5C13.0234 10.5 12.75 10.8125 12.75 11.125V12.375C12.75 12.7266 13.0234 13 13.375 13H14.625C14.9375 13 15.25 12.7266 15.25 12.375V11.125C15.25 10.8125 14.9375 10.5 14.625 10.5H13.375ZM2.75 16.125V17.375C2.75 17.7266 3.02344 18 3.375 18H4.625C4.9375 18 5.25 17.7266 5.25 17.375V16.125C5.25 15.8125 4.9375 15.5 4.625 15.5H3.375C3.02344 15.5 2.75 15.8125 2.75 16.125ZM8.375 15.5C8.02344 15.5 7.75 15.8125 7.75 16.125V17.375C7.75 17.7266 8.02344 18 8.375 18H9.625C9.9375 18 10.25 17.7266 10.25 17.375V16.125C10.25 15.8125 9.9375 15.5 9.625 15.5H8.375ZM12.75 16.125V17.375C12.75 17.7266 13.0234 18 13.375 18H14.625C14.9375 18 15.25 17.7266 15.25 17.375V16.125C15.25 15.8125 14.9375 15.5 14.625 15.5H13.375C13.0234 15.5 12.75 15.8125 12.75 16.125Z" fill="#222627" />
-                      </svg> January 12, 2024
+                      </svg> {{ ($blog->published_at ?? $blog->created_at)->format('F d, Y') }}
                     </a>
                     <a href='single-blog.html'>
                       <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -50,12 +54,13 @@
                     </a>
                   </div>
                 </div>
-                <a class='blog-thumb-category' href='blog.html'>Cloud Solutions</a>
+                <a class='blog-thumb-category' href='#'>{{ $blog->category->name ?? 'Technology' }}</a>
               </div>
               <div class="techin-blog-content">
-                <h2 class="blog-title1"><a href='single-blog.html'>How IT Infrastructure Can Improve Efficiency and Productivity</a></h2>
-                <p class="blog-text">Packages and web page editors now use Ipsum as their default model textlayout. The point of using are Ipsum is that it has a more-or-less normal distribution of letterng It is a long fact that a reader will be distracted by the content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal of letters, as opposed to using Content here, content here, making it look like readable English. packages and web page editors now use Lorem Ipsum as their default model.</p>
-                <p>In today’s fast-paced business environment, a well-designed IT infrastructure is a critical factor in enhancing operational efficiency and productivity. Companies, regardless of their size, rely heavily on technology to streamline processes, support daily operations, and drive innovation. In this blog, we’ll explore how investing in the right IT infrastructure can lead to tangible improvements in efficiency and productivity for your business.</p>
+                <h2 class="blog-title1">{{ $blog->translation->title }}</h2>
+                <div class="blog-text">
+                    {!! $blog->translation->content ?? $blog->translation->description !!}
+                </div>
                 <div class="blog-d-list-wrap">
                   <div class="blog-d-list-item">
                     <a href='blog.html'><img src="assets/images/blog/7.svg" alt="">Streamlining Operations with Scalable Solutions</a>

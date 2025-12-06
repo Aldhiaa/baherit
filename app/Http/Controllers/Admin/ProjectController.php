@@ -44,33 +44,51 @@ class ProjectController extends Controller
         ]);
 
         // Handle image upload
+        $imagePath = null;
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('projects', 'public');
+            $imagePath = $request->file('image')->store('projects', 'public');
         }
 
         // Create project
         $project = Project::create([
-            'client_name' => $validated['client_name'],
-            'project_url' => $validated['project_url'],
+            'slug' => $this->createUniqueSlug($validated['title_en']),
+            'client' => $validated['client_name'],
             'completion_date' => $validated['completion_date'],
             'status' => $validated['status'],
             'is_featured' => $request->boolean('is_featured'),
-            'image' => $validated['image'] ?? null,
+            'featured_image' => $imagePath,
         ]);
 
         // Create translations
-        $project->translateOrNew('en')->fill([
+        $deliverablesEn = [
+            'project_url' => $validated['project_url'] ?? null,
+            'technologies' => $validated['technologies_en'] ?? null,
+        ];
+
+        $translationEn = $project->translateOrNew('en');
+        $translationEn->fill([
             'title' => $validated['title_en'],
             'description' => $validated['description_en'],
-            'technologies' => $validated['technologies_en'],
+            'deliverables' => json_encode($deliverablesEn),
         ]);
+        $translationEn->firstOrNew(['project_id' => $project->id, 'locale' => 'en']); // Ensure relationships
+        $translationEn->project_id = $project->id;
+        $translationEn->save();
 
-        if ($validated['title_ar']) {
-            $project->translateOrNew('ar')->fill([
+        if ($request->filled('title_ar')) {
+            $deliverablesAr = [
+                'project_url' => $validated['project_url'] ?? null,
+                'technologies' => $validated['technologies_ar'] ?? null,
+            ];
+
+            $translationAr = $project->translateOrNew('ar');
+            $translationAr->fill([
                 'title' => $validated['title_ar'],
                 'description' => $validated['description_ar'],
-                'technologies' => $validated['technologies_ar'],
+                'deliverables' => json_encode($deliverablesAr),
             ]);
+            $translationAr->project_id = $project->id;
+            $translationAr->save();
         }
 
         $project->save();
@@ -104,41 +122,70 @@ class ProjectController extends Controller
         // Handle image upload
         if ($request->hasFile('image')) {
             // Delete old image
-            if ($project->image) {
-                Storage::disk('public')->delete($project->image);
+            if ($project->featured_image) {
+                Storage::disk('public')->delete($project->featured_image);
             }
-            $validated['image'] = $request->file('image')->store('projects', 'public');
+            $project->featured_image = $request->file('image')->store('projects', 'public');
         }
 
         // Update project
-        $project->update([
-            'client_name' => $validated['client_name'],
-            'project_url' => $validated['project_url'],
-            'completion_date' => $validated['completion_date'],
-            'status' => $validated['status'],
-            'is_featured' => $request->boolean('is_featured'),
-            'image' => $validated['image'] ?? $project->image,
-        ]);
+        $project->client = $validated['client_name'];
+        $project->completion_date = $validated['completion_date'];
+        $project->status = $validated['status'];
+        $project->is_featured = $request->boolean('is_featured');
+        
+        // Update slug only if changed
+        if (Str::slug($validated['title_en']) !== $project->slug) {
+             $project->slug = $this->createUniqueSlug($validated['title_en'], $project->id);
+        }
+        
+        $project->save();
 
         // Update translations
-        $project->translateOrNew('en')->fill([
+        $deliverablesEn = [
+            'project_url' => $validated['project_url'] ?? null,
+            'technologies' => $validated['technologies_en'] ?? null,
+        ];
+
+        $translationEn = $project->translateOrNew('en');
+        $translationEn->fill([
             'title' => $validated['title_en'],
             'description' => $validated['description_en'],
-            'technologies' => $validated['technologies_en'],
+            'deliverables' => json_encode($deliverablesEn),
         ]);
+        $translationEn->save();
 
-        if ($validated['title_ar']) {
-            $project->translateOrNew('ar')->fill([
+        if ($request->filled('title_ar')) {
+            $deliverablesAr = [
+                'project_url' => $validated['project_url'] ?? null,
+                'technologies' => $validated['technologies_ar'] ?? null,
+            ];
+
+            $translationAr = $project->translateOrNew('ar');
+            $translationAr->fill([
                 'title' => $validated['title_ar'],
                 'description' => $validated['description_ar'],
-                'technologies' => $validated['technologies_ar'],
+                'deliverables' => json_encode($deliverablesAr),
             ]);
+            $translationAr->save();
         }
-
-        $project->save();
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Project updated successfully.');
+    }
+
+    private function createUniqueSlug(string $title, int $ignoreId = 0): string
+    {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        while (Project::where('slug', $slug)->where('id', '!=', $ignoreId)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
     }
 
     public function destroy(Project $project): RedirectResponse

@@ -56,4 +56,34 @@ class BlogController extends Controller
 
         return view('blog', compact('blogs', 'recentPosts', 'categories', 'settings'));
     }
+
+    public function show($slug)
+    {
+        $locale = app()->getLocale();
+
+        $blog = Blog::withTranslations($locale)
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        // Global Settings
+        $settings = Setting::withTranslations($locale)->get()->mapWithKeys(function ($setting) {
+            return [$setting->key => $setting->value];
+        });
+
+        // Fetch recent posts for sidebar
+        $recentPosts = Blog::published()
+            ->withTranslations()
+            ->orderByDesc('published_at')
+            ->orderByDesc('created_at')
+            ->take(3)
+            ->get();
+            
+        // Re-use category logic or similar if needed for sidebar
+        $categories = collect([
+            ['name' => 'Technology', 'count' => 10], // Placeholder or reusing logic
+            ['name' => 'IT Solutions', 'count' => 5],
+        ]);
+
+        return view('single-blog', compact('blog', 'recentPosts', 'categories', 'settings'));
+    }
 }

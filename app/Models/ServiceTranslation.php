@@ -15,5 +15,6 @@ class ServiceTranslation extends Model
         'name',
         'short_description',
         'long_description',
+        'details',
     ];
 }

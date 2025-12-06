@@ -78,13 +78,15 @@
                         <div class="{{ $loop->iteration % 3 == 1 ? 'techin-p-wra2' : '' }}">
                             <div class="techin-p-item">
                                 <div class="techin-p-thumb">
-                                    <img src="{{ $imageUrl }}" alt="{{ $title }}">
+                                    <a href='{{ route('portfolio.show', $project->slug) }}'>
+                                        <img src="{{ $imageUrl }}" alt="{{ $title }}">
+                                    </a>
                                 </div>
                                 <div class="techin-p-content">
                                     <p>{{ $excerpt }}</p>
-                                    <h6>{{ $title }}</h6>
+                                    <h6><a href='{{ route('portfolio.show', $project->slug) }}'>{{ $title }}</a></h6>
                                     <div class="btn-icon">
-                                        <a href='#'><img src="{{ asset('assets/images/v1/r-arrow.svg') }}"
+                                        <a href='{{ route('portfolio.show', $project->slug) }}'><img src="{{ asset('assets/images/v1/r-arrow.svg') }}"
                                                 alt=""></a>
                                     </div>
                                 </div>
