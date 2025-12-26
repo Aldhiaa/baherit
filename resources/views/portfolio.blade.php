@@ -67,8 +67,8 @@
                             $imageUrl = $imagePath;
                         } elseif ($imagePath) {
                             $relativeImagePath = ltrim($imagePath, '/');
-                            $publicProjectPath = public_path($relativeImagePath);
-                            $imageUrl = file_exists($publicProjectPath) ? asset($relativeImagePath) : asset('storage/' . $relativeImagePath);
+                            $storagePath = storage_path('app/public/' . $relativeImagePath);
+                            $imageUrl = file_exists($storagePath) ? asset('storage/' . $relativeImagePath) : asset('assets/images/v1/img5.png');
                         } else {
                             $defaultImages = ['assets/images/v1/img77.png', 'assets/images/v1/img6.png', 'assets/images/v1/img5.png', 'assets/images/portfolio/img1.png', 'assets/images/portfolio/img2.png', 'assets/images/portfolio/img3.png'];
                             $imageUrl = asset($defaultImages[$loop->index % 6]);
@@ -134,8 +134,8 @@
                             $blogImageUrl = $blogImagePath;
                         } elseif ($blogImagePath) {
                             $blogRelativeImagePath = ltrim($blogImagePath, '/');
-                            $blogPublicPath = public_path($blogRelativeImagePath);
-                            $blogImageUrl = file_exists($blogPublicPath) ? asset($blogRelativeImagePath) : asset('storage/' . $blogRelativeImagePath);
+                            $blogStoragePath = storage_path('app/public/' . $blogRelativeImagePath);
+                            $blogImageUrl = file_exists($blogStoragePath) ? asset('storage/' . $blogRelativeImagePath) : asset('assets/images/blog/img1.png');
                         } else {
                             $blogImageUrl = asset('assets/images/blog/img' . (($loop->index % 8) + 1) . '.png');
                         }

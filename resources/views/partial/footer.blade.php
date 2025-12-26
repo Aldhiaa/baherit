@@ -50,17 +50,7 @@
                                                 fill="white" />
                                         </svg>{{ __('layout.menu.portfolio') }}
                                     </a>
-                                </li>
-                                <li>
-                                    <a href='{{ LaravelLocalization::localizeUrl('/team') }}'>
-                                        <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path
-                                                d="M7.6875 6.3125C8.09375 6.6875 8.09375 7.34375 7.6875 7.71875L2.6875 12.7188C2.3125 13.125 1.65625 13.125 1.28125 12.7188C0.875 12.3438 0.875 11.6875 1.28125 11.3125L5.5625 7L1.28125 2.71875C0.875 2.34375 0.875 1.6875 1.28125 1.3125C1.65625 0.90625 2.3125 0.90625 2.6875 1.3125L7.6875 6.3125Z"
-                                                fill="white" />
-                                        </svg>{{ __('layout.menu.team') }}
-                                    </a>
-                                </li>
+                                </li>                               
                                 <li>
                                     <a href='{{ LaravelLocalization::localizeUrl('/blog') }}'>
                                         <svg width="9" height="14" viewBox="0 0 9 14" fill="none"
@@ -193,7 +183,7 @@
                         </div>
                         <div class="techin-footer-info-text info1">
                             <span>{{ __('layout.sidebar.address') }}</span>
-                            <h5>{{ setting('site_address', '12th Street, New York, USA') }}</h5>
+                            <h5>{{ setting('site_address', 'Yemen') }}</h5>
                         </div>
                     </div>
                     <a href="mailto:{{ setting('site_email') }}">
@@ -203,7 +193,7 @@
                             </div>
                             <div class="techin-footer-info-text info1">
                                 <span>{{ __('layout.sidebar.email') }}</span>
-                                <h5>{{ setting('site_email', 'info@techin.com') }}</h5>
+                                <h5>{{ setting('site_email', 'info@baherit.com') }}</h5>
                             </div>
                         </div>
                     </a>
@@ -215,7 +205,7 @@
                             </div>
                             <div class="techin-footer-info-text info1">
                                 <span>{{ __('layout.buttons.get_in_touch') }}</span>
-                                <h5>{{ setting('site_phone', '+(009) 1888 000 2222') }}</h5>
+                                <h5>{{ setting('site_phone', '+967782788810') }}</h5>
                             </div>
                         </div>
                     </a>

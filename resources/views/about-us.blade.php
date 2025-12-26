@@ -108,13 +108,13 @@
                     <div class="techin-service-wrap2">
                         <div class="techin-service-thumb">
                             @if ($service->image_path)
-                                <img src="{{ asset($service->image_path) }}" alt="">
+                                <img src="{{ asset('storage/' . $service->image_path) }}" alt="">
                             @else
                                 <img src="{{ asset('assets/images/v2/s1.png') }}" alt="">
                             @endif
                             <div class="techin-service-icon2">
                                 @if ($service->icon_path)
-                                    <img src="{{ asset($service->icon_path) }}" alt="">
+                                    <img src="{{ asset('storage/' . $service->icon_path) }}" alt="">
                                 @else
                                     <img src="{{ asset('assets/images/v2/icon4.svg') }}" alt="">
                                 @endif
@@ -160,7 +160,7 @@
                                 <div class="techin-iconbox-title-wrap2">
                                     <div class="techin-iconbox-title-icon">
                                         @if ($process->icon_path)
-                                            <img src="{{ asset($process->icon_path) }}" alt="">
+                                            <img src="{{ asset('storage/' . $process->icon_path) }}" alt="">
                                         @else
                                             <img src="{{ asset('assets/images/v1/icon-s1.svg') }}" alt="">
                                         @endif
@@ -174,7 +174,7 @@
                                 </div>
                                 <div class="techin-iconbox-number">
                                     @if ($process->number_tag_path)
-                                        <img src="{{ asset($process->number_tag_path) }}" alt="">
+                                        <img src="{{ asset('storage/' . $process->number_tag_path) }}" alt="">
                                     @else
                                         <img src="{{ asset('assets/images/v1/tag2.svg') }}" alt="">
                                     @endif
@@ -188,7 +188,7 @@
                                 <div class="techin-iconbox-title-wrap2">
                                     <div class="techin-iconbox-title-icon">
                                         @if ($process->icon_path)
-                                            <img src="{{ asset($process->icon_path) }}" alt="">
+                                            <img src="{{ asset('storage/' . $process->icon_path) }}" alt="">
                                         @else
                                             <img src="{{ asset('assets/images/v1/icon-s2.svg') }}" alt="">
                                         @endif
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="techin-iconbox-number">
                                     @if ($process->number_tag_path)
-                                        <img src="{{ asset($process->number_tag_path) }}" alt="">
+                                        <img src="{{ asset('storage/' . $process->number_tag_path) }}" alt="">
                                     @else
                                         <img src="{{ asset('assets/images/v1/tag3.svg') }}" alt="">
                                     @endif
@@ -258,7 +258,7 @@
                                 <div class="techin-counter-wrap wrap2">
                                     <div class="techin-counter-icon">
                                         @if ($counter->icon_path)
-                                            <img src="{{ asset($counter->icon_path) }}" alt=""
+                                            <img src="{{ asset('storage/' . $counter->icon_path) }}" alt=""
                                                 style="width: 60px; height: 60px;">
                                         @else
                                             <img src="{{ asset('assets/images/v1/icon-s1.svg') }}" alt=""
@@ -379,10 +379,10 @@
                             $avatarUrl = $avatarPath;
                         } elseif ($avatarPath) {
                             $relativeAvatarPath = ltrim($avatarPath, '/');
-                            $publicAvatarPath = public_path($relativeAvatarPath);
-                            $avatarUrl = file_exists($publicAvatarPath)
-                                ? asset($relativeAvatarPath)
-                                : asset('storage/' . $relativeAvatarPath);
+                            $storageAvatarPath = storage_path('app/public/' . $relativeAvatarPath);
+                            $avatarUrl = file_exists($storageAvatarPath)
+                                ? asset('storage/' . $relativeAvatarPath)
+                                : asset('assets/images/v1/img8.png');
                         } else {
                             $avatarUrl = asset('assets/images/v1/img8.png');
                         }
@@ -480,10 +480,10 @@
                             $imageUrl = $imagePath;
                         } elseif ($imagePath) {
                             $relativeImagePath = ltrim($imagePath, '/');
-                            $publicBlogPath = public_path($relativeImagePath);
-                            $imageUrl = file_exists($publicBlogPath)
-                                ? asset($relativeImagePath)
-                                : asset('storage/' . $relativeImagePath);
+                            $storageBlogPath = storage_path('app/public/' . $relativeImagePath);
+                            $imageUrl = file_exists($storageBlogPath)
+                                ? asset('storage/' . $relativeImagePath)
+                                : asset('assets/images/blog/img1.png');
                         } else {
                             $imageUrl = asset('assets/images/blog/img1.png');
                         }
@@ -548,27 +548,32 @@
     </div>
     <!--  end blog -->
 
-    <div class="techin-cta-content-top">
-        <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
-        <h6>{{ __('index.cta.tagline') }}</h6>
-        <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
-    </div>
-    <div class="techin-cta-content-bottom">
-        <h2>{{ __('index.cta.title') }}</h2>
-    </div>
-    </div>
-    </div>
-    <div class="col-xl-4 col-lg-4 d-flex align-items-center justify-content-end">
-        <div class="techin-title-btn">
-            <a class="techin-default-btn pill techin-cta-btn" href="{{ route('contact') }}" data-text="{{ __('index.cta.button') }}">
-                <span class="button-wraper">{{ __('index.cta.button') }}</span>
-            </a>
+    <div class="techin-cta-section" style="background-image: url({{ asset('assets/images/cta/cta-bg1.png') }})">
+        <div class="container">
+            <div class="techin-cta-wrap">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-8">
+                        <div class="techin-cta-content">
+                            <div class="techin-cta-content-top">
+                                <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
+                                <h6>{{ __('index.cta.tagline') }}</h6>
+                                <img src="{{ asset('assets/images/shape/cta-shape1.svg') }}" alt="">
+                            </div>
+                            <div class="techin-cta-content-bottom">
+                                <h2>{{ __('index.cta.title') }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 d-flex align-items-center justify-content-end">
+                        <div class="techin-title-btn">
+                            <a class="techin-default-btn pill techin-cta-btn" href="{{ route('contact') }}" data-text="{{ __('index.cta.button') }}">
+                                <span class="button-wraper">{{ __('index.cta.button') }}</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </div>
-
-
+    <!-- end cta -->
 @endsection

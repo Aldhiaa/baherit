@@ -1,20 +1,20 @@
 :root {
   --heading-color: #222627;
   --body-color: #616669;
-  --accent-color: #2f2beb;
+  --accent-color: #084c7f;
   --accent-color2: #2bc8eb;
   --white-color: #ffffff;
   --white-bg: #ffffff;
-  --accent-bg: #2f2beb;
+  --accent-bg: #084c7f;
   --accent-bg2: #2bc8eb;
-  --accent-bg3: #0256fe;
+  --accent-bg3: #084c7f;
   --light-color: #f5f4ff;
   --light-color2: #e6eeff;
   --light-color3: #f9f9f9;
   --light-color4: #d9d9d9;
   --light-color5: #838588;
-  --dark-color1: #01194b;
-  --dark-color2: #113866;
+  --dark-color1: #084c7f;
+  --dark-color2: #084c7f;
   --white-smoke: #f7f7f7;
 }
 @media (min-width: 1400px) {
