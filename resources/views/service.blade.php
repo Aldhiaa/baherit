@@ -17,7 +17,6 @@
   <!--End landex-header-section -->
 
   <!-- strat sidebar menu -->
-
   @include('partial.sidebar')
 
   <div class="breadcrumb-wrapper" style="background-image: url({{ asset('assets/images/blog/blog-thumb.png') }})">

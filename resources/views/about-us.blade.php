@@ -445,7 +445,6 @@
         </div>
     </section>
     <!-- end -->
-
     <div class="techin-section-padding7">
         <div class="container">
             <div class="techin-section-title center">

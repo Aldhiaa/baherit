@@ -20,7 +20,6 @@
     </div>
   </div>
   <!-- End breadcrumb -->
-
   <section class="techin-section-padding2">
     <div class="container">
       <div class="row">
