@@ -503,9 +503,4 @@
         </div>
     </section>
     <!-- end section -->
-
-    
-
-   
-
 @endsection
