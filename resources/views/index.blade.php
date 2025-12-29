@@ -502,5 +502,5 @@
             </div>
         </div>
     </section>
-    <!-- end section -->
+    <!-- end section -->   
 @endsection

@@ -59,18 +59,9 @@
               <div class="techin-service-thumb">
                 @if($service->image_path)
                   <img src="{{ asset('storage/' . $service->image_path) }}" alt="{{ optional($service->translation)->name }}">
-                @elseif($service->icon_path)
-                  <img src="{{ asset('storage/' . $service->icon_path) }}" alt="{{ optional($service->translation)->name }}">
                 @else
                   <img src="{{ asset('assets/images/v2/s1.png') }}" alt="{{ optional($service->translation)->name }}">
                 @endif
-                <div class="techin-service-icon2">
-                  @if($service->icon_path)
-                    <img src="{{ asset('storage/' . $service->icon_path) }}" alt="">
-                  @else
-                    <img src="{{ asset('assets/images/v2/icon4.svg') }}" alt="">
-                  @endif
-                </div>
               </div>
               <div class="techin-service-content2">
                 <h5>{{ optional($service->translation)->name }}</h5>
