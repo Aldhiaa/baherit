@@ -25,8 +25,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="search">Search</label>
-                            <input type="text" class="form-control" id="search" name="search" 
-                                   value="{{ request('search') }}" placeholder="Search by title or content...">
+                            <input type="text" class="form-control" id="search" name="search"   value="{{ request('search') }}" placeholder="Search by title or content...">
                         </div>
                     </div>
                     <div class="col-md-3">

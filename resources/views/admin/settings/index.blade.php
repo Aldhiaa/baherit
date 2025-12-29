@@ -219,4 +219,30 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Handle URL hash on page load - activate the correct tab
+        var hash = window.location.hash;
+        if (hash) {
+            var tabLink = $('a[href="' + hash + '"]');
+            if (tabLink.length) {
+                // Remove active class from all tabs and panes
+                $('.nav-link').removeClass('active');
+                $('.tab-pane').removeClass('show active');
+                
+                // Add active class to the target tab and pane
+                tabLink.addClass('active');
+                $(hash).addClass('show active');
+            }
+        }
+        
+        // Update URL hash when clicking on tabs
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            history.pushState(null, null, e.target.hash);
+        });
+    });
+</script>
+@endpush
 @endsection
