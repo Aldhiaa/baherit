@@ -6,6 +6,31 @@
                         <img src="{{ site_logo() }}" alt="{{ setting('site_name') }}">
                     </a>
                 </div>
+                
+                <!-- Mobile Navigation Menu -->
+                <nav class="techin-mobile-menu">
+                    <ul>
+                        <li class="menu-item">
+                            <a href="{{ LaravelLocalization::localizeUrl('/') }}">{{ __('layout.menu.home') }}</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ LaravelLocalization::localizeUrl('/about-us') }}">{{ __('layout.menu.about') }}</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ LaravelLocalization::localizeUrl('/services') }}">{{ __('layout.menu.service') }}</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ LaravelLocalization::localizeUrl('/blog') }}">{{ __('layout.menu.blog') }}</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ LaravelLocalization::localizeUrl('/portfolio') }}">{{ __('layout.menu.portfolio') }}</a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="{{ LaravelLocalization::localizeUrl('/contact-us') }}">{{ __('layout.menu.contact') }}</a>
+                        </li>
+                    </ul>
+                </nav>
+                
                 <p>{{ setting('site_description', __('layout.sidebar.testimonial')) }}</p>
                 <div class="techin-sidemenu-thumb">
                     <img src="{{ setting('sidebar_image', asset('assets/images/blog/img15.png')) }}" alt="">
