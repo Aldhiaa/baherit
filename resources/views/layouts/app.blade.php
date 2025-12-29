@@ -84,35 +84,25 @@
             </div>
             <div class="techin-mobile-menu">
                 <ul>
-                    <li class="menu-item-has-children">
-                        <a href="#">{{ __('layout.menu.demo') }}</a>
-
+                    <li>
+                        <a href="{{ LaravelLocalization::localizeUrl('/') }}">{{ __('layout.menu.home') }}</a>
                     </li>
                     <li class="menu-item-has-children">
                         <a href="#">{{ __('layout.menu.pages') }}</a>
                         <ul class="sub-menu">
                             <li><a href='{{ LaravelLocalization::localizeUrl('/about-us') }}'>{{ __('layout.menu.about') }}</a></li>
-                            <li><a href='pricing.html'>{{ __('layout.menu.pricing') }}</a></li>
-                            <li><a href='blog.html'>{{ __('layout.menu.blog') }}</a></li>
                             <li><a href='{{ LaravelLocalization::localizeUrl('/services') }}'>{{ __('layout.menu.service') }}</a></li>
-                            <li><a href='team.html'>{{ __('layout.menu.team') }}</a></li>
+                            <li><a href='{{ LaravelLocalization::localizeUrl('/blog') }}'>{{ __('layout.menu.blog') }}</a></li>
+                            <li><a href='{{ LaravelLocalization::localizeUrl('/portfolio') }}'>{{ __('layout.menu.portfolio') }}</a></li>
                             <li><a href='{{ LaravelLocalization::localizeUrl('/faq') }}'>{{ __('layout.menu.faq') }}</a></li>
-                            <li><a href='errors-404.html'>{{ __('layout.menu.errors_404') }}</a></li>
-                            <li><a href="testimonial.html">{{ __('layout.menu.testimonial') }}</a></li>
                         </ul>
                     </li>
                     <li>
                         <a href='{{ LaravelLocalization::localizeUrl('/portfolio') }}'>{{ __('layout.menu.portfolio') }}</a>
                     </li>
-                    <li class="menu-item-has-children">
-                        <a href="#">{{ __('layout.menu.blog') }}</a>
-                        <ul class="sub-menu">
-                            <li><a href='{{ LaravelLocalization::localizeUrl('/blog') }}'>{{ __('layout.menu.blog') }}</a></li>
-                            <li><a href='blog-grid.html'>{{ __('layout.menu.blog_grid') }}</a></li>
-                            <li><a href='single-blog.html'>{{ __('layout.menu.blog_details') }}</a></li>
-                        </ul>
+                    <li>
+                        <a href='{{ LaravelLocalization::localizeUrl('/blog') }}'>{{ __('layout.menu.blog') }}</a>
                     </li>
-
                     <li>
                         <a href='{{ LaravelLocalization::localizeUrl('/contact-us') }}'>{{ __('layout.menu.contact') }}</a>
                     </li>

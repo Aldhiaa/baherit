@@ -84,17 +84,78 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colspan="7" class="text-center text-muted">
-                                <i class="fas fa-info-circle"></i> No blog posts found. 
-                                @can('create-blogs', 'admin')
-                                <a href="{{ route('admin.blogs.create') }}">Create your first blog post</a>
-                                @endcan
-                            </td>
-                        </tr>
+                        @forelse($blogs as $blog)
+                            @php
+                                $translation = $blog->translations->firstWhere('locale', app()->getLocale()) 
+                                             ?? $blog->translations->firstWhere('locale', 'en')
+                                             ?? $blog->translations->first();
+                            @endphp
+                            <tr>
+                                <td>{{ $blog->id }}</td>
+                                <td>
+                                    @if($blog->featured_image)
+                                        <img src="{{ asset('storage/' . $blog->featured_image) }}" 
+                                             alt="{{ $translation->title ?? 'Blog' }}" 
+                                             style="width: 60px; height: 40px; object-fit: cover; border-radius: 4px;">
+                                    @else
+                                        <span class="text-muted"><i class="fas fa-image"></i></span>
+                                    @endif
+                                </td>
+                                <td>{{ $translation->title ?? 'N/A' }}</td>
+                                <td>
+                                    @if($blog->status === 'published')
+                                        <span class="badge badge-success">Published</span>
+                                    @elseif($blog->status === 'scheduled')
+                                        <span class="badge badge-info">Scheduled</span>
+                                    @else
+                                        <span class="badge badge-secondary">Draft</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if($blog->is_featured)
+                                        <span class="badge badge-warning"><i class="fas fa-star"></i> Featured</span>
+                                    @else
+                                        <span class="text-muted">-</span>
+                                    @endif
+                                </td>
+                                <td>{{ $blog->published_at ? $blog->published_at->format('M d, Y') : 'Not set' }}</td>
+                                <td>
+                                    @can('edit-blogs', 'admin')
+                                    <a href="{{ route('admin.blogs.edit', $blog) }}" class="btn btn-sm btn-primary" title="Edit">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @endcan
+                                    @can('delete-blogs', 'admin')
+                                    <form action="{{ route('admin.blogs.destroy', $blog) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this blog post?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                    @endcan
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="text-center text-muted">
+                                    <i class="fas fa-info-circle"></i> No blog posts found. 
+                                    @can('create-blogs', 'admin')
+                                    <a href="{{ route('admin.blogs.create') }}">Create your first blog post</a>
+                                    @endcan
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
             </div>
+            
+            <!-- Pagination -->
+            @if($blogs->hasPages())
+            <div class="d-flex justify-content-center mt-4">
+                {{ $blogs->links() }}
+            </div>
+            @endif
         </div>
     </div>
 </div>
