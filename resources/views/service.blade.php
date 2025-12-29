@@ -57,7 +57,9 @@
           <div class="col-xl-4 col-md-6">
             <div class="techin-service-wrap2 wrap3">
               <div class="techin-service-thumb">
-                @if($service->icon_path)
+                @if($service->image_path)
+                  <img src="{{ asset('storage/' . $service->image_path) }}" alt="{{ optional($service->translation)->name }}">
+                @elseif($service->icon_path)
                   <img src="{{ asset('storage/' . $service->icon_path) }}" alt="{{ optional($service->translation)->name }}">
                 @else
                   <img src="{{ asset('assets/images/v2/s1.png') }}" alt="{{ optional($service->translation)->name }}">

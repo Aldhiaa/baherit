@@ -145,6 +145,23 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="image_path">Service Image</label>
+                            @if($service->image_path)
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/' . $service->image_path) }}" alt="Current Image" 
+                                         style="width: 120px; height: 80px; object-fit: cover; border-radius: 5px;">
+                                    <p class="text-muted small mb-0">Current Image</p>
+                                </div>
+                            @endif
+                            <input type="file" class="form-control-file @error('image_path') is-invalid @enderror" 
+                                   id="image_path" name="image_path" accept="image/*">
+                            <small class="form-text text-muted">Recommended: JPG, PNG (max 5MB) - Used as thumbnail. Leave empty to keep current image.</small>
+                            @error('image_path')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="is_featured" 
                                        name="is_featured" value="1" {{ old('is_featured', $service->is_featured) ? 'checked' : '' }}>

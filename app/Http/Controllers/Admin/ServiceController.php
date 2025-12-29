@@ -23,11 +23,9 @@ class ServiceController extends Controller
         if ($request->filled('search')) {
             $search = $request->search;
             $query->whereHas('translations', function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('short_description', 'like', "%{$search}%");
+                $q->where('name', 'like', "%{$search}%")->orWhere('short_description', 'like', "%{$search}%");
             });
         }
-
         // Filter by status
         if ($request->filled('status')) {
             $query->where('is_active', $request->status);
@@ -54,6 +52,7 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'slug' => 'required|string|unique:services,slug|max:255',
             'icon_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'display_order' => 'nullable|integer|min:0',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
@@ -77,10 +76,17 @@ class ServiceController extends Controller
                 $iconPath = $request->file('icon_path')->store('services/icons', 'public');
             }
 
+            // Handle image upload
+            $imagePath = null;
+            if ($request->hasFile('image_path')) {
+                $imagePath = $request->file('image_path')->store('services/images', 'public');
+            }
+
             // Create service
             $service = Service::create([
                 'slug' => $validated['slug'],
                 'icon_path' => $iconPath,
+                'image_path' => $imagePath,
                 'display_order' => $validated['display_order'] ?? 0,
                 'is_featured' => $request->boolean('is_featured'),
                 'is_active' => $request->boolean('is_active', true),
@@ -114,6 +120,11 @@ class ServiceController extends Controller
             // Delete uploaded icon if exists
             if (isset($iconPath)) {
                 Storage::disk('public')->delete($iconPath);
+            }
+
+            // Delete uploaded image if exists
+            if (isset($imagePath)) {
+                Storage::disk('public')->delete($imagePath);
             }
 
             return back()->withInput()
@@ -152,6 +163,7 @@ class ServiceController extends Controller
         $validated = $request->validate([
             'slug' => 'required|string|max:255|unique:services,slug,' . $service->id,
             'icon_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5120',
             'display_order' => 'nullable|integer|min:0',
             'is_featured' => 'boolean',
             'is_active' => 'boolean',
@@ -177,6 +189,16 @@ class ServiceController extends Controller
                 }
                 $iconPath = $request->file('icon_path')->store('services/icons', 'public');
                 $service->icon_path = $iconPath;
+            }
+
+            // Handle image upload
+            if ($request->hasFile('image_path')) {
+                // Delete old image
+                if ($service->image_path) {
+                    Storage::disk('public')->delete($service->image_path);
+                }
+                $imagePath = $request->file('image_path')->store('services/images', 'public');
+                $service->image_path = $imagePath;
             }
 
             // Update service
@@ -228,6 +250,11 @@ class ServiceController extends Controller
             // Delete icon if exists
             if ($service->icon_path) {
                 Storage::disk('public')->delete($service->icon_path);
+            }
+
+            // Delete image if exists
+            if ($service->image_path) {
+                Storage::disk('public')->delete($service->image_path);
             }
 
             // Delete translations

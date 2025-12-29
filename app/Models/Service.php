@@ -21,6 +21,7 @@ class Service extends Model
     protected $fillable = [
         'slug',
         'icon_path',
+        'image_path',
         'display_order',
         'is_featured',
         'is_active',
