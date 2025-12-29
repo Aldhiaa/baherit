@@ -14,22 +14,22 @@
         <div class="card-header py-3">
             <ul class="nav nav-tabs card-header-tabs" id="settingsTabs" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="general-tab" data-toggle="tab" href="#general" role="tab">
+                    <a class="nav-link active" id="general-tab" data-bs-toggle="tab" href="#general" role="tab">
                         <i class="fas fa-cog"></i> General
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="branding-tab" data-toggle="tab" href="#branding" role="tab">
+                    <a class="nav-link" id="branding-tab" data-bs-toggle="tab" href="#branding" role="tab">
                         <i class="fas fa-image"></i> Branding
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="social-tab" data-toggle="tab" href="#social" role="tab">
+                    <a class="nav-link" id="social-tab" data-bs-toggle="tab" href="#social" role="tab">
                         <i class="fas fa-share-alt"></i> Social Media
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="seo-tab" data-toggle="tab" href="#seo" role="tab">
+                    <a class="nav-link" id="seo-tab" data-bs-toggle="tab" href="#seo" role="tab">
                         <i class="fas fa-search"></i> SEO
                     </a>
                 </li>
@@ -228,19 +228,15 @@
         if (hash) {
             var tabLink = $('a[href="' + hash + '"]');
             if (tabLink.length) {
-                // Remove active class from all tabs and panes
-                $('.nav-link').removeClass('active');
-                $('.tab-pane').removeClass('show active');
-                
-                // Add active class to the target tab and pane
-                tabLink.addClass('active');
-                $(hash).addClass('show active');
+                // Use Bootstrap 5 Tab API
+                var tab = new bootstrap.Tab(tabLink[0]);
+                tab.show();
             }
         }
         
-        // Update URL hash when clicking on tabs
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            history.pushState(null, null, e.target.hash);
+        // Update URL hash when clicking on tabs (Bootstrap 5 event)
+        $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+            history.pushState(null, null, e.target.getAttribute('href'));
         });
     });
 </script>
