@@ -62,6 +62,10 @@ return [
         ],
         'empty' => 'No projects available.',
     ],
+    'customers' => [
+        'label' => 'Our Clients',
+        'title' => 'Trusted By Industry Leaders',
+    ],
     'testimonials' => [
         'label' => 'Testimonials',
         'title' => 'What Our Clients Say',

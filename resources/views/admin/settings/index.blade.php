@@ -54,8 +54,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="site_email">Site Email</label>
-                                    <input type="email" class="form-control" id="site_email" name="site_email" 
-                                           value="{{ $settings['site_email'] ?? '' }}" placeholder="Enter site email" required>
+                                    <input type="email" class="form-control" id="site_email" name="site_email"   value="{{ $settings['site_email'] ?? '' }}" placeholder="Enter site email" required>
                                 </div>
                             </div>
                         </div>

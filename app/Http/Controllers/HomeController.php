@@ -9,6 +9,7 @@ use App\Models\Page;
 use App\Models\Project;
 use App\Models\Service;
 use App\Models\Testimonial;
+use App\Models\Customer;
 use App\Models\WorkingProcess;
 use Illuminate\View\View;
 
@@ -57,6 +58,11 @@ class HomeController extends Controller
             ->withTranslations($locale)
             ->get();
 
+        $customers = Customer::query()
+            ->active()
+            ->ordered()
+            ->get();
+
         $blogs = Blog::query()
             ->published()
             ->withTranslations($locale)
@@ -84,7 +90,7 @@ class HomeController extends Controller
             return [$setting->key => $value];
         });
 
-        return view('index', compact('hero', 'about', 'services', 'projects', 'counters', 'testimonials', 'blogs', 'workingProcesses', 'faqs', 'settings'));
+        return view('index', compact('hero', 'about', 'services', 'projects', 'counters', 'testimonials', 'customers', 'blogs', 'workingProcesses', 'faqs', 'settings'));
     }
     
 }

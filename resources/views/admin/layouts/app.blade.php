@@ -354,6 +354,13 @@
             </li>
             @endcan
 
+            <li>
+                <a href="{{ route('admin.customers.index') }}" class="{{ request()->routeIs('admin.customers.*') ? 'active' : '' }}">
+                    <i class="fas fa-building"></i>
+                    <span>Customers</span>
+                </a>
+            </li>
+
             @can('view-pages', 'admin')
             <li>
                 <a href="{{ route('admin.pages.index') }}" class="{{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">

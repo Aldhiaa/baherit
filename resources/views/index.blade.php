@@ -96,8 +96,49 @@
     </section>
     <!--  end about -->
 
-   
-    <!-- end brand -->
+    <!-- Customers/Clients Logo Slider -->
+    @if(($customers ?? collect())->count() > 0)
+    <section class="techin-brand-section py-5">
+        <div class="container">
+            <div class="techin-section-title center mb-4">
+                <div class="techin-title-tag center2">
+                    <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+                    <h6>{{ __('index.customers.label') }}</h6>
+                    <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+                </div>
+                <h2>{{ __('index.customers.title') }}</h2>
+            </div>
+        </div>
+        <div class="techin-brand-slider-wrapper">
+            <div class="techin-brand-slider">
+                @foreach($customers as $customer)
+                    @if($customer->website_url)
+                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="techin-brand-item" title="{{ $customer->name }}">
+                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                    </a>
+                    @else
+                    <div class="techin-brand-item" title="{{ $customer->name }}">
+                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                    </div>
+                    @endif
+                @endforeach
+                {{-- Duplicate for seamless loop --}}
+                @foreach($customers as $customer)
+                    @if($customer->website_url)
+                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="techin-brand-item" title="{{ $customer->name }}">
+                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                    </a>
+                    @else
+                    <div class="techin-brand-item" title="{{ $customer->name }}">
+                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                    </div>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+    <!-- end customers/brand -->
 
     <div class="techin-section-padding2 light-bg1">
         <div class="container">

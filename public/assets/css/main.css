@@ -1053,3 +1053,121 @@ a.log-in-btn:hover:after {
     padding-left: 0;
     padding-right: 10px;
 }
+
+/* Customer/Brand Logo Slider Styles */
+.techin-brand-section {
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.techin-brand-slider-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.techin-brand-slider-wrapper::before,
+.techin-brand-slider-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.techin-brand-slider-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.techin-brand-slider-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+}
+
+.techin-brand-slider {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    animation: brandSlide 25s linear infinite;
+    width: max-content;
+}
+
+.techin-brand-slider:hover {
+    animation-play-state: paused;
+}
+
+@keyframes brandSlide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+[dir="rtl"] .techin-brand-slider {
+    animation: brandSlideRTL 25s linear infinite;
+}
+
+@keyframes brandSlideRTL {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(50%);
+    }
+}
+
+.techin-brand-item {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.techin-brand-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.12);
+}
+
+.techin-brand-item img {
+    max-width: 150px;
+    max-height: 60px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.techin-brand-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .techin-brand-slider {
+        gap: 30px;
+    }
+    
+    .techin-brand-item {
+        padding: 10px 15px;
+    }
+    
+    .techin-brand-item img {
+        max-width: 100px;
+        max-height: 40px;
+    }
+    
+    .techin-brand-slider-wrapper::before,
+    .techin-brand-slider-wrapper::after {
+        width: 50px;
+    }
+}

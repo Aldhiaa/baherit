@@ -67,6 +67,9 @@ Route::middleware(['admin.auth'])->prefix('admin')->name('admin.')->group(functi
     // Banners Management
     Route::resource('banners', BannerController::class)->except(['show']);
     
+    // Customers/Clients Management (logo slider)
+    Route::resource('customers', \App\Http\Controllers\Admin\CustomerController::class)->except(['show']);
+    
     // Pages Management
     Route::resource('pages', PageController::class)->except(['show']);
     
