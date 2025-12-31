@@ -24,15 +24,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="slug">Blog Slug</label>
-                            <input type="text" class="form-control" id="slug" name="slug">
-                            <small class="form-text text-muted">URL-friendly version (auto-generated if empty)</small>
+                            <label for="slug">Blog Slug <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="slug" name="slug" required>
+                            <small class="form-text text-muted">URL-friendly version (required, e.g. my-blog-post)</small>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="author">Author</label>
-                            <input type="text" class="form-control" id="author" name="author" required>
+                            <label for="author_name">Author</label>
+                            <input type="text" class="form-control" id="author_name" name="author_name">
                         </div>
                     </div>
                 </div>
@@ -58,8 +58,8 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="reading_time">Reading Time (minutes)</label>
-                            <input type="number" class="form-control" id="reading_time" name="reading_time" min="1" value="5">
+                            <label for="read_time_minutes">Reading Time (minutes)</label>
+                            <input type="number" class="form-control" id="read_time_minutes" name="read_time_minutes" min="1" value="5">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -108,20 +108,20 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="title_ar">Title (Arabic)</label>
-                            <input type="text" class="form-control" id="title_ar" name="title_ar" dir="rtl">
+                            <label for="title_ar">Title (Arabic) <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="title_ar" name="title_ar" dir="rtl" required>
                         </div>
                         <div class="form-group">
-                            <label for="excerpt_ar">Excerpt (Arabic)</label>
-                            <textarea class="form-control" id="excerpt_ar" name="excerpt_ar" rows="3" dir="rtl"></textarea>
+                            <label for="excerpt_ar">Excerpt (Arabic) <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="excerpt_ar" name="excerpt_ar" rows="3" dir="rtl" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="meta_description_ar">Meta Description (Arabic)</label>
                             <textarea class="form-control" id="meta_description_ar" name="meta_description_ar" rows="2" dir="rtl"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="content_ar">Content (Arabic)</label>
-                            <textarea class="form-control" id="content_ar" name="content_ar" rows="10" dir="rtl"></textarea>
+                            <label for="content_ar">Content (Arabic) <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="content_ar" name="content_ar" rows="10" dir="rtl" required></textarea>
                         </div>
                     </div>
                 </div>
