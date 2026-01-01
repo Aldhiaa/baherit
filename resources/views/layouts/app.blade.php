@@ -31,11 +31,11 @@
 
     <!-- Code Editor  -->
 
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}?v={{ filemtime(public_path('assets/css/main.css')) }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/app.min.css') }}?v={{ filemtime(public_path('assets/css/app.min.css')) }}">
 
     <!-- RTL Support for Arabic -->
-    <link rel="stylesheet" href="{{ asset('assets/css/rtl.css') }}" id="rtl-css">
+    <link rel="stylesheet" href="{{ asset('assets/css/rtl.css') }}?v={{ filemtime(public_path('assets/css/rtl.css')) }}" id="rtl-css">
 
     @stack('styles')
 </head>
