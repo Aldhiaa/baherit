@@ -1054,185 +1054,356 @@ a.log-in-btn:hover:after {
     padding-right: 10px;
 }
 
-/* Customer/Brand Logo Slider Styles */
-.techin-brand-section {
+/* ========================================
+   Premium Customers Section - Two Row Marquee
+   ======================================== */
+
+.techin-customers-section {
+    position: relative;
+    padding: 100px 0 120px;
     overflow: hidden;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
-    padding: 80px 0;
+    background: linear-gradient(180deg, #0f0f23 0%, #1a1a3e 50%, #0f0f23 100%);
+}
+
+.techin-customers-section .techin-section-title h2 {
+    color: #ffffff;
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.techin-customers-section .techin-title-tag h6 {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.customers-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: 300;
+}
+
+/* Marquee Container */
+.customers-marquee-container {
+    margin-top: 60px;
     position: relative;
 }
 
-.techin-brand-section::before {
+.customers-marquee-row {
+    overflow: hidden;
+    position: relative;
+    padding: 15px 0;
+}
+
+.customers-marquee-row:first-child {
+    margin-bottom: 20px;
+}
+
+/* Edge Fade Effect */
+.customers-marquee-row::before,
+.customers-marquee-row::after {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    width: 200px;
+    height: 100%;
+    z-index: 10;
+    pointer-events: none;
 }
 
-.techin-brand-section::after {
+.customers-marquee-row::before {
+    left: 0;
+    background: linear-gradient(to right, #0f0f23 0%, transparent 100%);
+}
+
+.customers-marquee-row::after {
+    right: 0;
+    background: linear-gradient(to left, #0f0f23 0%, transparent 100%);
+}
+
+/* Marquee Tracks */
+.customers-marquee {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    width: max-content;
+}
+
+.customers-marquee-left {
+    animation: marqueeLeft 50s linear infinite;
+}
+
+.customers-marquee-right {
+    animation: marqueeRight 50s linear infinite;
+}
+
+.customers-marquee:hover {
+    animation-play-state: paused;
+}
+
+@keyframes marqueeLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* RTL Support */
+[dir="rtl"] .customers-marquee-left {
+    animation: marqueeLeftRTL 50s linear infinite;
+}
+
+[dir="rtl"] .customers-marquee-right {
+    animation: marqueeRightRTL 50s linear infinite;
+}
+
+@keyframes marqueeLeftRTL {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(50%); }
+}
+
+@keyframes marqueeRightRTL {
+    0% { transform: translateX(50%); }
+    100% { transform: translateX(0); }
+}
+
+/* Customer Cards */
+.customer-card {
+    flex-shrink: 0;
+    perspective: 1000px;
+}
+
+.customer-card-inner {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.customer-logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px 30px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.customer-logo-link::before {
     content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.7s ease;
+}
+
+.customer-logo-link:hover::before {
+    left: 100%;
+}
+
+.customer-logo-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(102, 126, 234, 0.5);
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 
+        0 25px 50px rgba(102, 126, 234, 0.25),
+        0 0 30px rgba(102, 126, 234, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.customer-logo-link img {
+    max-width: 140px;
+    max-height: 55px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+    opacity: 0.5;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.customer-logo-link:hover img {
+    opacity: 1;
+    filter: brightness(0) invert(1);
+    transform: scale(1.08);
+}
+
+/* Customer Name Overlay */
+.customer-overlay {
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
+    padding: 12px;
+    background: linear-gradient(to top, rgba(102, 126, 234, 0.9), transparent);
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.4s ease;
 }
 
-.techin-brand-slider-wrapper {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    padding: 20px 0;
+.customer-logo-link:hover .customer-overlay {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.techin-brand-slider-wrapper::before,
-.techin-brand-slider-wrapper::after {
-    content: '';
+.customer-name {
+    display: block;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Floating Decorations */
+.customers-decoration {
     position: absolute;
     top: 0;
-    width: 150px;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
-
-.techin-brand-slider-wrapper::before {
     left: 0;
-    background: linear-gradient(to right, rgba(248,250,252,1) 0%, rgba(248,250,252,0.8) 50%, transparent 100%);
-}
-
-.techin-brand-slider-wrapper::after {
     right: 0;
-    background: linear-gradient(to left, rgba(248,250,252,1) 0%, rgba(248,250,252,0.8) 50%, transparent 100%);
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
 }
 
-.techin-brand-slider {
-    display: flex;
-    align-items: center;
-    gap: 80px;
-    animation: brandSlide 60s linear infinite;
-    width: max-content;
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
 }
 
-.techin-brand-slider:hover {
-    animation-play-state: paused;
+.circle-1 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    top: -200px;
+    right: -100px;
+    animation: floatCircle 20s ease-in-out infinite;
 }
 
-@keyframes brandSlide {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
+.circle-2 {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    bottom: -150px;
+    left: -100px;
+    animation: floatCircle 15s ease-in-out infinite reverse;
 }
 
-[dir="rtl"] .techin-brand-slider {
-    animation: brandSlideRTL 60s linear infinite;
+.circle-3 {
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulseCircle 10s ease-in-out infinite;
 }
 
-@keyframes brandSlideRTL {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(50%);
-    }
+@keyframes floatCircle {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 30px); }
 }
 
-.techin-brand-item {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 25px 40px;
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-    border-radius: 16px;
-    box-shadow: 
-        0 4px 20px rgba(0, 0, 0, 0.04),
-        0 1px 3px rgba(0, 0, 0, 0.06),
-        inset 0 1px 0 rgba(255, 255, 255, 0.8);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    min-width: 180px;
-    min-height: 90px;
+@keyframes pulseCircle {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.1; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.05; }
 }
 
-.techin-brand-item:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 
-        0 20px 40px rgba(102, 126, 234, 0.15),
-        0 8px 16px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 1);
-    border-color: rgba(102, 126, 234, 0.3);
-    background: linear-gradient(145deg, #ffffff 0%, #fefefe 100%);
-}
-
-.techin-brand-item img {
-    max-width: 160px;
-    max-height: 65px;
-    object-fit: contain;
-    filter: grayscale(100%) brightness(0.9);
-    opacity: 0.6;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.techin-brand-item:hover img {
-    filter: grayscale(0%) brightness(1);
-    opacity: 1;
-    transform: scale(1.05);
-}
-
+/* Responsive Styles */
 @media (max-width: 992px) {
-    .techin-brand-section {
-        padding: 60px 0;
+    .techin-customers-section {
+        padding: 80px 0 100px;
     }
     
-    .techin-brand-slider {
-        gap: 50px;
-        animation-duration: 45s;
+    .techin-customers-section .techin-section-title h2 {
+        font-size: 32px;
     }
     
-    .techin-brand-item {
-        padding: 20px 30px;
-        min-width: 150px;
-        min-height: 75px;
+    .customers-subtitle {
+        font-size: 16px;
     }
     
-    .techin-brand-item img {
-        max-width: 130px;
-        max-height: 50px;
+    .customers-marquee-container {
+        margin-top: 40px;
+    }
+    
+    .customers-marquee {
+        gap: 30px;
+    }
+    
+    .customer-card-inner {
+        width: 170px;
+        height: 85px;
+    }
+    
+    .customer-logo-link img {
+        max-width: 120px;
+        max-height: 45px;
+    }
+    
+    .customers-marquee-left,
+    .customers-marquee-right {
+        animation-duration: 40s;
     }
 }
 
 @media (max-width: 768px) {
-    .techin-brand-section {
-        padding: 50px 0;
+    .techin-customers-section {
+        padding: 60px 0 80px;
     }
     
-    .techin-brand-slider {
-        gap: 35px;
-        animation-duration: 35s;
+    .techin-customers-section .techin-section-title h2 {
+        font-size: 26px;
     }
     
-    .techin-brand-item {
-        padding: 15px 25px;
-        min-width: 130px;
-        min-height: 65px;
+    .customers-marquee-container {
+        margin-top: 30px;
+    }
+    
+    .customers-marquee {
+        gap: 20px;
+    }
+    
+    .customer-card-inner {
+        width: 150px;
+        height: 75px;
+    }
+    
+    .customer-logo-link {
+        padding: 15px 20px;
         border-radius: 12px;
     }
     
-    .techin-brand-item img {
+    .customer-logo-link img {
         max-width: 100px;
         max-height: 40px;
     }
     
-    .techin-brand-slider-wrapper::before,
-    .techin-brand-slider-wrapper::after {
-        width: 60px;
+    .customers-marquee-row::before,
+    .customers-marquee-row::after {
+        width: 80px;
+    }
+    
+    .customers-marquee-left,
+    .customers-marquee-right {
+        animation-duration: 30s;
+    }
+    
+    .decoration-circle {
+        display: none;
     }
 }

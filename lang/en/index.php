@@ -65,6 +65,7 @@ return [
     'customers' => [
         'label' => 'Our Clients',
         'title' => 'Trusted By Industry Leaders',
+        'subtitle' => 'Partnering with world-class companies to deliver excellence',
     ],
     'testimonials' => [
         'label' => 'Testimonials',

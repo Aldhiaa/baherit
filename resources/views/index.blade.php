@@ -96,45 +96,174 @@
     </section>
     <!--  end about -->
 
-    <!-- Customers/Clients Logo Slider -->
+    <!-- Premium Customers/Clients Section - Two Row Marquee -->
     @if(($customers ?? collect())->count() > 0)
-    <section class="techin-brand-section py-5">
+    <section class="techin-customers-section">
         <div class="container">
-            <div class="techin-section-title center mb-4">
+            <div class="techin-section-title center" data-aos="fade-up" data-aos-duration="800">
                 <div class="techin-title-tag center2">
                     <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                     <h6>{{ __('index.customers.label') }}</h6>
                     <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
                 </div>
                 <h2>{{ __('index.customers.title') }}</h2>
+                <p class="customers-subtitle">{{ __('index.customers.subtitle') ?? 'Trusted by leading companies worldwide' }}</p>
             </div>
         </div>
-        <div class="techin-brand-slider-wrapper">
-            <div class="techin-brand-slider">
-                @foreach($customers as $customer)
-                    @if($customer->website_url)
-                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="techin-brand-item" title="{{ $customer->name }}">
-                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
-                    </a>
-                    @else
-                    <div class="techin-brand-item" title="{{ $customer->name }}">
-                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
-                    </div>
-                    @endif
-                @endforeach
-                {{-- Duplicate for seamless loop --}}
-                @foreach($customers as $customer)
-                    @if($customer->website_url)
-                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="techin-brand-item" title="{{ $customer->name }}">
-                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
-                    </a>
-                    @else
-                    <div class="techin-brand-item" title="{{ $customer->name }}">
-                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
-                    </div>
-                    @endif
-                @endforeach
+        
+        <div class="customers-marquee-container">
+            <!-- Row 1 - Moving Left -->
+            <div class="customers-marquee-row" data-aos="fade-right" data-aos-duration="1000">
+                <div class="customers-marquee customers-marquee-left">
+                    @php $firstHalf = $customers->take(ceil($customers->count() / 2)); @endphp
+                    @foreach($firstHalf as $customer)
+                        <div class="customer-card">
+                            <div class="customer-card-inner">
+                                @if($customer->website_url)
+                                <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="customer-logo-link">
+                                    <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                    <div class="customer-overlay">
+                                        <span class="customer-name">{{ $customer->name }}</span>
+                                    </div>
+                                </a>
+                                @else
+                                <div class="customer-logo-link">
+                                    <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                    <div class="customer-overlay">
+                                        <span class="customer-name">{{ $customer->name }}</span>
+                                    </div>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                    {{-- Duplicate for seamless loop --}}
+                    @foreach($firstHalf as $customer)
+                        <div class="customer-card">
+                            <div class="customer-card-inner">
+                                @if($customer->website_url)
+                                <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="customer-logo-link">
+                                    <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                    <div class="customer-overlay">
+                                        <span class="customer-name">{{ $customer->name }}</span>
+                                    </div>
+                                </a>
+                                @else
+                                <div class="customer-logo-link">
+                                    <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                    <div class="customer-overlay">
+                                        <span class="customer-name">{{ $customer->name }}</span>
+                                    </div>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
+            
+            <!-- Row 2 - Moving Right -->
+            <div class="customers-marquee-row" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="customers-marquee customers-marquee-right">
+                    @php $secondHalf = $customers->skip(ceil($customers->count() / 2)); @endphp
+                    @if($secondHalf->count() > 0)
+                        @foreach($secondHalf as $customer)
+                            <div class="customer-card">
+                                <div class="customer-card-inner">
+                                    @if($customer->website_url)
+                                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </a>
+                                    @else
+                                    <div class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                        {{-- Duplicate for seamless loop --}}
+                        @foreach($secondHalf as $customer)
+                            <div class="customer-card">
+                                <div class="customer-card-inner">
+                                    @if($customer->website_url)
+                                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </a>
+                                    @else
+                                    <div class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @else
+                        {{-- If only a few customers, use first half for second row too --}}
+                        @foreach($firstHalf as $customer)
+                            <div class="customer-card">
+                                <div class="customer-card-inner">
+                                    @if($customer->website_url)
+                                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </a>
+                                    @else
+                                    <div class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                        @foreach($firstHalf as $customer)
+                            <div class="customer-card">
+                                <div class="customer-card-inner">
+                                    @if($customer->website_url)
+                                    <a href="{{ $customer->website_url }}" target="_blank" rel="noopener" class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </a>
+                                    @else
+                                    <div class="customer-logo-link">
+                                        <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                                        <div class="customer-overlay">
+                                            <span class="customer-name">{{ $customer->name }}</span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating decorative elements -->
+        <div class="customers-decoration">
+            <div class="decoration-circle circle-1"></div>
+            <div class="decoration-circle circle-2"></div>
+            <div class="decoration-circle circle-3"></div>
         </div>
     </section>
     @endif
