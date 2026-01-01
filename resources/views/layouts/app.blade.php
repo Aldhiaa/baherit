@@ -36,6 +36,8 @@
 
     <!-- RTL Support for Arabic -->
     <link rel="stylesheet" href="{{ asset('assets/css/rtl.css') }}" id="rtl-css">
+
+    @stack('styles')
 </head>
 
 <body>
@@ -156,6 +158,8 @@
     <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=AIzaSyArZVfNvjnLNwJZlLJKuOiWHZ6vtQzzb1Y"></script>
 
     <script src="{{ asset('assets/js/app.js') }}"></script>
+
+    @stack('scripts')
 
     <!-- RTL Language Detection & Switching Script -->
     <script>
