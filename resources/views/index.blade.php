@@ -581,4 +581,55 @@
         </div>
     </section>
     <!-- end section -->   
+
+@push('styles')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+@endpush
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Partners Swiper - Row 1 (Right to Left)
+    if(document.querySelector('.partners-swiper-rtl')) {
+        new Swiper('.partners-swiper-rtl', {
+            slidesPerView: 'auto',
+            spaceBetween: 25,
+            loop: true,
+            loopAdditionalSlides: 5,
+            speed: 8000,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+                reverseDirection: false,
+            },
+            freeMode: true,
+            freeModeMomentum: false,
+            allowTouchMove: true,
+            grabCursor: true,
+        });
+    }
+
+    // Partners Swiper - Row 2 (Left to Right)
+    if(document.querySelector('.partners-swiper-ltr')) {
+        new Swiper('.partners-swiper-ltr', {
+            slidesPerView: 'auto',
+            spaceBetween: 25,
+            loop: true,
+            loopAdditionalSlides: 5,
+            speed: 8000,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: false,
+                reverseDirection: true,
+            },
+            freeMode: true,
+            freeModeMomentum: false,
+            allowTouchMove: true,
+            grabCursor: true,
+        });
+    }
+});
+</script>
+@endpush
 @endsection
