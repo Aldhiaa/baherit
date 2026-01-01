@@ -3,6 +3,7 @@
 return [
     'tagline' => 'Blog',
     'title' => 'Latest News & Blog',
+    'details_title' => 'Blog Details',
     'read_more' => 'Read More',
     'read_time' => '{1} :count min read|[2,*] :count mins read',
     'default_author' => 'Admin',
@@ -12,4 +13,7 @@ return [
     'categories' => 'Categories',
     'recent_posts' => 'Recent Posts',
     'search_placeholder' => 'Search Here...',
+    'search_btn' => 'Search',
+    'share' => 'Share',
+    'written_by' => 'Written by',
 ];
