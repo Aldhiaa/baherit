@@ -19,7 +19,7 @@ return [
     'read_less' => 'Read Less',
     'no_services' => 'No services available at the moment.',
     'key_features' => 'Key Features:',
-    'why_choose_us' => 'Why Choose TechIn’s :service?',
+    'why_choose_us' => 'Why Choose Baher Technology’s :service?',
     'default_icon_alt' => 'Service Icon',
     'default_image_alt' => 'Service Image',
     'our_services_sidebar' => 'Our Services',
