@@ -143,7 +143,20 @@
                         </div>
                     </div>
                     @endforeach
-                    
+                      {{-- Duplicate for seamless loop --}}
+                    @foreach($customers as $customer)
+                    <div class="swiper-slide">
+                        <div class="partner-item">
+                            @if($customer->website_url)
+                            <a href="{{ $customer->website_url }}" target="_blank" rel="noopener">
+                                <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                            </a>
+                            @else
+                            <img src="{{ asset('storage/' . $customer->logo_path) }}" alt="{{ $customer->name }}">
+                            @endif
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
