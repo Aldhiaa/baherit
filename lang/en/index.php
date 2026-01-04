@@ -4,13 +4,13 @@ return [
     'hero' => [
         'subheading' => 'Get Best IT Solution Business',
         'heading' => 'Unlocking the Power of Technology',
-        'description' => 'At techin, we deliver innovative and reliable IT solutions tailored to meet your unique business needs.',
+        'description' => 'At Baher Technology, we deliver innovative and reliable IT solutions tailored to meet your unique business needs.',
         'button' => 'Get Start Now',
     ],
     'about' => [
         'tagline' => 'About Us',
         'title' => 'About Us',
-        'description' => 'At techin, we are dedicated to delivering innovative IT solutions and services that empower businesses to thrive in the digital age.',
+        'description' => 'At Baher Technology, we are dedicated to delivering innovative IT solutions and services that empower businesses to thrive in the digital age.',
         'service_1' => 'Providing Skillful Services',
         'service_2' => '24/7 Support For Clients',
         'more_info' => 'More Information',
@@ -89,7 +89,7 @@ return [
     'contact' => [
         'tagline' => 'Contact Us',
         'title' => 'To Make Request For Contact Us',
-        'description' => 'At Techin, we are dedicated to delivering innovative IT solutions and services that empower businesses to thrive in the digital age.',
+        'description' => 'At Baher Technology, we are dedicated to delivering innovative IT solutions and services that empower businesses to thrive in the digital age.',
         'call_us' => 'Call Us Any Time',
         'email_address' => 'Email Address',
         'office_address' => 'Office Address',
