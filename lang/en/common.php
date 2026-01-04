@@ -31,7 +31,7 @@ return [
     ],
     'call_us' => [
         'label' => 'Call Us Any Time',
-        'phone' => '+(009) 1888 000 2222',
+        'phone' => '772010405',
     ],
     'process' => [
         'label' => 'Working Process',
