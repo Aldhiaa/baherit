@@ -19,7 +19,7 @@ return [
     'read_less' => 'اقرأ أقل',
     'no_services' => 'لا توجد خدمات متاحة في الوقت الحالي.',
     'key_features' => 'الميزات الرئيسية:',
-    'why_choose_us' => 'لماذا تختار :service من TechIn؟',
+    'why_choose_us' => 'لماذا تختار :service من بحر التكنلوجيا؟',
     'default_icon_alt' => 'أيقونة الخدمة',
     'default_image_alt' => 'صورة الخدمة',
     'our_services_sidebar' => 'خدماتنا',
