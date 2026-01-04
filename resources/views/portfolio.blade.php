@@ -197,5 +197,45 @@
                 @endforelse
             </div>
         </div>
-    </div> -->
+    </div> -->  <div class="techin-section-padding2">
+    <div class="container">
+      <div class="techin-section-title center">
+        <div class="techin-title-tag center2">
+          <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+          <h6>{{ __('faq.tagline') }}</h6>
+          <span><img src="{{ asset('assets/images/v1/shape1.svg') }}" alt=""></span>
+        </div>
+        <h2>{{ __('faq.title') }}</h2>
+      </div>
+      <div class="techin-faq-wrap1">
+        @forelse(($faqs ?? collect()) as $index => $faq)
+          <div class="techin-faq-item {{ $index === 0 ? 'open' : '' }}">
+            <div class="techin-faq-header headr-2">
+              <h6>{{ optional($faq->translation)->question ?? 'FAQ Question' }}</h6>
+              <div class="techin-active-icon">
+                <img src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
+              </div>
+            </div>
+            <div class="techin-faq-body light-bg1">
+              <p>{{ optional($faq->translation)->answer ?? 'FAQ Answer' }}</p>
+            </div>
+          </div>
+        @empty
+          <div class="techin-faq-item open">
+            <div class="techin-faq-header headr-2">
+              <h6>{{ __('faq.default.q1') }}</h6>
+              <div class="techin-active-icon">
+                <img src="{{ asset('assets/images/v1/top-arrow.svg') }}" alt="">
+              </div>
+            </div>
+            <div class="techin-faq-body light-bg1">
+              <p>{{ __('faq.default.a1') }}</p>
+            </div>
+          </div>
+        @endforelse
+      </div>
+    </div>
+  </div>
+  <!-- end faq section -->
+
 @endsection
