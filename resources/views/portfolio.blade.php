@@ -104,7 +104,7 @@
             </div>
         </div>
     </div>
-    <!-- end section -->
+    <!-- end section
 
     <div class="techin-blog-section dark-bg" style="background-image: url({{ asset('assets/images/blog/blog-bg.png') }})">
         <div class="container">
@@ -197,5 +197,5 @@
                 @endforelse
             </div>
         </div>
-    </div>
+    </div> -->
 @endsection
