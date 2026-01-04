@@ -198,6 +198,10 @@
             </div>
         </div>
     </div> -->  
+
+
+@endsection
+
 @section('content')
   <div class="breadcrumb-wrapper" style="background-image: url({{ asset('assets/images/blog/blog-thumb.png') }})">
     <div class="container">
@@ -293,6 +297,4 @@
       </div>
     </div>
   </div>
-@endsection
-
 @endsection
