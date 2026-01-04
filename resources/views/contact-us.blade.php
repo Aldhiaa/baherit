@@ -138,7 +138,7 @@
             </div>
             <div class="techin-iconbox-contact-data">
               <h5>{{ __('contact.call_us') }}</h5>
-              <p>+967782788810</p>
+              <p>00967782788810</p>
             </div>
           </div>
         </a>
@@ -159,7 +159,7 @@
           </div>
           <div class="techin-iconbox-contact-data">
             <h5>{{ __('contact.office_address') }}</h5>
-            <p>Yemen</p>
+            <p>26 Sebtmber St., Marib ,Yemen </p>   <p>شارع 26 سبتمبر ,مأرب , اليمن </p>
           </div>
         </div>
         <div class="shape-up">
