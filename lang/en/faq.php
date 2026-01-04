@@ -8,7 +8,7 @@ return [
     'section_title' => 'Frequently Asked Any Questions',
     'fallback' => [
         [
-            'question' => 'What services does TechIn offer?',
+            'question' => 'What services does Baher Technology offer?',
             'answer' => 'We offer comprehensive IT solutions including cloud services, cybersecurity, managed IT support, and digital transformation consulting to help businesses thrive in the digital age.',
         ],
         [
@@ -16,7 +16,7 @@ return [
             'answer' => 'Our consulting process typically starts with an initial consultation to understand your business needs and challenges. We then conduct a thorough analysis, develop a tailored strategy, and work closely with you to implement the solutions.',
         ],
         [
-            'question' => 'How can I get started with TechIn?',
+            'question' => 'How can I get started with Baher Technology?',
             'answer' => "Getting started is easy! Simply contact us through our contact form, give us a call, or send us an email. We'll schedule a consultation to discuss your needs and how we can help.",
         ],
         // Add more fallbacks if needed to match the loop in blade
