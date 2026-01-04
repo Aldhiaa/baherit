@@ -271,139 +271,83 @@
                 </div>
                 <h2>{{ __('index.working_process.title') }}</h2>
             </div>
-            @if(($workingProcesses ?? collect())->count() > 0)
             <div class="row">
-                @php
-                    $processesArray = $workingProcesses->toArray();
-                    $leftProcesses = array_slice($processesArray, 0, 2);
-                    $rightProcesses = array_slice($processesArray, 2, 2);
-                @endphp
-                
-                <!-- Left Column -->
-                <div class="col-xl-4 col-md-6">
-                    @foreach($leftProcesses as $process)
-                        @php
-                            $processObj = (object) $process;
-                            $translation = optional($processObj->translation ?? null);
-                            $fallbackTranslation = collect($processObj->translations ?? [])->firstWhere('locale', config('app.fallback_locale'));
-                            $title = $translation->title ?? optional($fallbackTranslation)->title ?? __('index.working_process.fallback.title');
-                            $description = $translation->description ?? optional($fallbackTranslation)->description ?? __('index.working_process.fallback.description');
-                            
-                            // Handle icon path
-                            $iconPath = $processObj->icon_path ?? null;
-                            if ($iconPath && (str_starts_with($iconPath, 'http://') || str_starts_with($iconPath, 'https://'))) {
-                                $iconUrl = $iconPath;
-                            } elseif ($iconPath) {
-                                $relativeIconPath = ltrim($iconPath, '/');
-                                $publicIconPath = public_path('storage/' . $relativeIconPath);
-                                $iconUrl = file_exists($publicIconPath) ? asset('storage/' . $relativeIconPath) : asset('assets/images/v1/icon-s1.svg');
-                            } else {
-                                $iconUrl = asset('assets/images/v1/icon-s1.svg');
-                            }
-                            
-                            // Handle number tag path
-                            $numberTagPath = $processObj->number_tag_path ?? null;
-                            if ($numberTagPath && (str_starts_with($numberTagPath, 'http://') || str_starts_with($numberTagPath, 'https://'))) {
-                                $numberTagUrl = $numberTagPath;
-                            } elseif ($numberTagPath) {
-                                $relativeTagPath = ltrim($numberTagPath, '/');
-                                $publicTagPath = public_path('storage/' . $relativeTagPath);
-                                $numberTagUrl = file_exists($publicTagPath) ? asset('storage/' . $relativeTagPath) : asset('assets/images/v1/tag2.svg');
-                            } else {
-                                $numberTagUrl = asset('assets/images/v1/tag2.svg');
-                            }
-                        @endphp
-                        <div class="techin-iconbox-wrap2-item1">
-                            <div class="techin-iconbox-title-wrap2">
-                                <div class="techin-iconbox-title-icon">
-                                    <img src="{{ $iconUrl }}" alt="{{ $title }}">
+                @if (($workingProcesses ?? collect())->count() > 0)
+                    @php
+                        $leftProcesses = $workingProcesses->take(2);
+                        $rightProcesses = $workingProcesses->slice(2, 2);
+                    @endphp
+                    <div class="col-xl-4 col-md-6">
+                        @foreach ($leftProcesses as $process)
+                            <div class="techin-iconbox-wrap2-item1">
+                                <div class="techin-iconbox-title-wrap2">
+                                    <div class="techin-iconbox-title-icon">
+                                        @if ($process->icon_path)
+                                            <img src="{{ asset('storage/' . $process->icon_path) }}" alt="">
+                                        @else
+                                            <img src="{{ asset('assets/images/v1/icon-s1.svg') }}" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="techin-iconbox-title-content">
+                                        <h5>{{ optional($process->translation)->title }}</h5>
+                                    </div>
                                 </div>
-                                <div class="techin-iconbox-title-content">
-                                    <h5>{{ $title }}</h5>
+                                <div class="techin-iconbox-title-text">
+                                    <p>{{ optional($process->translation)->description }}</p>
+                                </div>
+                                <div class="techin-iconbox-number">
+                                    @if ($process->number_tag_path)
+                                        <img src="{{ asset('storage/' . $process->number_tag_path) }}" alt="">
+                                    @else
+                                        <img src="{{ asset('assets/images/v1/tag2.svg') }}" alt="">
+                                    @endif
                                 </div>
                             </div>
-                            <div class="techin-iconbox-title-text">
-                                <p>{{ $description }}</p>
-                            </div>
-                            <div class="techin-iconbox-number">
-                                <img src="{{ $numberTagUrl }}" alt="">
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                
-                <!-- Right Column -->
-                <div class="col-xl-4 col-md-6 order-xl-2">
-                    @foreach($rightProcesses as $process)
-                        @php
-                            $processObj = (object) $process;
-                            $translation = optional($processObj->translation ?? null);
-                            $fallbackTranslation = collect($processObj->translations ?? [])->firstWhere('locale', config('app.fallback_locale'));
-                            $title = $translation->title ?? optional($fallbackTranslation)->title ?? __('index.working_process.fallback.title');
-                            $description = $translation->description ?? optional($fallbackTranslation)->description ?? __('index.working_process.fallback.description');
-                            
-                            // Handle icon path
-                            $iconPath = $processObj->icon_path ?? null;
-                            if ($iconPath && (str_starts_with($iconPath, 'http://') || str_starts_with($iconPath, 'https://'))) {
-                                $iconUrl = $iconPath;
-                            } elseif ($iconPath) {
-                                $relativeIconPath = ltrim($iconPath, '/');
-                                $publicIconPath = public_path('storage/' . $relativeIconPath);
-                                $iconUrl = file_exists($publicIconPath) ? asset('storage/' . $relativeIconPath) : asset('assets/images/v1/icon-s2.svg');
-                            } else {
-                                $iconUrl = asset('assets/images/v1/icon-s2.svg');
-                            }
-                            
-                            // Handle number tag path
-                            $numberTagPath = $processObj->number_tag_path ?? null;
-                            if ($numberTagPath && (str_starts_with($numberTagPath, 'http://') || str_starts_with($numberTagPath, 'https://'))) {
-                                $numberTagUrl = $numberTagPath;
-                            } elseif ($numberTagPath) {
-                                $relativeTagPath = ltrim($numberTagPath, '/');
-                                $publicTagPath = public_path('storage/' . $relativeTagPath);
-                                $numberTagUrl = file_exists($publicTagPath) ? asset('storage/' . $relativeTagPath) : asset('assets/images/v1/tag3.svg');
-                            } else {
-                                $numberTagUrl = asset('assets/images/v1/tag3.svg');
-                            }
-                        @endphp
-                        <div class="techin-iconbox-wrap2-item1">
-                            <div class="techin-iconbox-title-wrap2">
-                                <div class="techin-iconbox-title-icon">
-                                    <img src="{{ $iconUrl }}" alt="{{ $title }}">
-                                </div>
-                                <div class="techin-iconbox-title-content">
-                                    <h5>{{ $title }}</h5>
-                                </div>
-                            </div>
-                            <div class="techin-iconbox-title-text">
-                                <p>{{ $description }}</p>
-                            </div>
-                            <div class="techin-iconbox-number">
-                                <img src="{{ $numberTagUrl }}" alt="">
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                
-                <!-- Center Image -->
-                <div class="col-xl-4 col-lg-6">
-                    <div class="techin-iconbox-title-thumb">
-                        <img data-aos="zoom-out" data-aos-duration="700" src="{{ asset('assets/images/v1/img1.png') }}" alt="">
+                        @endforeach
                     </div>
-                </div>
+                    <div class="col-xl-4 col-md-6 order-xl-2">
+                        @foreach ($rightProcesses as $process)
+                            <div class="techin-iconbox-wrap2-item1">
+                                <div class="techin-iconbox-title-wrap2">
+                                    <div class="techin-iconbox-title-icon">
+                                        @if ($process->icon_path)
+                                            <img src="{{ asset('storage/' . $process->icon_path) }}" alt="">
+                                        @else
+                                            <img src="{{ asset('assets/images/v1/icon-s2.svg') }}" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="techin-iconbox-title-content">
+                                        <h5>{{ optional($process->translation)->title }}</h5>
+                                    </div>
+                                </div>
+                                <div class="techin-iconbox-title-text">
+                                    <p>{{ optional($process->translation)->description }}</p>
+                                </div>
+                                <div class="techin-iconbox-number">
+                                    @if ($process->number_tag_path)
+                                        <img src="{{ asset('storage/' . $process->number_tag_path) }}" alt="">
+                                    @else
+                                        <img src="{{ asset('assets/images/v1/tag3.svg') }}" alt="">
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="col-xl-4 col-md-6">
+                        <div class="techin-iconbox-title-thumb">
+                            <img data-aos="zoom-out" data-aos-duration="700"
+                                src="{{ asset('assets/images/v1/img1.png') }}" alt="">
+                        </div>
+                    </div>
+                @else
+                    <div class="col-12 text-center">
+                        <p>{{ __('index.working_process.empty') }}</p>
+                    </div>
+                @endif
             </div>
-            @else
-            <div class="row">
-                <div class="col-12 text-center">
-                    <p class="text-muted">{{ __('index.working_process.empty') }}</p>
-                </div>
-            </div>
-            @endif
         </div>
     </div>
     <!-- end section -->
-
-  
 
     <div class="techin-section-padding2">
         <div class="container">
