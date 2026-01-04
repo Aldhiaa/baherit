@@ -100,48 +100,7 @@
         </div>
         <h2>{{ __('portfolio.related_news_title') }}</h2>
       </div>
-      <div class="row">
-        @foreach($recentBlogs as $blog)
-        <div class="col-xl-4 col-md-6">
-          <div class="blog-wrapper">
-            <div class="blog-content white-bg">
-              <div class="blog-meta">
-                <a href='{{ route('blog.show', $blog->slug) }}'>
-                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 8C5.5625 8 4.25 7.25 3.53125 6C2.8125 4.78125 2.8125 3.25 3.53125 2C4.25 0.78125 5.5625 0 7 0C8.40625 0 9.71875 0.78125 10.4375 2C11.1562 3.25 11.1562 4.78125 10.4375 6C9.71875 7.25 8.40625 8 7 8ZM5.5625 9.5H8.40625C11.5 9.5 14 12 14 15.0938C14 15.5938 13.5625 16 13.0625 16H0.90625C0.40625 16 0 15.5938 0 15.0938C0 12 2.46875 9.5 5.5625 9.5Z" fill="#222627" />
-                  </svg>{{ $blog->author ?? 'Admin' }}
-                </a>
-              </div>
-              <h5 class="blog-title"><a href='{{ route('blog.show', $blog->slug) }}'>{{ $blog->translation->title }}</a></h5>
-            </div>
-            <div class="blog-img">
-              <a href='{{ route('blog.show', $blog->slug) }}'>
-                @if($blog->image)
-                  <img src="{{ Storage::url($blog->image) }}" alt="{{ $blog->translation->title }}">
-                @else
-                  <img src="assets/images/blog/img1.png" alt="Blog Image">
-                @endif
-                <div class="blog-date-wrap">
-                  <div class="blog-year">
-                    <span>{{ $blog->created_at->format('Y') }}</span>
-                  </div>
-                  <div class="blog-month">
-                    <h4>{{ $blog->created_at->format('d') }}</h4>
-                    <h6>{{ $blog->created_at->format('M') }}</h6>
-                  </div>
-                </div>
-              </a>
-            </div>
-            <a class='techin-default-btn blog-btn1' data-text='{{ __('portfolio.read_more') }}' href='{{ route('blog.show', $blog->slug) }}'>
-              <span class="button-wraper">{{ __('portfolio.read_more') }}</span>
-            </a>
-          </div>
-        </div>
-        @endforeach
-      </div>
-    </div>
-  </div>
-  <!--  end blog -->
+   
 
   <div class="techin-cta-section mt-160" style="background-image: url(assets/images/cta/cta-bg1.png)">
     <div class="container">
