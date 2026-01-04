@@ -3,7 +3,7 @@
 return [
     'tagline' => 'Contact Us',
     'title' => 'To Make Request For Contact Us',
-    'description' => 'At Techin, we are dedicated to delivering innovative IT solutions and services that empower businesses to thrive in the digital age.',
+    'description' => 'At Baher Technology, we are dedicated to delivering innovative IT solutions and services that empower businesses to thrive in the digital age.',
     'call_us' => 'Call Us Any Time',
     'email_address' => 'Email Address',
     'office_address' => 'Office Address',
@@ -23,5 +23,5 @@ return [
     'breadcrumb_title' => 'Contact Us',
     'lets_get_in_touch' => "Let's Get In Touch!",
     'office_time_title' => 'Office Time',
-    'office_time_value' => 'Mon-Fri: 10:00Am-09:00Pm',
+    'office_time_value' => 'sun-Thur: 10:00Am-09:00Pm',
 ];
