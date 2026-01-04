@@ -169,10 +169,11 @@
             <div class="techin-section-title center">
                 <div class="techin-title-tag center2">
                     <span><img src="assets/images/v1/shape1.svg" alt=""></span>
-                    <h6>{{ __('index.services.tagline') }}</h6>
+                    <h2>{{ __('index.services.tagline') }}</h2>   
+                    <h3>{{ __('index.services.title') }}</h3>
+
                     <span><img src="assets/images/v1/shape1.svg" alt=""></span>
                 </div>
-                <h2>{{ __('index.services.title') }}</h2>
             </div>
             <div class="row">
                 @foreach(($services ?? collect()) as $service)
