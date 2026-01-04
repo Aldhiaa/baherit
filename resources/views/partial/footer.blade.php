@@ -183,7 +183,7 @@
                         </div>
                         <div class="techin-footer-info-text info1">
                             <span>{{ __('layout.sidebar.address') }}</span>
-                            <h5>{{ setting('site_address', 'Yemen') }}</h5>
+                            <h5>{{ setting('site_address', 'اليمن') }}</h5>
                         </div>
                     </div>
                     <a href="mailto:{{ setting('site_email') }}">
@@ -205,7 +205,7 @@
                             </div>
                             <div class="techin-footer-info-text info1">
                                 <span>{{ __('layout.buttons.get_in_touch') }}</span>
-                                <h5>{{ setting('site_phone', '+967782788810') }}</h5>
+                                <h5>{{ setting('site_phone', 00967782788810') }}</h5>
                             </div>
                         </div>
                     </a>
